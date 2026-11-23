@@ -1,0 +1,267 @@
+{
+  "seed": 2913497007,
+  "uniform": {
+    "bits": 4.64385618977472,
+    "medianAbsoluteError": 6,
+    "anticipation": {
+      "2": 0.1328125,
+      "4": 0.1328125,
+      "6": 0.1328125,
+      "8": 0.1328125,
+      "10": 0.1328125,
+      "12": 0.1328125
+    },
+    "maxAhead": 0,
+    "events": 256
+  },
+  "physics": [
+    1
+  ],
+  "checkpoints": {
+    "0": {
+      "prior": [
+        {
+          "bits": 4.64385618977472,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.1328125,
+            "4": 0.1328125,
+            "6": 0.1328125,
+            "8": 0.1328125,
+            "10": 0.1328125,
+            "12": 0.1328125
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 0,
+          "work": 0,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 137023488,
+          "trainMs": 0,
+          "maintenanceMs": 0,
+          "deployBytes": 37744,
+          "scores": [
+            {
+              "bits": 4.668257578380687,
+              "medianAbsoluteError": 6,
+              "anticipation": {
+                "2": 0.1328125,
+                "4": 0.1328125,
+                "6": 0.1328125,
+                "8": 0.1328125,
+                "10": 0.1328125,
+                "12": 0.1328125
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "128": {
+      "prior": [
+        {
+          "bits": 4.737693303321076,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 128,
+          "work": 59596160,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 136921088,
+          "trainMs": 125.55410000003394,
+          "maintenanceMs": 0.11919999997189734,
+          "deployBytes": 37744,
+          "scores": [
+            {
+              "bits": 4.523366200409892,
+              "medianAbsoluteError": 5,
+              "anticipation": {
+                "2": 0.140625,
+                "4": 0.13671875,
+                "6": 0.140625,
+                "8": 0.16015625,
+                "10": 0.15625,
+                "12": 0.13671875
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "512": {
+      "prior": [
+        {
+          "bits": 4.646281465325994,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.1328125,
+            "4": 0.1328125,
+            "6": 0.1328125,
+            "8": 0.1328125,
+            "10": 0.1328125,
+            "12": 0.1328125
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 512,
+          "work": 229672352,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 136921088,
+          "trainMs": 487.3904000000475,
+          "maintenanceMs": 0.49959999997372506,
+          "deployBytes": 37744,
+          "scores": [
+            {
+              "bits": 3.959003438431112,
+              "medianAbsoluteError": 2,
+              "anticipation": {
+                "2": 0.14453125,
+                "4": 0.1640625,
+                "6": 0.171875,
+                "8": 0.16015625,
+                "10": 0.1484375,
+                "12": 0.19140625
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "2048": {
+      "prior": [
+        {
+          "bits": 4.643860064988683,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.1328125,
+            "4": 0.1328125,
+            "6": 0.1328125,
+            "8": 0.1328125,
+            "10": 0.1328125,
+            "12": 0.1328125
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 2048,
+          "work": 910183328,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 136921088,
+          "trainMs": 1857.0044000000817,
+          "maintenanceMs": 1.171600000005128,
+          "deployBytes": 37744,
+          "scores": [
+            {
+              "bits": 3.407656316205821,
+              "medianAbsoluteError": 2,
+              "anticipation": {
+                "2": 0.40234375,
+                "4": 0.4140625,
+                "6": 0.42578125,
+                "8": 0.4296875,
+                "10": 0.4453125,
+                "12": 0.484375
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "8192": {
+      "prior": [
+        {
+          "bits": 4.647804033521691,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.1328125,
+            "4": 0.1328125,
+            "6": 0.1328125,
+            "8": 0.1328125,
+            "10": 0.1328125,
+            "12": 0.1328125
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 8192,
+          "work": 3645596384,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 163119104,
+          "trainMs": 7216.521500000228,
+          "maintenanceMs": 3.261799999861978,
+          "deployBytes": 37744,
+          "scores": [
+            {
+              "bits": 2.43160976500588,
+              "medianAbsoluteError": 1,
+              "anticipation": {
+                "2": 0.7109375,
+                "4": 0.73828125,
+                "6": 0.73046875,
+                "8": 0.734375,
+                "10": 0.74609375,
+                "12": 0.765625
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    }
+  },
+  "latest": 8192,
+  "final": {
+    "fixed": {
+      "model": "fixed.syn",
+      "trainingStateBytes": 643919,
+      "auditBytes": 19685,
+      "shuffledBits": 11.608580179596864,
+      "compressionVsPrior": {
+        "predictionSavingPerEvent": 2.216194268515811,
+        "extraModelBits": 301152,
+        "netExtraBits": 300584.65426725993,
+        "breakEvenEvents": 135888
+      }
+    }
+  }
+}

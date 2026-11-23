@@ -1,0 +1,44 @@
+{
+  "config": {
+    "profile": "development",
+    "seed": 7,
+    "seeds": 3,
+    "train": 8192,
+    "samples": 256,
+    "checkpoints": [
+      0,
+      128,
+      512,
+      2048,
+      8192
+    ],
+    "rate": 0.003,
+    "encoder": "motion",
+    "learner": "bptt",
+    "traceDecay": 1,
+    "interval": 64,
+    "candidates": 128,
+    "edgesPerGrowth": 4,
+    "maxEdges": 512,
+    "maxIn": 20,
+    "fixedCapacity": 176,
+    "confirmEvents": 32,
+    "confirmWindows": 3,
+    "support": 0.0001,
+    "matureRate": 0.3,
+    "homeostasis": true,
+    "prune": true,
+    "methods": [
+      "joint"
+    ],
+    "computeMatch": false,
+    "memory": false
+  },
+  "codeHash": "3d90c72d691af17d80caeb85e0aada9fa5c3c8966d714bbb4e4e2bcbcd9e4157",
+  "machine": {
+    "node": "v24.19.0",
+    "platform": "win32",
+    "cpu": "Intel(R) Core(TM) i7-10700F CPU @ 2.90GHz",
+    "memoryBytes": 17040011264
+  }
+}

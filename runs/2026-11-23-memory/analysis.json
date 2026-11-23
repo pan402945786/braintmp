@@ -1,0 +1,1706 @@
+{
+  "config": {
+    "profile": "pilot",
+    "seed": 20261124,
+    "seeds": 3,
+    "train": 1024,
+    "samples": 256,
+    "checkpoints": [
+      0,
+      128,
+      512,
+      1024
+    ],
+    "rate": 0.003,
+    "encoder": "motion",
+    "learner": "bptt",
+    "traceDecay": 1,
+    "interval": 64,
+    "candidates": 128,
+    "edgesPerGrowth": 4,
+    "maxEdges": 512,
+    "maxIn": 20,
+    "fixedCapacity": 176,
+    "confirmEvents": 32,
+    "confirmWindows": 3,
+    "support": 0.0001,
+    "matureRate": 0.3,
+    "homeostasis": true,
+    "prune": true,
+    "methods": [
+      "fixed",
+      "random",
+      "joint",
+      "joint_no_prune",
+      "joint_no_stability",
+      "joint_no_homeostasis",
+      "local_fixed",
+      "local_random",
+      "local_joint"
+    ],
+    "computeMatch": false,
+    "memory": true
+  },
+  "prior": 4.649382324973426,
+  "uniform": 4.64385618977472,
+  "methods": {
+    "fixed": {
+      "bits": 3.083412268274788,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.4361979166666667,
+        "4": 0.44140625,
+        "6": 0.4622395833333333,
+        "8": 0.48828125,
+        "10": 0.515625,
+        "12": 0.5442708333333334
+      },
+      "active": 128,
+      "mature": 0,
+      "bytes": 37744,
+      "trainBytes": 646908,
+      "auditBytes": 19684.666666666668,
+      "ms": 5299.407866666593,
+      "work": 1360483520,
+      "shuffledBits": 8.23799606352231,
+      "memory": {
+        "forgettingBits": -0.26466449347843346,
+        "bAfterB": 3.231435369345166,
+        "aAfterReturn": 3.083412268274788,
+        "constantA": 3.129306265266512,
+        "constantB": 3.194150076967498,
+        "freshA": 3.6961539850072644,
+        "recoveredByEvents": [
+          64,
+          64,
+          64
+        ]
+      }
+    },
+    "random": {
+      "bits": 3.030840808801399,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.4700520833333333,
+        "4": 0.4830729166666667,
+        "6": 0.4869791666666667,
+        "8": 0.515625,
+        "10": 0.5494791666666666,
+        "12": 0.5911458333333334
+      },
+      "active": 204,
+      "mature": 54.666666666666664,
+      "bytes": 38352,
+      "trainBytes": 662463,
+      "auditBytes": 1982617.3333333333,
+      "ms": 12844.438433333265,
+      "work": 1725615757.3333333,
+      "shuffledBits": 8.282168631621698,
+      "memory": {
+        "forgettingBits": -0.27755996031624824,
+        "bAfterB": 3.2197571179671045,
+        "aAfterReturn": 3.030840808801399,
+        "constantA": 3.0485482864359983,
+        "constantB": 3.2008184853654154,
+        "freshA": 3.6920880861070073,
+        "recoveredByEvents": [
+          64,
+          64,
+          64
+        ]
+      }
+    },
+    "joint": {
+      "bits": 3.000131677644941,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.5,
+        "4": 0.5104166666666666,
+        "6": 0.5208333333333334,
+        "8": 0.5481770833333334,
+        "10": 0.5807291666666666,
+        "12": 0.5924479166666666
+      },
+      "active": 230.66666666666666,
+      "mature": 82.66666666666667,
+      "bytes": 38565.333333333336,
+      "trainBytes": 669050,
+      "auditBytes": 1997381.3333333333,
+      "ms": 15769.886300000158,
+      "work": 1845450898.6666667,
+      "shuffledBits": 8.324277441092585,
+      "memory": {
+        "forgettingBits": -0.2995718602044648,
+        "bAfterB": 3.212362487844457,
+        "aAfterReturn": 3.000131677644941,
+        "constantA": 3.0979650429802015,
+        "constantB": 3.223803749313811,
+        "freshA": 3.6912082936926827,
+        "recoveredByEvents": [
+          64,
+          64,
+          64
+        ]
+      }
+    },
+    "joint_no_prune": {
+      "bits": 2.9727979594159666,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.5143229166666666,
+        "4": 0.5364583333333334,
+        "6": 0.5494791666666666,
+        "8": 0.578125,
+        "10": 0.6002604166666666,
+        "12": 0.62109375
+      },
+      "active": 320,
+      "mature": 154.66666666666666,
+      "bytes": 39280,
+      "trainBytes": 688898.3333333334,
+      "auditBytes": 2025472.3333333333,
+      "ms": 20362.56813333302,
+      "work": 2054750552,
+      "shuffledBits": 8.39481295301691,
+      "memory": {
+        "forgettingBits": -0.13389349971709855,
+        "bAfterB": 3.254776259456144,
+        "aAfterReturn": 2.9727979594159666,
+        "constantA": 3.0432402950530886,
+        "constantB": 3.1953634506886845,
+        "freshA": 3.7038369299257,
+        "recoveredByEvents": [
+          64,
+          64,
+          64
+        ]
+      }
+    },
+    "joint_no_stability": {
+      "bits": 3.0055935372282097,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.4713541666666667,
+        "4": 0.4856770833333333,
+        "6": 0.4947916666666667,
+        "8": 0.5182291666666666,
+        "10": 0.5442708333333334,
+        "12": 0.5598958333333334
+      },
+      "active": 224,
+      "mature": 82.66666666666667,
+      "bytes": 38512,
+      "trainBytes": 666694.3333333334,
+      "auditBytes": 1992906,
+      "ms": 15211.786233333545,
+      "work": 1820834501.3333333,
+      "shuffledBits": 8.471267923247613,
+      "memory": {
+        "forgettingBits": -0.2640270093058746,
+        "bAfterB": 3.2353363629551475,
+        "aAfterReturn": 3.0055935372282097,
+        "constantA": 3.007296845652957,
+        "constantB": 3.175889601898595,
+        "freshA": 3.643985326340252,
+        "recoveredByEvents": [
+          64,
+          64,
+          64
+        ]
+      }
+    },
+    "joint_no_homeostasis": {
+      "bits": 3.0185895309318433,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.45703125,
+        "4": 0.4518229166666667,
+        "6": 0.4674479166666667,
+        "8": 0.484375,
+        "10": 0.5078125,
+        "12": 0.53515625
+      },
+      "active": 186.66666666666666,
+      "mature": 42.666666666666664,
+      "bytes": 38213.333333333336,
+      "trainBytes": 655260.3333333334,
+      "auditBytes": 1973178.6666666667,
+      "ms": 12577.782900000224,
+      "work": 1707200205.3333333,
+      "shuffledBits": 8.435504856102293,
+      "memory": {
+        "forgettingBits": -0.22914280210163604,
+        "bAfterB": 3.168329400002637,
+        "aAfterReturn": 3.0185895309318433,
+        "constantA": 3.100781588271565,
+        "constantB": 3.1568448459653298,
+        "freshA": 3.6863038372808723,
+        "recoveredByEvents": [
+          64,
+          64,
+          64
+        ]
+      }
+    },
+    "local_fixed": {
+      "bits": 3.8749940967996754,
+      "absoluteError": 2.6666666666666665,
+      "anticipation": {
+        "2": 0.20052083333333334,
+        "4": 0.21484375,
+        "6": 0.22135416666666666,
+        "8": 0.21484375,
+        "10": 0.21875,
+        "12": 0.19140625
+      },
+      "active": 128,
+      "mature": 0,
+      "bytes": 37744,
+      "trainBytes": 654042,
+      "auditBytes": 19752,
+      "ms": 5253.467933333373,
+      "work": 1360483520,
+      "shuffledBits": 5.383209836998785,
+      "memory": {
+        "forgettingBits": -0.13308549262071998,
+        "bAfterB": 3.9413288114811453,
+        "aAfterReturn": 3.8749940967996754,
+        "constantA": 3.8773407810439644,
+        "constantB": 3.878125020527895,
+        "freshA": 4.133744459851164,
+        "recoveredByEvents": [
+          64,
+          64,
+          64
+        ]
+      }
+    },
+    "local_random": {
+      "bits": 3.8707385034044273,
+      "absoluteError": 2.6666666666666665,
+      "anticipation": {
+        "2": 0.19921875,
+        "4": 0.2109375,
+        "6": 0.21875,
+        "8": 0.21614583333333334,
+        "10": 0.21354166666666666,
+        "12": 0.19270833333333334
+      },
+      "active": 161.33333333333334,
+      "mature": 14.666666666666666,
+      "bytes": 38010.666666666664,
+      "trainBytes": 661471.6666666666,
+      "auditBytes": 1962599,
+      "ms": 8781.733799999818,
+      "work": 1570434545.3333333,
+      "shuffledBits": 5.3909225880889124,
+      "memory": {
+        "forgettingBits": -0.13021768008601256,
+        "bAfterB": 3.9415025396162147,
+        "aAfterReturn": 3.8707385034044273,
+        "constantA": 3.869938483223047,
+        "constantB": 3.875783979169213,
+        "freshA": 4.129638605735832,
+        "recoveredByEvents": [
+          64,
+          64,
+          64
+        ]
+      }
+    },
+    "local_joint": {
+      "bits": 3.8675663196216328,
+      "absoluteError": 2.6666666666666665,
+      "anticipation": {
+        "2": 0.20182291666666666,
+        "4": 0.2109375,
+        "6": 0.21875,
+        "8": 0.21484375,
+        "10": 0.21354166666666666,
+        "12": 0.1953125
+      },
+      "active": 173.33333333333334,
+      "mature": 26.666666666666668,
+      "bytes": 38106.666666666664,
+      "trainBytes": 664187.6666666666,
+      "auditBytes": 1964059.3333333333,
+      "ms": 9155.527633333279,
+      "work": 1583399356,
+      "shuffledBits": 5.400427995739598,
+      "memory": {
+        "forgettingBits": -0.13286544445049353,
+        "bAfterB": 3.9414707122349495,
+        "aAfterReturn": 3.8675663196216328,
+        "constantA": 3.872616328729267,
+        "constantB": 3.876425079499675,
+        "freshA": 4.133199346296661,
+        "recoveredByEvents": [
+          64,
+          64,
+          64
+        ]
+      }
+    }
+  },
+  "trials": [
+    {
+      "seed": 20261124,
+      "prior": 4.651873228413049,
+      "uniform": 4.64385618977472,
+      "networks": {
+        "fixed": {
+          "bits": 3.1592414078718525,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.45703125,
+            "4": 0.47265625,
+            "6": 0.4921875,
+            "8": 0.5,
+            "10": 0.50390625,
+            "12": 0.51953125
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 646491,
+          "auditBytes": 19694,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 8,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 5264.16069999986,
+          "work": 1363874496,
+          "shuffledBits": 8.170178886080219,
+          "compression": {
+            "predictionSavingPerEvent": -0.10485895900090236,
+            "extraModelBits": -5632,
+            "netExtraBits": -5605.156106495769,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.4992467533901066,
+            "bAfterB": 3.2145083772984586,
+            "aAfterReturn": 3.1592414078718525,
+            "recoveredByEvents": 64,
+            "constantA": 3.168095118579709,
+            "constantB": 3.2035570356091565,
+            "freshA": 3.749902795397052
+          }
+        },
+        "random": {
+          "bits": 3.05438244887095,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.53515625,
+            "4": 0.5859375,
+            "6": 0.5546875,
+            "8": 0.5703125,
+            "10": 0.59375,
+            "12": 0.609375
+          },
+          "active": 216,
+          "mature": 64,
+          "bytes": 38448,
+          "trainBytes": 663442,
+          "auditBytes": 1987877,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 104
+          },
+          "ms": 13997.662499999959,
+          "work": 1777886616,
+          "shuffledBits": 8.403438023747732,
+          "memory": {
+            "forgettingBits": -0.4992547916687804,
+            "bAfterB": 3.22611958637041,
+            "aAfterReturn": 3.05438244887095,
+            "recoveredByEvents": 64,
+            "constantA": 3.107243256821281,
+            "constantB": 3.2071770074220463,
+            "freshA": 3.806506552636379
+          }
+        },
+        "joint": {
+          "bits": 3.0546663311969335,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.5078125,
+            "4": 0.515625,
+            "6": 0.51171875,
+            "8": 0.5234375,
+            "10": 0.53125,
+            "12": 0.53515625
+          },
+          "active": 236,
+          "mature": 92,
+          "bytes": 38608,
+          "trainBytes": 669669,
+          "auditBytes": 1997805,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 15,
+            "minIn": 4
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 84
+          },
+          "ms": 16199.664400000493,
+          "work": 1872349080,
+          "shuffledBits": 8.31633578177496,
+          "compression": {
+            "predictionSavingPerEvent": -0.00028388232598342,
+            "extraModelBits": 1280,
+            "netExtraBits": 1280.0726738754518,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.4344092816006322,
+            "bAfterB": 3.2122631587046335,
+            "aAfterReturn": 3.0546663311969335,
+            "recoveredByEvents": 64,
+            "constantA": 3.084042172455262,
+            "constantB": 3.148998176923118,
+            "freshA": 3.7763193612283157
+          }
+        },
+        "joint_no_prune": {
+          "bits": 3.0016411079585974,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.5234375,
+            "4": 0.53125,
+            "6": 0.56640625,
+            "8": 0.59375,
+            "10": 0.58203125,
+            "12": 0.59765625
+          },
+          "active": 320,
+          "mature": 152,
+          "bytes": 39280,
+          "trainBytes": 688663,
+          "auditBytes": 2022690,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 18,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 0
+          },
+          "ms": 19891.516999999694,
+          "work": 2057584712,
+          "shuffledBits": 8.39831434134682,
+          "compression": {
+            "predictionSavingPerEvent": 0.05274134091235272,
+            "extraModelBits": 6656,
+            "netExtraBits": 6642.498216726438,
+            "breakEvenEvents": 126201
+          },
+          "memory": {
+            "forgettingBits": -0.425180764085201,
+            "bAfterB": 3.1877599474374745,
+            "aAfterReturn": 3.0016411079585974,
+            "recoveredByEvents": 64,
+            "constantA": 3.080578417326105,
+            "constantB": 3.149633101178618,
+            "freshA": 3.7747180402258125
+          }
+        },
+        "joint_no_stability": {
+          "bits": 3.083566233080951,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.5234375,
+            "4": 0.54296875,
+            "6": 0.546875,
+            "8": 0.5625,
+            "10": 0.56640625,
+            "12": 0.55078125
+          },
+          "active": 224,
+          "mature": 84,
+          "bytes": 38512,
+          "trainBytes": 664084,
+          "auditBytes": 1988883,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 96
+          },
+          "ms": 14706.07020000036,
+          "work": 1808904256,
+          "shuffledBits": 8.273405361366454,
+          "compression": {
+            "predictionSavingPerEvent": -0.029183784210000674,
+            "extraModelBits": 512,
+            "netExtraBits": 519.4710487577602,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.35610825842314986,
+            "bAfterB": 3.213465690197262,
+            "aAfterReturn": 3.083566233080951,
+            "recoveredByEvents": 64,
+            "constantA": 3.1434165289816334,
+            "constantB": 3.161881067243342,
+            "freshA": 3.6654419699103435
+          }
+        },
+        "joint_no_homeostasis": {
+          "bits": 3.1286533441400395,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.53125,
+            "4": 0.49609375,
+            "6": 0.5234375,
+            "8": 0.54296875,
+            "10": 0.55859375,
+            "12": 0.55078125
+          },
+          "active": 188,
+          "mature": 44,
+          "bytes": 38224,
+          "trainBytes": 655454,
+          "auditBytes": 1969080,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 132
+          },
+          "ms": 12502.560500000034,
+          "work": 1713287956,
+          "shuffledBits": 8.459705360559628,
+          "compression": {
+            "predictionSavingPerEvent": -0.07427089526908937,
+            "extraModelBits": -1792,
+            "netExtraBits": -1772.9866508111131,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.7837316392211808,
+            "bAfterB": 3.2256668285643197,
+            "aAfterReturn": 3.1286533441400395,
+            "recoveredByEvents": 64,
+            "constantA": 3.141424985336229,
+            "constantB": 3.154573434978103,
+            "freshA": 3.821358319721664
+          }
+        },
+        "local_fixed": {
+          "bits": 3.9230806274937042,
+          "absoluteError": 3,
+          "anticipation": {
+            "2": 0.1875,
+            "4": 0.203125,
+            "6": 0.20703125,
+            "8": 0.17578125,
+            "10": 0.171875,
+            "12": 0.17578125
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 654094,
+          "auditBytes": 19757,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 8,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 5209.459899999945,
+          "work": 1363874496,
+          "shuffledBits": 5.379263205481029,
+          "compression": {
+            "predictionSavingPerEvent": -0.8686981786227541,
+            "extraModelBits": -5632,
+            "netExtraBits": -5409.613266272575,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.14770311138260972,
+            "bAfterB": 3.918804727631873,
+            "aAfterReturn": 3.9230806274937042,
+            "recoveredByEvents": 64,
+            "constantA": 3.926255343004612,
+            "constantB": 3.8166319385792535,
+            "freshA": 4.17304279317252
+          }
+        },
+        "local_random": {
+          "bits": 3.9161650249679663,
+          "absoluteError": 3,
+          "anticipation": {
+            "2": 0.18359375,
+            "4": 0.19921875,
+            "6": 0.203125,
+            "8": 0.17578125,
+            "10": 0.16015625,
+            "12": 0.1796875
+          },
+          "active": 156,
+          "mature": 12,
+          "bytes": 37968,
+          "trainBytes": 660302,
+          "auditBytes": 1966391,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 164
+          },
+          "ms": 9509.503699999983,
+          "work": 1600672588,
+          "shuffledBits": 5.374576851949963,
+          "compression": {
+            "predictionSavingPerEvent": -0.8617825760970161,
+            "extraModelBits": -3840,
+            "netExtraBits": -3619.3836605191636,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.14736708032704282,
+            "bAfterB": 3.916791450374483,
+            "aAfterReturn": 3.9161650249679663,
+            "recoveredByEvents": 64,
+            "constantA": 3.9205224996450836,
+            "constantB": 3.81621122190698,
+            "freshA": 4.169134747333461
+          }
+        },
+        "local_joint": {
+          "bits": 3.915726620623997,
+          "absoluteError": 3,
+          "anticipation": {
+            "2": 0.1875,
+            "4": 0.203125,
+            "6": 0.203125,
+            "8": 0.17578125,
+            "10": 0.1640625,
+            "12": 0.1796875
+          },
+          "active": 164,
+          "mature": 16,
+          "bytes": 38032,
+          "trainBytes": 661921,
+          "auditBytes": 1951750,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 156
+          },
+          "ms": 7904.344300000188,
+          "work": 1542120444,
+          "shuffledBits": 5.386611380676082,
+          "compression": {
+            "predictionSavingPerEvent": -0.8613441717530468,
+            "extraModelBits": -3328,
+            "netExtraBits": -3107.49589203122,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.15168702480462226,
+            "bAfterB": 3.9186849798191967,
+            "aAfterReturn": 3.915726620623997,
+            "recoveredByEvents": 64,
+            "constantA": 3.9229024823132557,
+            "constantB": 3.815971213860555,
+            "freshA": 4.172619744468812
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 1,
+              "edges": [
+                128,
+                129,
+                130,
+                131
+              ],
+              "target": [
+                0.00962861777891888,
+                -0.0031535779927103214
+              ],
+              "control": [
+                0.0038653625931174052,
+                -0.015497424475078935
+              ],
+              "difference": [
+                0.005763255185801475,
+                0.012343846482368614
+              ]
+            }
+          ]
+        },
+        {
+          "regime": 1,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 17,
+              "edges": [
+                192,
+                193,
+                194,
+                195
+              ],
+              "target": [
+                0.0033223082115734215,
+                -0.020587136771976322
+              ],
+              "control": [
+                0.0022745586539849373,
+                -0.014297049721333744
+              ],
+              "difference": [
+                0.0010477495575884842,
+                -0.0062900870506425784
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 4141705506,
+      "prior": 4.643350886813389,
+      "uniform": 4.64385618977472,
+      "networks": {
+        "fixed": {
+          "bits": 2.977484270833188,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.42578125,
+            "4": 0.41796875,
+            "6": 0.4453125,
+            "8": 0.48046875,
+            "10": 0.53515625,
+            "12": 0.6015625
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 647161,
+          "auditBytes": 19688,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 7,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 5228.274799999798,
+          "work": 1348185504,
+          "shuffledBits": 7.825003263099878,
+          "compression": {
+            "predictionSavingPerEvent": 0.0103409480180634,
+            "extraModelBits": -4352,
+            "netExtraBits": -4354.647282692624,
+            "breakEvenEvents": 0
+          },
+          "memory": {
+            "forgettingBits": -0.04903802395422474,
+            "bAfterB": 3.211528036132055,
+            "aAfterReturn": 2.977484270833188,
+            "recoveredByEvents": 64,
+            "constantA": 3.096247020420087,
+            "constantB": 3.2093644302981086,
+            "freshA": 3.7180254862158852
+          }
+        },
+        "random": {
+          "bits": 2.9878252188512513,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.44140625,
+            "4": 0.4296875,
+            "6": 0.4375,
+            "8": 0.49609375,
+            "10": 0.5546875,
+            "12": 0.58984375
+          },
+          "active": 196,
+          "mature": 48,
+          "bytes": 38288,
+          "trainBytes": 660781,
+          "auditBytes": 1979102,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 124
+          },
+          "ms": 12291.362400000007,
+          "work": 1693090920,
+          "shuffledBits": 7.734692981468406,
+          "memory": {
+            "forgettingBits": -0.09919796358672528,
+            "bAfterB": 3.199789304472083,
+            "aAfterReturn": 2.9878252188512513,
+            "recoveredByEvents": 64,
+            "constantA": 2.941234617645185,
+            "constantB": 3.1897278673982057,
+            "freshA": 3.65949060412999
+          }
+        },
+        "joint": {
+          "bits": 2.927201250144713,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.5390625,
+            "4": 0.546875,
+            "6": 0.578125,
+            "8": 0.6015625,
+            "10": 0.66015625,
+            "12": 0.62890625
+          },
+          "active": 212,
+          "mature": 64,
+          "bytes": 38416,
+          "trainBytes": 665105,
+          "auditBytes": 1993634,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 108
+          },
+          "ms": 14926.64080000002,
+          "work": 1802009804,
+          "shuffledBits": 7.871402836265537,
+          "compression": {
+            "predictionSavingPerEvent": 0.06062396870653819,
+            "extraModelBits": 1024,
+            "netExtraBits": 1008.4802640111262,
+            "breakEvenEvents": 16892
+          },
+          "memory": {
+            "forgettingBits": -0.08172819298572698,
+            "bAfterB": 3.192517791050131,
+            "aAfterReturn": 2.927201250144713,
+            "recoveredByEvents": 64,
+            "constantA": 3.0739716161998936,
+            "constantB": 3.2679599161798016,
+            "freshA": 3.69300416921248
+          }
+        },
+        "joint_no_prune": {
+          "bits": 2.9077999260328897,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.51171875,
+            "4": 0.56640625,
+            "6": 0.5546875,
+            "8": 0.5625,
+            "10": 0.60546875,
+            "12": 0.65234375
+          },
+          "active": 320,
+          "mature": 160,
+          "bytes": 39280,
+          "trainBytes": 689182,
+          "auditBytes": 2026994,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 18,
+            "minIn": 5
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 0
+          },
+          "ms": 19944.13839999941,
+          "work": 2038809156,
+          "shuffledBits": 7.841756884351821,
+          "compression": {
+            "predictionSavingPerEvent": 0.08002529281836157,
+            "extraModelBits": 7936,
+            "netExtraBits": 7915.513525038499,
+            "breakEvenEvents": 99169
+          },
+          "memory": {
+            "forgettingBits": 0.060328591986130053,
+            "bAfterB": 3.225441437744003,
+            "aAfterReturn": 2.9077999260328897,
+            "recoveredByEvents": 64,
+            "constantA": 2.9112575264513616,
+            "constantB": 3.1772333842222067,
+            "freshA": 3.65433249265179
+          }
+        },
+        "joint_no_stability": {
+          "bits": 2.9365924171981326,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.44140625,
+            "4": 0.44140625,
+            "6": 0.453125,
+            "8": 0.484375,
+            "10": 0.52734375,
+            "12": 0.546875
+          },
+          "active": 212,
+          "mature": 72,
+          "bytes": 38416,
+          "trainBytes": 664160,
+          "auditBytes": 1993115,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 108
+          },
+          "ms": 14880.225000000126,
+          "work": 1803267020,
+          "shuffledBits": 8.160746345198529,
+          "compression": {
+            "predictionSavingPerEvent": 0.05123280165311872,
+            "extraModelBits": 1024,
+            "netExtraBits": 1010.8844027768016,
+            "breakEvenEvents": 19988
+          },
+          "memory": {
+            "forgettingBits": -0.26204116995622906,
+            "bAfterB": 3.261178025148866,
+            "aAfterReturn": 2.9365924171981326,
+            "recoveredByEvents": 64,
+            "constantA": 2.89105214179782,
+            "constantB": 3.183722454900339,
+            "freshA": 3.667400010379873
+          }
+        },
+        "joint_no_homeostasis": {
+          "bits": 2.913140063314097,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.4375,
+            "4": 0.45703125,
+            "6": 0.47265625,
+            "8": 0.48046875,
+            "10": 0.5,
+            "12": 0.54296875
+          },
+          "active": 168,
+          "mature": 24,
+          "bytes": 38064,
+          "trainBytes": 653319,
+          "auditBytes": 1970942,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 152
+          },
+          "ms": 12067.811400000244,
+          "work": 1678978200,
+          "shuffledBits": 7.761409387833063,
+          "compression": {
+            "predictionSavingPerEvent": 0.07468515553715438,
+            "extraModelBits": -1792,
+            "netExtraBits": -1811.1193998175115,
+            "breakEvenEvents": 0
+          },
+          "memory": {
+            "forgettingBits": 0.2305259479965085,
+            "bAfterB": 3.11207286756995,
+            "aAfterReturn": 2.913140063314097,
+            "recoveredByEvents": 64,
+            "constantA": 2.920002825979323,
+            "constantB": 3.255230588788746,
+            "freshA": 3.6361539061995347
+          }
+        },
+        "local_fixed": {
+          "bits": 3.893491388318074,
+          "absoluteError": 3,
+          "anticipation": {
+            "2": 0.21875,
+            "4": 0.22265625,
+            "6": 0.234375,
+            "8": 0.234375,
+            "10": 0.25,
+            "12": 0.21484375
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 654489,
+          "auditBytes": 19755,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 7,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 5179.893600000328,
+          "work": 1348185504,
+          "shuffledBits": 5.305829650263105,
+          "compression": {
+            "predictionSavingPerEvent": -0.9056661694668229,
+            "extraModelBits": -4352,
+            "netExtraBits": -4120.149460616493,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.1615414629350278,
+            "bAfterB": 3.8918977569713786,
+            "aAfterReturn": 3.893491388318074,
+            "recoveredByEvents": 64,
+            "constantA": 3.8813100055995995,
+            "constantB": 3.8433760328695663,
+            "freshA": 4.121939611141703
+          }
+        },
+        "local_random": {
+          "bits": 3.893615031015771,
+          "absoluteError": 3,
+          "anticipation": {
+            "2": 0.21875,
+            "4": 0.22265625,
+            "6": 0.234375,
+            "8": 0.23828125,
+            "10": 0.25390625,
+            "12": 0.20703125
+          },
+          "active": 160,
+          "mature": 12,
+          "bytes": 38000,
+          "trainBytes": 661548,
+          "auditBytes": 1956521,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 7,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 160
+          },
+          "ms": 8197.046099999941,
+          "work": 1538293496,
+          "shuffledBits": 5.319811336056108,
+          "compression": {
+            "predictionSavingPerEvent": -0.9057898121645196,
+            "extraModelBits": -2304,
+            "netExtraBits": -2072.117808085883,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.15902182818898591,
+            "bAfterB": 3.8938031431898983,
+            "aAfterReturn": 3.893615031015771,
+            "recoveredByEvents": 64,
+            "constantA": 3.8706652040150464,
+            "constantB": 3.8406756147342063,
+            "freshA": 4.119175833411219
+          }
+        },
+        "local_joint": {
+          "bits": 3.8903875821844944,
+          "absoluteError": 3,
+          "anticipation": {
+            "2": 0.21875,
+            "4": 0.21875,
+            "6": 0.23046875,
+            "8": 0.23828125,
+            "10": 0.25,
+            "12": 0.2109375
+          },
+          "active": 164,
+          "mature": 20,
+          "bytes": 38032,
+          "trainBytes": 662584,
+          "auditBytes": 1957341,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 156
+          },
+          "ms": 8770.8024000003,
+          "work": 1557178104,
+          "shuffledBits": 5.328269233640485,
+          "compression": {
+            "predictionSavingPerEvent": -0.9025623633332431,
+            "extraModelBits": -2048,
+            "netExtraBits": -1816.9440349866898,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.16422034315549094,
+            "bAfterB": 3.8906324898816647,
+            "aAfterReturn": 3.8903875821844944,
+            "recoveredByEvents": 64,
+            "constantA": 3.8767300725486074,
+            "constantB": 3.8370695763495535,
+            "freshA": 4.124605261570579
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 1,
+              "edges": [
+                128,
+                129,
+                130,
+                131
+              ],
+              "target": [
+                -0.001451043265467078,
+                -0.031004863711973307
+              ],
+              "control": [
+                0.00033321043370793113,
+                -0.011194612345705401
+              ],
+              "difference": [
+                -0.001784253699175009,
+                -0.019810251366267906
+              ]
+            }
+          ]
+        },
+        {
+          "regime": 1,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 17,
+              "edges": [
+                192,
+                193,
+                194,
+                195
+              ],
+              "target": [
+                0.003480529681439748,
+                -0.005662058002287029
+              ],
+              "control": [
+                0.001232125187555355,
+                -0.005882658118881778
+              ],
+              "difference": [
+                0.002248404493884393,
+                0.0002206001165947491
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 3549354703,
+      "prior": 4.652922859693841,
+      "uniform": 4.64385618977472,
+      "networks": {
+        "fixed": {
+          "bits": 3.1135111261193233,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.42578125,
+            "4": 0.43359375,
+            "6": 0.44921875,
+            "8": 0.484375,
+            "10": 0.5078125,
+            "12": 0.51171875
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 647072,
+          "auditBytes": 19672,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 7,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 5405.7881000001225,
+          "work": 1369390560,
+          "shuffledBits": 8.718806041386834,
+          "compression": {
+            "predictionSavingPerEvent": -0.06319636743732637,
+            "extraModelBits": -4608,
+            "netExtraBits": -4591.821729936044,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.24570870309096904,
+            "bAfterB": 3.268269694604984,
+            "aAfterReturn": 3.1135111261193233,
+            "recoveredByEvents": 64,
+            "constantA": 3.1235766567997394,
+            "constantB": 3.1695287649952304,
+            "freshA": 3.6205336734088567
+          }
+        },
+        "random": {
+          "bits": 3.050314758681997,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.43359375,
+            "4": 0.43359375,
+            "6": 0.46875,
+            "8": 0.48046875,
+            "10": 0.5,
+            "12": 0.57421875
+          },
+          "active": 200,
+          "mature": 52,
+          "bytes": 38320,
+          "trainBytes": 663166,
+          "auditBytes": 1980873,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 120
+          },
+          "ms": 12244.290399999827,
+          "work": 1705869736,
+          "shuffledBits": 8.708374889648955,
+          "memory": {
+            "forgettingBits": -0.2342271256932391,
+            "bAfterB": 3.2333624630588202,
+            "aAfterReturn": 3.050314758681997,
+            "recoveredByEvents": 64,
+            "constantA": 3.097166984841529,
+            "constantB": 3.205550581275994,
+            "freshA": 3.6102671015546526
+          }
+        },
+        "joint": {
+          "bits": 3.0185274515931773,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.453125,
+            "4": 0.46875,
+            "6": 0.47265625,
+            "8": 0.51953125,
+            "10": 0.55078125,
+            "12": 0.61328125
+          },
+          "active": 244,
+          "mature": 92,
+          "bytes": 38672,
+          "trainBytes": 672376,
+          "auditBytes": 2000705,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 14,
+            "minIn": 5
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 76
+          },
+          "ms": 16183.353699999963,
+          "work": 1861993812,
+          "shuffledBits": 8.785093705237259,
+          "compression": {
+            "predictionSavingPerEvent": 0.031787307088819716,
+            "extraModelBits": 2816,
+            "netExtraBits": 2807.862449385262,
+            "breakEvenEvents": 88589
+          },
+          "memory": {
+            "forgettingBits": -0.38257810602703524,
+            "bAfterB": 3.2323065137786062,
+            "aAfterReturn": 3.0185274515931773,
+            "recoveredByEvents": 64,
+            "constantA": 3.1358813402854495,
+            "constantB": 3.254453154838514,
+            "freshA": 3.604301350637252
+          }
+        },
+        "joint_no_prune": {
+          "bits": 3.008952844256412,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.5078125,
+            "4": 0.51171875,
+            "6": 0.52734375,
+            "8": 0.578125,
+            "10": 0.61328125,
+            "12": 0.61328125
+          },
+          "active": 320,
+          "mature": 152,
+          "bytes": 39280,
+          "trainBytes": 688850,
+          "auditBytes": 2026733,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 19,
+            "minIn": 5
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 0
+          },
+          "ms": 21252.048999999963,
+          "work": 2067857788,
+          "shuffledBits": 8.944367633352085,
+          "compression": {
+            "predictionSavingPerEvent": 0.04136191442558479,
+            "extraModelBits": 7680,
+            "netExtraBits": 7669.41134990705,
+            "breakEvenEvents": 185679
+          },
+          "memory": {
+            "forgettingBits": -0.03682832705222472,
+            "bAfterB": 3.3511273931869545,
+            "aAfterReturn": 3.008952844256412,
+            "recoveredByEvents": 64,
+            "constantA": 3.1378849413817993,
+            "constantB": 3.259223866665229,
+            "freshA": 3.6824602568994966
+          }
+        },
+        "joint_no_stability": {
+          "bits": 2.9966219614055456,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.44921875,
+            "4": 0.47265625,
+            "6": 0.484375,
+            "8": 0.5078125,
+            "10": 0.5390625,
+            "12": 0.58203125
+          },
+          "active": 236,
+          "mature": 92,
+          "bytes": 38608,
+          "trainBytes": 671839,
+          "auditBytes": 1996720,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 84
+          },
+          "ms": 16049.06350000015,
+          "work": 1850332228,
+          "shuffledBits": 8.979652063177856,
+          "compression": {
+            "predictionSavingPerEvent": 0.053692797276451376,
+            "extraModelBits": 2304,
+            "netExtraBits": 2290.2546438972286,
+            "breakEvenEvents": 42911
+          },
+          "memory": {
+            "forgettingBits": -0.17393159953824489,
+            "bAfterB": 3.2313653735193157,
+            "aAfterReturn": 2.9966219614055456,
+            "recoveredByEvents": 64,
+            "constantA": 2.9874218661794183,
+            "constantB": 3.1820652835521033,
+            "freshA": 3.5991139987305396
+          }
+        },
+        "joint_no_homeostasis": {
+          "bits": 3.013975185341394,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.40234375,
+            "4": 0.40234375,
+            "6": 0.40625,
+            "8": 0.4296875,
+            "10": 0.46484375,
+            "12": 0.51171875
+          },
+          "active": 204,
+          "mature": 60,
+          "bytes": 38352,
+          "trainBytes": 657008,
+          "auditBytes": 1979514,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 116
+          },
+          "ms": 13162.976800000393,
+          "work": 1729334460,
+          "shuffledBits": 9.085399819914192,
+          "compression": {
+            "predictionSavingPerEvent": 0.03633957334060289,
+            "extraModelBits": 256,
+            "netExtraBits": 246.69706922480566,
+            "breakEvenEvents": 7045
+          },
+          "memory": {
+            "forgettingBits": -0.13422271508023575,
+            "bAfterB": 3.1672485038736427,
+            "aAfterReturn": 3.013975185341394,
+            "recoveredByEvents": 64,
+            "constantA": 3.2409169534991435,
+            "constantB": 3.060730514129141,
+            "freshA": 3.6013992859214174
+          }
+        },
+        "local_fixed": {
+          "bits": 3.808410274587249,
+          "absoluteError": 2,
+          "anticipation": {
+            "2": 0.1953125,
+            "4": 0.21875,
+            "6": 0.22265625,
+            "8": 0.234375,
+            "10": 0.234375,
+            "12": 0.18359375
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 653543,
+          "auditBytes": 19744,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 7,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 5371.050299999845,
+          "work": 1369390560,
+          "shuffledBits": 5.464536655252221,
+          "compression": {
+            "predictionSavingPerEvent": -0.7580955159052518,
+            "extraModelBits": -4608,
+            "netExtraBits": -4413.927547928255,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.09001190354452238,
+            "bAfterB": 4.013283949840184,
+            "aAfterReturn": 3.808410274587249,
+            "recoveredByEvents": 64,
+            "constantA": 3.824456994527682,
+            "constantB": 3.974367090134865,
+            "freshA": 4.10625097523927
+          }
+        },
+        "local_random": {
+          "bits": 3.8024354542295447,
+          "absoluteError": 2,
+          "anticipation": {
+            "2": 0.1953125,
+            "4": 0.2109375,
+            "6": 0.21875,
+            "8": 0.234375,
+            "10": 0.2265625,
+            "12": 0.19140625
+          },
+          "active": 168,
+          "mature": 20,
+          "bytes": 38064,
+          "trainBytes": 662565,
+          "auditBytes": 1964885,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 152
+          },
+          "ms": 8638.651599999528,
+          "work": 1572337552,
+          "shuffledBits": 5.478379576260664,
+          "compression": {
+            "predictionSavingPerEvent": -0.7521206955475477,
+            "extraModelBits": -2048,
+            "netExtraBits": -1855.4571019398277,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.08426413174200897,
+            "bAfterB": 4.013913025284262,
+            "aAfterReturn": 3.8024354542295447,
+            "recoveredByEvents": 64,
+            "constantA": 3.8186277460090103,
+            "constantB": 3.9704651008664524,
+            "freshA": 4.100605236462818
+          }
+        },
+        "local_joint": {
+          "bits": 3.796584756056407,
+          "absoluteError": 2,
+          "anticipation": {
+            "2": 0.19921875,
+            "4": 0.2109375,
+            "6": 0.22265625,
+            "8": 0.23046875,
+            "10": 0.2265625,
+            "12": 0.1953125
+          },
+          "active": 192,
+          "mature": 44,
+          "bytes": 38256,
+          "trainBytes": 668058,
+          "auditBytes": 1983087,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 192,
+            "deleted": 128
+          },
+          "ms": 10791.436199999349,
+          "work": 1650899520,
+          "shuffledBits": 5.486403372902228,
+          "compression": {
+            "predictionSavingPerEvent": -0.74626999737441,
+            "extraModelBits": -512,
+            "netExtraBits": -320.95488067215103,
+            "breakEvenEvents": null
+          },
+          "memory": {
+            "forgettingBits": -0.08268896539136739,
+            "bAfterB": 4.0150946670039875,
+            "aAfterReturn": 3.796584756056407,
+            "recoveredByEvents": 64,
+            "constantA": 3.818216431325938,
+            "constantB": 3.976234448288917,
+            "freshA": 4.102373032850592
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 3,
+              "edges": [
+                136,
+                137,
+                138,
+                139
+              ],
+              "target": [
+                -0.007464546863636734,
+                -0.0344549927417126
+              ],
+              "control": [
+                0.004234761275012655,
+                -0.006599027664444113
+              ],
+              "difference": [
+                -0.011699308138649389,
+                -0.027855965077268487
+              ]
+            }
+          ]
+        },
+        {
+          "regime": 1,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 18,
+              "edges": [
+                196,
+                197,
+                198,
+                199
+              ],
+              "target": [
+                0.0014536633172319569,
+                -0.0026861651434648692
+              ],
+              "control": [
+                0.0011713843584830962,
+                -0.003840186909065424
+              ],
+              "difference": [
+                0.00028227895874886064,
+                0.0011540217656005546
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

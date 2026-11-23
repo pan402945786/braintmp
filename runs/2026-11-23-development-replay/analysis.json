@@ -1,0 +1,357 @@
+{
+  "config": {
+    "profile": "development",
+    "seed": 7,
+    "seeds": 3,
+    "train": 8192,
+    "samples": 256,
+    "checkpoints": [
+      0,
+      128,
+      512,
+      2048,
+      8192
+    ],
+    "rate": 0.003,
+    "encoder": "motion",
+    "learner": "bptt",
+    "traceDecay": 1,
+    "interval": 64,
+    "candidates": 128,
+    "edgesPerGrowth": 4,
+    "maxEdges": 512,
+    "maxIn": 20,
+    "fixedCapacity": 176,
+    "confirmEvents": 32,
+    "confirmWindows": 3,
+    "support": 0.0001,
+    "matureRate": 0.3,
+    "homeostasis": true,
+    "prune": true,
+    "methods": [
+      "fixed",
+      "joint"
+    ],
+    "computeMatch": false,
+    "memory": false
+  },
+  "prior": 4.646393653414656,
+  "uniform": 4.64385618977472,
+  "methods": {
+    "fixed": {
+      "bits": 2.435913809318392,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.65625,
+        "4": 0.69140625,
+        "6": 0.703125,
+        "8": 0.7174479166666666,
+        "10": 0.7252604166666666,
+        "12": 0.73828125
+      },
+      "active": 128,
+      "mature": 0,
+      "bytes": 37744,
+      "trainBytes": 644221.6666666666,
+      "auditBytes": 19660.666666666668,
+      "ms": 8309.263133333363,
+      "work": 3630892608,
+      "shuffledBits": 12.430560619742842
+    },
+    "joint": {
+      "bits": 2.4426887523781224,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.6588541666666666,
+        "4": 0.6861979166666666,
+        "6": 0.7083333333333334,
+        "8": 0.7161458333333334,
+        "10": 0.7200520833333334,
+        "12": 0.7200520833333334
+      },
+      "active": 189.33333333333334,
+      "mature": 46.666666666666664,
+      "bytes": 38234.666666666664,
+      "trainBytes": 657816.6666666666,
+      "auditBytes": 5333538,
+      "ms": 28681.112733333186,
+      "work": 5154088988,
+      "shuffledBits": 12.162955131860649
+    }
+  },
+  "trials": [
+    {
+      "seed": 7,
+      "prior": 4.646603700674487,
+      "uniform": 4.64385618977472,
+      "networks": {
+        "fixed": {
+          "bits": 2.377917947726526,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.67578125,
+            "4": 0.73046875,
+            "6": 0.74609375,
+            "8": 0.77734375,
+            "10": 0.79296875,
+            "12": 0.828125
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 644309,
+          "auditBytes": 19650,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 6,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 8481.67669999979,
+          "work": 3627639104,
+          "shuffledBits": 12.738273018619298
+        },
+        "joint": {
+          "bits": 2.3502031895532123,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.69921875,
+            "4": 0.7109375,
+            "6": 0.72265625,
+            "8": 0.74609375,
+            "10": 0.75,
+            "12": 0.7734375
+          },
+          "active": 200,
+          "mature": 56,
+          "bytes": 38320,
+          "trainBytes": 657985,
+          "auditBytes": 5353850,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 440
+          },
+          "ms": 30172.627899999858,
+          "work": 5259222932,
+          "shuffledBits": 12.148580068030004
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 1,
+              "edges": [
+                128,
+                129,
+                130,
+                131
+              ],
+              "target": [
+                0.02103521283479015
+              ],
+              "control": [
+                0.039398564660357224
+              ],
+              "difference": [
+                -0.018363351825567073
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 2913497007,
+      "prior": 4.647804033521691,
+      "uniform": 4.64385618977472,
+      "networks": {
+        "fixed": {
+          "bits": 2.43160976500588,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.7109375,
+            "4": 0.73828125,
+            "6": 0.73046875,
+            "8": 0.734375,
+            "10": 0.74609375,
+            "12": 0.765625
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 643927,
+          "auditBytes": 19685,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 7,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 8290.05190000029,
+          "work": 3645596384,
+          "shuffledBits": 11.608580179596864
+        },
+        "joint": {
+          "bits": 2.477055478081835,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6875,
+            "4": 0.7109375,
+            "6": 0.71484375,
+            "8": 0.72265625,
+            "10": 0.71875,
+            "12": 0.7109375
+          },
+          "active": 196,
+          "mature": 52,
+          "bytes": 38288,
+          "trainBytes": 660094,
+          "auditBytes": 5336385,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 444
+          },
+          "ms": 30112.881600000106,
+          "work": 5271445284,
+          "shuffledBits": 11.67863010000204
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 4,
+              "edges": [
+                140,
+                141,
+                142,
+                143
+              ],
+              "target": [
+                0.04386555503805578
+              ],
+              "control": [
+                0.0210487034674385
+              ],
+              "difference": [
+                0.02281685157061728
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 2809245340,
+      "prior": 4.644773226047794,
+      "uniform": 4.64385618977472,
+      "networks": {
+        "fixed": {
+          "bits": 2.4982137152227706,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.58203125,
+            "4": 0.60546875,
+            "6": 0.6328125,
+            "8": 0.640625,
+            "10": 0.63671875,
+            "12": 0.62109375
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 644429,
+          "auditBytes": 19647,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 8,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 8156.060800000007,
+          "work": 3619442336,
+          "shuffledBits": 12.944828661012368
+        },
+        "joint": {
+          "bits": 2.5008075894993196,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.58984375,
+            "4": 0.63671875,
+            "6": 0.6875,
+            "8": 0.6796875,
+            "10": 0.69140625,
+            "12": 0.67578125
+          },
+          "active": 172,
+          "mature": 32,
+          "bytes": 38096,
+          "trainBytes": 655371,
+          "auditBytes": 5310379,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 468
+          },
+          "ms": 25757.828699999605,
+          "work": 4931598748,
+          "shuffledBits": 12.661655227549902
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 4,
+              "edges": [
+                140,
+                141,
+                142,
+                143
+              ],
+              "target": [
+                0.019961005011993826
+              ],
+              "control": [
+                0.00802566665617006
+              ],
+              "difference": [
+                0.011935338355823766
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

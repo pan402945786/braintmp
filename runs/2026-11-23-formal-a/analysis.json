@@ -1,0 +1,3324 @@
+{
+  "config": {
+    "profile": "formal",
+    "seed": 20261123,
+    "seeds": 10,
+    "train": 8192,
+    "samples": 2000,
+    "checkpoints": [
+      0,
+      128,
+      512,
+      2048,
+      8192
+    ],
+    "rate": 0.003,
+    "encoder": "motion",
+    "learner": "bptt",
+    "traceDecay": 1,
+    "interval": 64,
+    "candidates": 128,
+    "edgesPerGrowth": 4,
+    "maxEdges": 512,
+    "maxIn": 20,
+    "fixedCapacity": 196,
+    "confirmEvents": 32,
+    "confirmWindows": 3,
+    "support": 0.0001,
+    "matureRate": 0.3,
+    "homeostasis": true,
+    "prune": true,
+    "methods": [
+      "fixed",
+      "random",
+      "hebb",
+      "bidirectional",
+      "joint",
+      "shuffled",
+      "capacity"
+    ],
+    "computeMatch": true,
+    "memory": false
+  },
+  "prior": 4.646393410489589,
+  "uniform": 4.643856189774707,
+  "methods": {
+    "fixed": {
+      "bits": 2.461209176737054,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.636,
+        "4": 0.6601499999999999,
+        "6": 0.6774,
+        "8": 0.6936500000000001,
+        "10": 0.7030000000000001,
+        "12": 0.70305
+      },
+      "active": 128,
+      "mature": 0,
+      "bytes": 37744,
+      "trainBytes": 642415,
+      "auditBytes": 19655.5,
+      "ms": 12487.870409998404,
+      "work": 3622580134.4,
+      "ece": 0.04654866340805937,
+      "shuffledBits": 12.672671171917106,
+      "biasBits": 4.649565233943744,
+      "matchedBits": 2.461209176737054,
+      "matchedEvents": 8192,
+      "medianMatchedEvents": 8192
+    },
+    "random": {
+      "bits": 2.5074461728649844,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.62815,
+        "4": 0.65605,
+        "6": 0.6771,
+        "8": 0.69645,
+        "10": 0.7031,
+        "12": 0.6901499999999999
+      },
+      "active": 185.2,
+      "mature": 38.8,
+      "bytes": 38201.6,
+      "trainBytes": 653962,
+      "auditBytes": 5290131.1,
+      "ms": 36606.416860000754,
+      "work": 4858244294,
+      "ece": 0.05655860655878229,
+      "shuffledBits": 12.717374488049256,
+      "biasBits": 4.6496622002244035,
+      "matchedBits": 2.639551006906949,
+      "matchedEvents": 6092.4,
+      "medianMatchedEvents": 6116.5
+    },
+    "hebb": {
+      "bits": 2.3778646006646946,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.6739499999999999,
+        "4": 0.6996,
+        "6": 0.7206500000000001,
+        "8": 0.7360999999999999,
+        "10": 0.7449,
+        "12": 0.7416999999999999
+      },
+      "active": 197.2,
+      "mature": 50,
+      "bytes": 38297.6,
+      "trainBytes": 658299.8,
+      "auditBytes": 5333885.3,
+      "ms": 43908.027299999885,
+      "work": 5184483238.4,
+      "ece": 0.05381605943147859,
+      "shuffledBits": 12.31994502594164,
+      "biasBits": 4.649312747375815,
+      "matchedBits": 2.6470690940210586,
+      "matchedEvents": 5660.3,
+      "medianMatchedEvents": 5717.5
+    },
+    "bidirectional": {
+      "bits": 2.401321483824021,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.65785,
+        "4": 0.68615,
+        "6": 0.70695,
+        "8": 0.7226000000000001,
+        "10": 0.7298500000000001,
+        "12": 0.7182999999999999
+      },
+      "active": 188.4,
+      "mature": 42.4,
+      "bytes": 38227.2,
+      "trainBytes": 655946,
+      "auditBytes": 5316652.5,
+      "ms": 40250.42248999929,
+      "work": 4997222663.6,
+      "ece": 0.048997292286734995,
+      "shuffledBits": 12.43226502110652,
+      "biasBits": 4.6493031888675915,
+      "matchedBits": 2.652453902584111,
+      "matchedEvents": 5907.6,
+      "medianMatchedEvents": 5901
+    },
+    "joint": {
+      "bits": 2.4686213734773297,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.6353,
+        "4": 0.6581999999999999,
+        "6": 0.67745,
+        "8": 0.6922499999999998,
+        "10": 0.6940500000000001,
+        "12": 0.6874499999999999
+      },
+      "active": 187.6,
+      "mature": 41.6,
+      "bytes": 38220.8,
+      "trainBytes": 654985.5,
+      "auditBytes": 5313588.3,
+      "ms": 40646.17925000111,
+      "work": 5027748229.2,
+      "ece": 0.05298182533018173,
+      "shuffledBits": 12.28730759994232,
+      "biasBits": 4.649727559376441,
+      "matchedBits": 2.661250677327369,
+      "matchedEvents": 5852.3,
+      "medianMatchedEvents": 5854
+    },
+    "shuffled": {
+      "bits": 2.4310739315275,
+      "absoluteError": 1,
+      "anticipation": {
+        "2": 0.6691,
+        "4": 0.6886500000000001,
+        "6": 0.70775,
+        "8": 0.7253,
+        "10": 0.7317499999999999,
+        "12": 0.71975
+      },
+      "active": 192.4,
+      "mature": 41.2,
+      "bytes": 38259.2,
+      "trainBytes": 657298.9,
+      "auditBytes": 5318139.9,
+      "ms": 41323.02011999984,
+      "work": 5065907474.4,
+      "ece": 0.03968309495287677,
+      "shuffledBits": 12.22702302974575,
+      "biasBits": 4.649376953206343,
+      "matchedBits": 2.6347669332175316,
+      "matchedEvents": 5756,
+      "medianMatchedEvents": 5781
+    },
+    "capacity": {
+      "bits": 2.474873936621928,
+      "absoluteError": 1.05,
+      "anticipation": {
+        "2": 0.62825,
+        "4": 0.6569,
+        "6": 0.6790999999999999,
+        "8": 0.6950999999999999,
+        "10": 0.7047999999999999,
+        "12": 0.7041499999999999
+      },
+      "active": 196,
+      "mature": 0,
+      "bytes": 38288,
+      "trainBytes": 655185.6,
+      "auditBytes": 30183.1,
+      "ms": 12868.160470001103,
+      "work": 3662102468.8,
+      "ece": 0.049887949597482925,
+      "shuffledBits": 12.515964865029497,
+      "biasBits": 4.649154885981304,
+      "matchedBits": 2.418052573729869,
+      "matchedEvents": 8102.2,
+      "medianMatchedEvents": 8102
+    }
+  },
+  "jointVsRandomCompute": {
+    "perSeed": [
+      0.025800894239263794,
+      -0.32948321344057874,
+      0.12339083902693604,
+      0.29521893429593815,
+      -0.025003345039490643,
+      -0.06893576220990605,
+      -0.06957741223103531,
+      -0.2218854948210831,
+      0.06004460660294475,
+      -0.006566750627188256
+    ],
+    "mean": -0.021699670420419936,
+    "interval": 0.95,
+    "bounds": [
+      -0.12386220788846644,
+      0.07945462037942294
+    ]
+  },
+  "trials": [
+    {
+      "seed": 20261123,
+      "prior": 4.650730504733933,
+      "uniform": 4.643856189774706,
+      "budget": 3633378560,
+      "networks": {
+        "fixed": {
+          "bits": 2.4101732231241306,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6505,
+            "4": 0.6745,
+            "6": 0.6965,
+            "8": 0.7235,
+            "10": 0.7465,
+            "12": 0.762
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 641038,
+          "auditBytes": 19660,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 7,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 13954.761099998606,
+          "work": 3633378560,
+          "shuffledBits": 13.375500057771577,
+          "matchedBits": 2.4101732231241306,
+          "matchedEvents": 8192,
+          "matchedWork": 3633378560,
+          "ece": 0.04254252046239408,
+          "biasBits": 4.648886838767968,
+          "compression": {
+            "predictionSavingPerEvent": -0.042210553466504486,
+            "extraModelBits": -2560,
+            "netExtraBits": -2475.578893066991,
+            "breakEvenEvents": null
+          }
+        },
+        "random": {
+          "bits": 2.367962669657626,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.7235,
+            "4": 0.76,
+            "6": 0.785,
+            "8": 0.8035,
+            "10": 0.8025,
+            "12": 0.787
+          },
+          "active": 168,
+          "mature": 24,
+          "bytes": 38064,
+          "trainBytes": 647357,
+          "auditBytes": 5270696,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 472
+          },
+          "ms": 38778.46780000082,
+          "work": 4771544768,
+          "shuffledBits": 13.241382694246502,
+          "matchedBits": 2.602374847536491,
+          "matchedEvents": 6146,
+          "matchedWork": 3633152472,
+          "ece": 0.03976450045377795,
+          "biasBits": 4.649473994448629
+        },
+        "hebb": {
+          "bits": 2.451942715104623,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.7345,
+            "4": 0.7495,
+            "6": 0.766,
+            "8": 0.7735,
+            "10": 0.761,
+            "12": 0.7495
+          },
+          "active": 188,
+          "mature": 44,
+          "bytes": 38224,
+          "trainBytes": 654466,
+          "auditBytes": 5338554,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 452
+          },
+          "ms": 50531.409599998195,
+          "work": 5269164012,
+          "shuffledBits": 12.807880214241722,
+          "matchedBits": 2.949522629731837,
+          "matchedEvents": 5509,
+          "matchedWork": 3632616816,
+          "ece": 0.07604676869786801,
+          "biasBits": 4.648334966433517,
+          "compression": {
+            "predictionSavingPerEvent": -0.08398004544699678,
+            "extraModelBits": 1280,
+            "netExtraBits": 1447.9600908939935,
+            "breakEvenEvents": null
+          }
+        },
+        "bidirectional": {
+          "bits": 2.3070630231744276,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.759,
+            "4": 0.762,
+            "6": 0.7645,
+            "8": 0.765,
+            "10": 0.746,
+            "12": 0.716
+          },
+          "active": 208,
+          "mature": 68,
+          "bytes": 38384,
+          "trainBytes": 659439,
+          "auditBytes": 5369550,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 432
+          },
+          "ms": 53863.89029999824,
+          "work": 5387542104,
+          "shuffledBits": 13.376263865778526,
+          "matchedBits": 2.728882995659335,
+          "matchedEvents": 5520,
+          "matchedWork": 3632576748,
+          "ece": 0.06851763714288056,
+          "biasBits": 4.647150920647858,
+          "compression": {
+            "predictionSavingPerEvent": 0.060899646483198566,
+            "extraModelBits": 2560,
+            "netExtraBits": 2438.200707033603,
+            "breakEvenEvents": 42037
+          }
+        },
+        "joint": {
+          "bits": 2.701925877628448,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.563,
+            "4": 0.5905,
+            "6": 0.5985,
+            "8": 0.607,
+            "10": 0.596,
+            "12": 0.5945
+          },
+          "active": 192,
+          "mature": 48,
+          "bytes": 38256,
+          "trainBytes": 650642,
+          "auditBytes": 5316152,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 448
+          },
+          "ms": 45511.28789999952,
+          "work": 5064404960,
+          "shuffledBits": 12.248606509893664,
+          "matchedBits": 2.576573953297227,
+          "matchedEvents": 5839,
+          "matchedWork": 3633132096,
+          "ece": 0.07334176998297343,
+          "biasBits": 4.64665455306454,
+          "compression": {
+            "predictionSavingPerEvent": -0.3339632079708217,
+            "extraModelBits": 1536,
+            "netExtraBits": 2203.9264159416434,
+            "breakEvenEvents": null
+          }
+        },
+        "shuffled": {
+          "bits": 2.4233527115770706,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.7035,
+            "4": 0.7115,
+            "6": 0.7285,
+            "8": 0.748,
+            "10": 0.7435,
+            "12": 0.715
+          },
+          "active": 180,
+          "mature": 28,
+          "bytes": 38160,
+          "trainBytes": 653803,
+          "auditBytes": 5300375,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 460
+          },
+          "ms": 43629.41919999994,
+          "work": 4985825344,
+          "shuffledBits": 12.818341634732478,
+          "matchedBits": 2.6697822812880654,
+          "matchedEvents": 5832,
+          "matchedWork": 3633340236,
+          "ece": 0.05350512879792666,
+          "biasBits": 4.647822119302365,
+          "compression": {
+            "predictionSavingPerEvent": -0.05539004191944441,
+            "extraModelBits": 768,
+            "netExtraBits": 878.7800838388888,
+            "breakEvenEvents": null
+          }
+        },
+        "capacity": {
+          "bits": 3.1958594289807905,
+          "absoluteError": 1.5,
+          "anticipation": {
+            "2": 0.4325,
+            "4": 0.4305,
+            "6": 0.4335,
+            "8": 0.443,
+            "10": 0.4505,
+            "12": 0.462
+          },
+          "active": 196,
+          "mature": 0,
+          "bytes": 38288,
+          "trainBytes": 652805,
+          "auditBytes": 30179,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 14345.925300000761,
+          "work": 3673029088,
+          "shuffledBits": 12.332156338658855,
+          "matchedBits": 2.463085697200873,
+          "matchedEvents": 8103,
+          "matchedWork": 3633199152,
+          "ece": 0.10044311861306422,
+          "biasBits": 4.649359390388285,
+          "compression": {
+            "predictionSavingPerEvent": -0.8278967593231643,
+            "extraModelBits": 1792,
+            "netExtraBits": 3447.7935186463287,
+            "breakEvenEvents": null
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 6,
+              "edges": [
+                148,
+                149,
+                150,
+                151
+              ],
+              "target": [
+                0.11026204782642157
+              ],
+              "control": [
+                0.016166100560347486
+              ],
+              "difference": [
+                0.09409594726607409
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 4155701375,
+      "prior": 4.64422826493514,
+      "uniform": 4.643856189774706,
+      "budget": 3630938432,
+      "networks": {
+        "fixed": {
+          "bits": 2.3347818336474844,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.618,
+            "4": 0.664,
+            "6": 0.6895,
+            "8": 0.7025,
+            "10": 0.71,
+            "12": 0.6955
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 644070,
+          "auditBytes": 19686,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 6,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 14167.358499999802,
+          "work": 3630938432,
+          "shuffledBits": 12.034886800396743,
+          "matchedBits": 2.3347818336474844,
+          "matchedEvents": 8192,
+          "matchedWork": 3630938432,
+          "ece": 0.04665929110373552,
+          "biasBits": 4.649046995998226,
+          "compression": {
+            "predictionSavingPerEvent": 0.18249930009786963,
+            "extraModelBits": -1792,
+            "netExtraBits": -2156.998600195739,
+            "breakEvenEvents": 0
+          }
+        },
+        "random": {
+          "bits": 2.517281133745354,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.5925,
+            "4": 0.6245,
+            "6": 0.6455,
+            "8": 0.662,
+            "10": 0.6835,
+            "12": 0.6585
+          },
+          "active": 156,
+          "mature": 16,
+          "bytes": 37968,
+          "trainBytes": 648170,
+          "auditBytes": 5218918,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 8,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 484
+          },
+          "ms": 31162.065699999446,
+          "work": 4457205612,
+          "shuffledBits": 11.672102512426136,
+          "matchedBits": 2.6357171731344247,
+          "matchedEvents": 6684,
+          "matchedWork": 3630549228,
+          "ece": 0.015249665445359826,
+          "biasBits": 4.649138310799776
+        },
+        "hebb": {
+          "bits": 2.293789217762002,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.693,
+            "4": 0.717,
+            "6": 0.7295,
+            "8": 0.7395,
+            "10": 0.744,
+            "12": 0.745
+          },
+          "active": 184,
+          "mature": 44,
+          "bytes": 38192,
+          "trainBytes": 656555,
+          "auditBytes": 5313141,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 456
+          },
+          "ms": 46819.69349999888,
+          "work": 5112243240,
+          "shuffledBits": 11.984341078440782,
+          "matchedBits": 2.6243322271736362,
+          "matchedEvents": 5686,
+          "matchedWork": 3630463896,
+          "ece": 0.04415042504917919,
+          "biasBits": 4.649458317325139,
+          "compression": {
+            "predictionSavingPerEvent": 0.22349191598335194,
+            "extraModelBits": 1792,
+            "netExtraBits": 1345.0161680332963,
+            "breakEvenEvents": 8019
+          }
+        },
+        "bidirectional": {
+          "bits": 2.3570286198029935,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6595,
+            "4": 0.7035,
+            "6": 0.727,
+            "8": 0.738,
+            "10": 0.742,
+            "12": 0.7405
+          },
+          "active": 192,
+          "mature": 48,
+          "bytes": 38256,
+          "trainBytes": 659165,
+          "auditBytes": 5318886,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 448
+          },
+          "ms": 43800.22360000074,
+          "work": 4977331480,
+          "shuffledBits": 11.859798536322607,
+          "matchedBits": 2.673108203422244,
+          "matchedEvents": 5903,
+          "matchedWork": 3630563976,
+          "ece": 0.050343997755242856,
+          "biasBits": 4.64911861763466,
+          "compression": {
+            "predictionSavingPerEvent": 0.1602525139423605,
+            "extraModelBits": 2304,
+            "netExtraBits": 1983.4949721152789,
+            "breakEvenEvents": 14378
+          }
+        },
+        "joint": {
+          "bits": 2.406658386955184,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6615,
+            "4": 0.688,
+            "6": 0.696,
+            "8": 0.704,
+            "10": 0.7135,
+            "12": 0.6995
+          },
+          "active": 164,
+          "mature": 16,
+          "bytes": 38032,
+          "trainBytes": 649218,
+          "auditBytes": 5298209,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 476
+          },
+          "ms": 42838.80380000121,
+          "work": 4942320508,
+          "shuffledBits": 11.768369534043503,
+          "matchedBits": 2.9652003865750034,
+          "matchedEvents": 5862,
+          "matchedWork": 3630926884,
+          "ece": 0.02413329576975793,
+          "biasBits": 4.649353667295837,
+          "compression": {
+            "predictionSavingPerEvent": 0.11062274679016992,
+            "extraModelBits": 512,
+            "netExtraBits": 290.7545064196602,
+            "breakEvenEvents": 4629
+          }
+        },
+        "shuffled": {
+          "bits": 2.393188203881542,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6505,
+            "4": 0.6605,
+            "6": 0.674,
+            "8": 0.6825,
+            "10": 0.6975,
+            "12": 0.6805
+          },
+          "active": 204,
+          "mature": 48,
+          "bytes": 38352,
+          "trainBytes": 661212,
+          "auditBytes": 5347547,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 436
+          },
+          "ms": 50041.7454000008,
+          "work": 5255063072,
+          "shuffledBits": 11.68972372972816,
+          "matchedBits": 2.7330427696435096,
+          "matchedEvents": 5503,
+          "matchedWork": 3630430972,
+          "ece": 0.04213214408648294,
+          "biasBits": 4.648320741552626,
+          "compression": {
+            "predictionSavingPerEvent": 0.12409292986381182,
+            "extraModelBits": 3072,
+            "netExtraBits": 2823.8141402723763,
+            "breakEvenEvents": 24756
+          }
+        },
+        "capacity": {
+          "bits": 2.5269565732154113,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6385,
+            "4": 0.6625,
+            "6": 0.6755,
+            "8": 0.696,
+            "10": 0.717,
+            "12": 0.72
+          },
+          "active": 196,
+          "mature": 0,
+          "bytes": 38288,
+          "trainBytes": 656219,
+          "auditBytes": 30213,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 4
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 14704.959600000973,
+          "work": 3670559992,
+          "shuffledBits": 11.847198961383759,
+          "matchedBits": 2.281012941344755,
+          "matchedEvents": 8102,
+          "matchedWork": 3630908692,
+          "ece": 0.021512214437854872,
+          "biasBits": 4.648409739558448,
+          "compression": {
+            "predictionSavingPerEvent": -0.009675439470057334,
+            "extraModelBits": 2560,
+            "netExtraBits": 2579.350878940115,
+            "breakEvenEvents": null
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 4,
+              "edges": [
+                140,
+                141,
+                142,
+                143
+              ],
+              "target": [
+                0.0019807689107405047
+              ],
+              "control": [
+                0.012568258939954812
+              ],
+              "difference": [
+                -0.010587490029214308
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 535989185,
+      "prior": 4.645364483571173,
+      "uniform": 4.643856189774706,
+      "budget": 3615146336,
+      "networks": {
+        "fixed": {
+          "bits": 2.698382724620428,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.545,
+            "4": 0.5555,
+            "6": 0.5685,
+            "8": 0.5805,
+            "10": 0.587,
+            "12": 0.5995
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 640740,
+          "auditBytes": 19674,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 7,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 13918.489299998479,
+          "work": 3615146336,
+          "shuffledBits": 11.920488831512154,
+          "matchedBits": 2.698382724620428,
+          "matchedEvents": 8192,
+          "matchedWork": 3615146336,
+          "ece": 0.028432999069450706,
+          "biasBits": 4.651155654876188,
+          "compression": {
+            "predictionSavingPerEvent": -0.09661072431399775,
+            "extraModelBits": -3328,
+            "netExtraBits": -3134.7785513720046,
+            "breakEvenEvents": null
+          }
+        },
+        "random": {
+          "bits": 2.6017720003064304,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.492,
+            "4": 0.525,
+            "6": 0.544,
+            "8": 0.561,
+            "10": 0.5705,
+            "12": 0.61
+          },
+          "active": 180,
+          "mature": 36,
+          "bytes": 38160,
+          "trainBytes": 651378,
+          "auditBytes": 5279935,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 460
+          },
+          "ms": 39643.29999999973,
+          "work": 4778742372,
+          "shuffledBits": 12.764185363041491,
+          "matchedBits": 2.855238569574866,
+          "matchedEvents": 6200,
+          "matchedWork": 3614701012,
+          "ece": 0.06630312406491871,
+          "biasBits": 4.649731847973696
+        },
+        "hebb": {
+          "bits": 2.42526696076177,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.629,
+            "4": 0.6485,
+            "6": 0.665,
+            "8": 0.686,
+            "10": 0.717,
+            "12": 0.748
+          },
+          "active": 208,
+          "mature": 52,
+          "bytes": 38384,
+          "trainBytes": 660701,
+          "auditBytes": 5326963,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 432
+          },
+          "ms": 47463.585799997214,
+          "work": 5095127884,
+          "shuffledBits": 12.199273145495534,
+          "matchedBits": 2.7513235669840115,
+          "matchedEvents": 5691,
+          "matchedWork": 3615027140,
+          "ece": 0.03843938963598463,
+          "biasBits": 4.648016542235081,
+          "compression": {
+            "predictionSavingPerEvent": 0.17650503954466057,
+            "extraModelBits": 1792,
+            "netExtraBits": 1438.9899209106788,
+            "breakEvenEvents": 10153
+          }
+        },
+        "bidirectional": {
+          "bits": 2.397918940665399,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.611,
+            "4": 0.6365,
+            "6": 0.661,
+            "8": 0.6775,
+            "10": 0.713,
+            "12": 0.7355
+          },
+          "active": 200,
+          "mature": 48,
+          "bytes": 38320,
+          "trainBytes": 659487,
+          "auditBytes": 5308594,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 440
+          },
+          "ms": 44694.107300000054,
+          "work": 4983364228,
+          "shuffledBits": 12.718630687996054,
+          "matchedBits": 2.595274500289982,
+          "matchedEvents": 5920,
+          "matchedWork": 3614673372,
+          "ece": 0.04235214870868975,
+          "biasBits": 4.64874024489121,
+          "compression": {
+            "predictionSavingPerEvent": 0.2038530596410313,
+            "extraModelBits": 1280,
+            "netExtraBits": 872.2938807179374,
+            "breakEvenEvents": 6280
+          }
+        },
+        "joint": {
+          "bits": 2.4780201581657075,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.591,
+            "4": 0.6085,
+            "6": 0.632,
+            "8": 0.6525,
+            "10": 0.683,
+            "12": 0.708
+          },
+          "active": 208,
+          "mature": 56,
+          "bytes": 38384,
+          "trainBytes": 658109,
+          "auditBytes": 5336446,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 432
+          },
+          "ms": 49027.90080000204,
+          "work": 5180776152,
+          "shuffledBits": 12.19750109294503,
+          "matchedBits": 2.73184773054793,
+          "matchedEvents": 5631,
+          "matchedWork": 3615097996,
+          "ece": 0.023167220731455825,
+          "biasBits": 4.649001250673709,
+          "compression": {
+            "predictionSavingPerEvent": 0.12375184214072288,
+            "extraModelBits": 1792,
+            "netExtraBits": 1544.4963157185543,
+            "breakEvenEvents": 14481
+          }
+        },
+        "shuffled": {
+          "bits": 2.427370318536736,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6225,
+            "4": 0.64,
+            "6": 0.66,
+            "8": 0.678,
+            "10": 0.6995,
+            "12": 0.7055
+          },
+          "active": 204,
+          "mature": 52,
+          "bytes": 38352,
+          "trainBytes": 659474,
+          "auditBytes": 5329410,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 436
+          },
+          "ms": 48159.478299999566,
+          "work": 5143642160,
+          "shuffledBits": 12.09056308199663,
+          "matchedBits": 2.8521018197820673,
+          "matchedEvents": 5697,
+          "matchedWork": 3614964372,
+          "ece": 0.02214854127828151,
+          "biasBits": 4.647944061947672,
+          "compression": {
+            "predictionSavingPerEvent": 0.1744016817696945,
+            "extraModelBits": 1536,
+            "netExtraBits": 1187.196636460611,
+            "breakEvenEvents": 8808
+          }
+        },
+        "capacity": {
+          "bits": 2.327437402265572,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.601,
+            "4": 0.648,
+            "6": 0.6855,
+            "8": 0.715,
+            "10": 0.754,
+            "12": 0.7905
+          },
+          "active": 196,
+          "mature": 0,
+          "bytes": 38288,
+          "trainBytes": 657023,
+          "auditBytes": 30184,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 14355.247300000636,
+          "work": 3654580420,
+          "shuffledBits": 12.995969680612868,
+          "matchedBits": 2.6586290581689647,
+          "matchedEvents": 8102,
+          "matchedWork": 3614894344,
+          "ece": 0.026046694568826956,
+          "biasBits": 4.647553487379892,
+          "compression": {
+            "predictionSavingPerEvent": 0.27433459804085825,
+            "extraModelBits": 1024,
+            "netExtraBits": 475.33080391828355,
+            "breakEvenEvents": 3733
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 8,
+              "edges": [
+                156,
+                157,
+                158,
+                159
+              ],
+              "target": [
+                -0.014454416805571135
+              ],
+              "control": [
+                -0.0013368721897998536
+              ],
+              "difference": [
+                -0.013117544615771281
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 3606290317,
+      "prior": 4.644056978652757,
+      "uniform": 4.643856189774706,
+      "budget": 3629391872,
+      "networks": {
+        "fixed": {
+          "bits": 2.2412879462435775,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.7305,
+            "4": 0.759,
+            "6": 0.777,
+            "8": 0.7945,
+            "10": 0.8175,
+            "12": 0.838
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 640540,
+          "auditBytes": 19625,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 13921.788799999153,
+          "work": 3629391872,
+          "shuffledBits": 14.378760553508277,
+          "matchedBits": 2.2412879462435775,
+          "matchedEvents": 8192,
+          "matchedWork": 3629391872,
+          "ece": 0.06435108361902887,
+          "biasBits": 4.647692164957247,
+          "compression": {
+            "predictionSavingPerEvent": 0.060620516130153845,
+            "extraModelBits": -3072,
+            "netExtraBits": -3193.2410322603077,
+            "breakEvenEvents": 0
+          }
+        },
+        "random": {
+          "bits": 2.3019084623737314,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.7525,
+            "4": 0.7855,
+            "6": 0.808,
+            "8": 0.8225,
+            "10": 0.8295,
+            "12": 0.824
+          },
+          "active": 176,
+          "mature": 28,
+          "bytes": 38128,
+          "trainBytes": 653083,
+          "auditBytes": 5303961,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 464
+          },
+          "ms": 42143.36650000077,
+          "work": 4928763848,
+          "shuffledBits": 13.957605718070226,
+          "matchedBits": 2.722250795251264,
+          "matchedEvents": 5883,
+          "matchedWork": 3629236372,
+          "ece": 0.07732758788110394,
+          "biasBits": 4.64744284883412
+        },
+        "hebb": {
+          "bits": 2.259214074831892,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.7535,
+            "4": 0.788,
+            "6": 0.812,
+            "8": 0.8175,
+            "10": 0.8205,
+            "12": 0.8205
+          },
+          "active": 224,
+          "mature": 76,
+          "bytes": 38512,
+          "trainBytes": 662004,
+          "auditBytes": 5401935,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 416
+          },
+          "ms": 58891.27170000334,
+          "work": 5675126820,
+          "shuffledBits": 13.668068244480848,
+          "matchedBits": 2.4999994894038267,
+          "matchedEvents": 5230,
+          "matchedWork": 3629297296,
+          "ece": 0.11308922877869991,
+          "biasBits": 4.648447882722484,
+          "compression": {
+            "predictionSavingPerEvent": 0.04269438754183952,
+            "extraModelBits": 3072,
+            "netExtraBits": 2986.611224916321,
+            "breakEvenEvents": 71954
+          }
+        },
+        "bidirectional": {
+          "bits": 2.323593852335533,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.679,
+            "4": 0.716,
+            "6": 0.749,
+            "8": 0.768,
+            "10": 0.7795,
+            "12": 0.785
+          },
+          "active": 184,
+          "mature": 36,
+          "bytes": 38192,
+          "trainBytes": 654136,
+          "auditBytes": 5304472,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 456
+          },
+          "ms": 42442.363999999514,
+          "work": 4930614580,
+          "shuffledBits": 13.879818733269047,
+          "matchedBits": 2.692388715151723,
+          "matchedEvents": 5899,
+          "matchedWork": 3629119204,
+          "ece": 0.05288346019586154,
+          "biasBits": 4.649429426627666,
+          "compression": {
+            "predictionSavingPerEvent": -0.021685389961801693,
+            "extraModelBits": 512,
+            "netExtraBits": 555.3707799236034,
+            "breakEvenEvents": null
+          }
+        },
+        "joint": {
+          "bits": 2.515391199775284,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.675,
+            "4": 0.6805,
+            "6": 0.6845,
+            "8": 0.681,
+            "10": 0.6665,
+            "12": 0.6665
+          },
+          "active": 196,
+          "mature": 44,
+          "bytes": 38288,
+          "trainBytes": 655578,
+          "auditBytes": 5342686,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 444
+          },
+          "ms": 49244.4659999992,
+          "work": 5225629600,
+          "shuffledBits": 14.1586753738872,
+          "matchedBits": 2.4270318609553256,
+          "matchedEvents": 5718,
+          "matchedWork": 3628810068,
+          "ece": 0.0921951175865553,
+          "biasBits": 4.64759548222599,
+          "compression": {
+            "predictionSavingPerEvent": -0.21348273740155266,
+            "extraModelBits": 1280,
+            "netExtraBits": 1706.9654748031053,
+            "breakEvenEvents": null
+          }
+        },
+        "shuffled": {
+          "bits": 2.2829719685823706,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.7745,
+            "4": 0.8065,
+            "6": 0.8285,
+            "8": 0.8505,
+            "10": 0.868,
+            "12": 0.8675
+          },
+          "active": 216,
+          "mature": 68,
+          "bytes": 38448,
+          "trainBytes": 660080,
+          "auditBytes": 5348792,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 424
+          },
+          "ms": 50181.71620000186,
+          "work": 5268914708,
+          "shuffledBits": 13.853561606545153,
+          "matchedBits": 2.468583083366513,
+          "matchedEvents": 5600,
+          "matchedWork": 3628999404,
+          "ece": 0.07693968982676046,
+          "biasBits": 4.6485172986488426,
+          "compression": {
+            "predictionSavingPerEvent": 0.018936493791360753,
+            "extraModelBits": 2560,
+            "netExtraBits": 2522.1270124172784,
+            "breakEvenEvents": 135189
+          }
+        },
+        "capacity": {
+          "bits": 2.299894401351956,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.7175,
+            "4": 0.76,
+            "6": 0.7975,
+            "8": 0.823,
+            "10": 0.8415,
+            "12": 0.8475
+          },
+          "active": 196,
+          "mature": 0,
+          "bytes": 38288,
+          "trainBytes": 654430,
+          "auditBytes": 30166,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 4
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 14386.083999997765,
+          "work": 3668995072,
+          "shuffledBits": 13.48449432837846,
+          "matchedBits": 2.323597647291301,
+          "matchedEvents": 8101,
+          "matchedWork": 3628896440,
+          "ece": 0.06891323510692314,
+          "biasBits": 4.649852309813933,
+          "compression": {
+            "predictionSavingPerEvent": 0.0020140610217751487,
+            "extraModelBits": 1280,
+            "netExtraBits": 1275.9718779564496,
+            "breakEvenEvents": 635532
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 2,
+              "edges": [
+                132,
+                133,
+                134,
+                135
+              ],
+              "target": [
+                -0.021600597579051417
+              ],
+              "control": [
+                0.0067286796256179615
+              ],
+              "difference": [
+                -0.02832927720466938
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 1252873071,
+      "prior": 4.6435432536147605,
+      "uniform": 4.643856189774706,
+      "budget": 3612895232,
+      "networks": {
+        "fixed": {
+          "bits": 2.3258226870796204,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.659,
+            "4": 0.689,
+            "6": 0.7085,
+            "8": 0.7275,
+            "10": 0.7265,
+            "12": 0.7285
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 644102,
+          "auditBytes": 19668,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 7,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 13813.70530000021,
+          "work": 3612895232,
+          "shuffledBits": 12.106031312430723,
+          "matchedBits": 2.3258226870796204,
+          "matchedEvents": 8192,
+          "matchedWork": 3612895232,
+          "ece": 0.07540226872868931,
+          "biasBits": 4.645859685909511,
+          "compression": {
+            "predictionSavingPerEvent": 0.8979611966166643,
+            "extraModelBits": -3072,
+            "netExtraBits": -4867.922393233329,
+            "breakEvenEvents": 0
+          }
+        },
+        "random": {
+          "bits": 3.2237838836962847,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.4755,
+            "4": 0.47,
+            "6": 0.484,
+            "8": 0.504,
+            "10": 0.517,
+            "12": 0.494
+          },
+          "active": 176,
+          "mature": 32,
+          "bytes": 38128,
+          "trainBytes": 640444,
+          "auditBytes": 5257067,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 8,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 464
+          },
+          "ms": 37602.56600000084,
+          "work": 4677067332,
+          "shuffledBits": 12.622335614455421,
+          "matchedBits": 2.598205150841378,
+          "matchedEvents": 6259,
+          "matchedWork": 3612720540,
+          "ece": 0.11194157588328976,
+          "biasBits": 4.644409148289119
+        },
+        "hebb": {
+          "bits": 2.3255858983142783,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6945,
+            "4": 0.717,
+            "6": 0.7395,
+            "8": 0.7455,
+            "10": 0.741,
+            "12": 0.7355
+          },
+          "active": 184,
+          "mature": 40,
+          "bytes": 38192,
+          "trainBytes": 655528,
+          "auditBytes": 5295229,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 456
+          },
+          "ms": 43111.2445000023,
+          "work": 4940398268,
+          "shuffledBits": 11.764751238324727,
+          "matchedBits": 2.591361063996548,
+          "matchedEvents": 5913,
+          "matchedWork": 3612444628,
+          "ece": 0.04635037618242159,
+          "biasBits": 4.644110428701809,
+          "compression": {
+            "predictionSavingPerEvent": 0.8981979853820063,
+            "extraModelBits": 512,
+            "netExtraBits": -1284.3959707640126,
+            "breakEvenEvents": 571
+          }
+        },
+        "bidirectional": {
+          "bits": 2.4604855021785057,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6075,
+            "4": 0.6315,
+            "6": 0.6575,
+            "8": 0.6785,
+            "10": 0.6925,
+            "12": 0.67
+          },
+          "active": 184,
+          "mature": 36,
+          "bytes": 38192,
+          "trainBytes": 657050,
+          "auditBytes": 5354663,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 456
+          },
+          "ms": 50108.11239999702,
+          "work": 5254765668,
+          "shuffledBits": 11.535870695741615,
+          "matchedBits": 2.7276624594152525,
+          "matchedEvents": 5600,
+          "matchedWork": 3612388104,
+          "ece": 0.03162212988992541,
+          "biasBits": 4.644154084035288,
+          "compression": {
+            "predictionSavingPerEvent": 0.763298381517779,
+            "extraModelBits": 512,
+            "netExtraBits": -1014.5967630355578,
+            "breakEvenEvents": 671
+          }
+        },
+        "joint": {
+          "bits": 2.3798792756493397,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6715,
+            "4": 0.6895,
+            "6": 0.702,
+            "8": 0.7055,
+            "10": 0.6805,
+            "12": 0.6645
+          },
+          "active": 176,
+          "mature": 36,
+          "bytes": 38128,
+          "trainBytes": 653812,
+          "auditBytes": 5309278,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 464
+          },
+          "ms": 44643.945400000746,
+          "work": 5005863832,
+          "shuffledBits": 11.496529500488162,
+          "matchedBits": 2.623208495880869,
+          "matchedEvents": 5846,
+          "matchedWork": 3612443932,
+          "ece": 0.03828072249381567,
+          "biasBits": 4.644228407566286,
+          "compression": {
+            "predictionSavingPerEvent": 0.843904608046945,
+            "extraModelBits": 0,
+            "netExtraBits": -1687.80921609389,
+            "breakEvenEvents": 0
+          }
+        },
+        "shuffled": {
+          "bits": 2.3941160126595626,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.649,
+            "4": 0.672,
+            "6": 0.688,
+            "8": 0.718,
+            "10": 0.7285,
+            "12": 0.7145
+          },
+          "active": 216,
+          "mature": 64,
+          "bytes": 38448,
+          "trainBytes": 663233,
+          "auditBytes": 5316627,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 424
+          },
+          "ms": 46757.84519999871,
+          "work": 5073026908,
+          "shuffledBits": 11.694134755985386,
+          "matchedBits": 2.630551367121899,
+          "matchedEvents": 5831,
+          "matchedWork": 3612547484,
+          "ece": 0.024316019085828405,
+          "biasBits": 4.646966771797632,
+          "compression": {
+            "predictionSavingPerEvent": 0.829667871036722,
+            "extraModelBits": 2560,
+            "netExtraBits": 900.664257926556,
+            "breakEvenEvents": 3086
+          }
+        },
+        "capacity": {
+          "bits": 2.366786852396652,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6495,
+            "4": 0.668,
+            "6": 0.6905,
+            "8": 0.7045,
+            "10": 0.6905,
+            "12": 0.6625
+          },
+          "active": 196,
+          "mature": 0,
+          "bytes": 38288,
+          "trainBytes": 656257,
+          "auditBytes": 30203,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 14276.755300001525,
+          "work": 3652302592,
+          "shuffledBits": 12.02755708251808,
+          "matchedBits": 2.3579801408461893,
+          "matchedEvents": 8102,
+          "matchedWork": 3612633904,
+          "ece": 0.05852223342968345,
+          "biasBits": 4.64566581360553,
+          "compression": {
+            "predictionSavingPerEvent": 0.8569970312996325,
+            "extraModelBits": 1280,
+            "netExtraBits": -433.9940625992649,
+            "breakEvenEvents": 1494
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 4,
+              "edges": [
+                140,
+                141,
+                142,
+                143
+              ],
+              "target": [
+                0.005108653223903303
+              ],
+              "control": [
+                0.0003206556544136152
+              ],
+              "difference": [
+                0.0047879975694896885
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 974962036,
+      "prior": 4.648172529117946,
+      "uniform": 4.643856189774706,
+      "budget": 3637812032,
+      "networks": {
+        "fixed": {
+          "bits": 2.5373881108293284,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6895,
+            "4": 0.6935,
+            "6": 0.6895,
+            "8": 0.6925,
+            "10": 0.6695,
+            "12": 0.6395
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 641583,
+          "auditBytes": 19647,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 7,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 13917.56890000084,
+          "work": 3637812032,
+          "shuffledBits": 12.27354208958435,
+          "matchedBits": 2.5373881108293284,
+          "matchedEvents": 8192,
+          "matchedWork": 3637812032,
+          "ece": 0.04779565745422231,
+          "biasBits": 4.650303502678065,
+          "compression": {
+            "predictionSavingPerEvent": -0.2818396154686682,
+            "extraModelBits": -4096,
+            "netExtraBits": -3532.3207690626637,
+            "breakEvenEvents": null
+          }
+        },
+        "random": {
+          "bits": 2.25554849536066,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.7085,
+            "4": 0.7555,
+            "6": 0.785,
+            "8": 0.8085,
+            "10": 0.812,
+            "12": 0.7595
+          },
+          "active": 192,
+          "mature": 48,
+          "bytes": 38256,
+          "trainBytes": 656241,
+          "auditBytes": 5309836,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 448
+          },
+          "ms": 45136.627099999896,
+          "work": 5058141400,
+          "shuffledBits": 12.72589057669812,
+          "matchedBits": 2.4690712969156006,
+          "matchedEvents": 5833,
+          "matchedWork": 3637051380,
+          "ece": 0.025547766639430983,
+          "biasBits": 4.650465825420356
+        },
+        "hebb": {
+          "bits": 2.52196913854697,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.5745,
+            "4": 0.6025,
+            "6": 0.633,
+            "8": 0.657,
+            "10": 0.6555,
+            "12": 0.646
+          },
+          "active": 188,
+          "mature": 40,
+          "bytes": 38224,
+          "trainBytes": 654035,
+          "auditBytes": 5320404,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 452
+          },
+          "ms": 46387.140199998015,
+          "work": 5099978044,
+          "shuffledBits": 11.835567536328758,
+          "matchedBits": 2.533794443669793,
+          "matchedEvents": 5749,
+          "matchedWork": 3637588144,
+          "ece": 0.036019815702748786,
+          "biasBits": 4.650778797648025,
+          "compression": {
+            "predictionSavingPerEvent": -0.26642064318630965,
+            "extraModelBits": -256,
+            "netExtraBits": 276.84128637261927,
+            "breakEvenEvents": null
+          }
+        },
+        "bidirectional": {
+          "bits": 2.3308888804882772,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6215,
+            "4": 0.6715,
+            "6": 0.6875,
+            "8": 0.714,
+            "10": 0.7445,
+            "12": 0.716
+          },
+          "active": 164,
+          "mature": 20,
+          "bytes": 38032,
+          "trainBytes": 650232,
+          "auditBytes": 5294335,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 476
+          },
+          "ms": 42554.91209999838,
+          "work": 4932433688,
+          "shuffledBits": 12.254574936253698,
+          "matchedBits": 2.5060162139006534,
+          "matchedEvents": 5823,
+          "matchedWork": 3635200600,
+          "ece": 0.032853757264509516,
+          "biasBits": 4.6491099937957046,
+          "compression": {
+            "predictionSavingPerEvent": -0.0753403851276171,
+            "extraModelBits": -1792,
+            "netExtraBits": -1641.3192297447658,
+            "breakEvenEvents": null
+          }
+        },
+        "joint": {
+          "bits": 2.346631312251514,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.63,
+            "4": 0.6625,
+            "6": 0.695,
+            "8": 0.722,
+            "10": 0.7365,
+            "12": 0.7275
+          },
+          "active": 180,
+          "mature": 40,
+          "bytes": 38160,
+          "trainBytes": 653290,
+          "auditBytes": 5297386,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 460
+          },
+          "ms": 43206.87940000237,
+          "work": 4967587756,
+          "shuffledBits": 12.447664181630431,
+          "matchedBits": 2.5380070591255066,
+          "matchedEvents": 5898,
+          "matchedWork": 3637602988,
+          "ece": 0.057957407866983904,
+          "biasBits": 4.649939085935741,
+          "compression": {
+            "predictionSavingPerEvent": -0.09108281689085374,
+            "extraModelBits": -768,
+            "netExtraBits": -585.8343662182925,
+            "breakEvenEvents": null
+          }
+        },
+        "shuffled": {
+          "bits": 2.627187525784883,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6295,
+            "4": 0.646,
+            "6": 0.663,
+            "8": 0.6755,
+            "10": 0.667,
+            "12": 0.647
+          },
+          "active": 160,
+          "mature": 16,
+          "bytes": 38000,
+          "trainBytes": 650037,
+          "auditBytes": 5272296,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 480
+          },
+          "ms": 40244.555199999966,
+          "work": 4834837508,
+          "shuffledBits": 11.374187776872578,
+          "matchedBits": 2.640056022320979,
+          "matchedEvents": 6029,
+          "matchedWork": 3637150872,
+          "ece": 0.007173647510194108,
+          "biasBits": 4.651708562155832,
+          "compression": {
+            "predictionSavingPerEvent": -0.37163903042422275,
+            "extraModelBits": -2048,
+            "netExtraBits": -1304.7219391515546,
+            "breakEvenEvents": null
+          }
+        },
+        "capacity": {
+          "bits": 2.378898576984271,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6425,
+            "4": 0.676,
+            "6": 0.7035,
+            "8": 0.723,
+            "10": 0.7345,
+            "12": 0.72
+          },
+          "active": 196,
+          "mature": 0,
+          "bytes": 38288,
+          "trainBytes": 655157,
+          "auditBytes": 30165,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 14360.55270000023,
+          "work": 3677515192,
+          "shuffledBits": 12.394868453419294,
+          "matchedBits": 2.565017977781664,
+          "matchedEvents": 8106,
+          "matchedWork": 3637775316,
+          "ece": 0.03151727412953801,
+          "biasBits": 4.64970506676901,
+          "compression": {
+            "predictionSavingPerEvent": -0.12335008162361083,
+            "extraModelBits": 256,
+            "netExtraBits": 502.70016324722167,
+            "breakEvenEvents": null
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 4,
+              "edges": [
+                140,
+                141,
+                142,
+                143
+              ],
+              "target": [
+                0.012527283378276355
+              ],
+              "control": [
+                -0.003690679801883512
+              ],
+              "difference": [
+                0.016217963180159868
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 777924426,
+      "prior": 4.645047867357205,
+      "uniform": 4.643856189774706,
+      "budget": 3633223904,
+      "networks": {
+        "fixed": {
+          "bits": 2.437272643853478,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.564,
+            "4": 0.6015,
+            "6": 0.6315,
+            "8": 0.6425,
+            "10": 0.658,
+            "12": 0.654
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 642896,
+          "auditBytes": 19647,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 8,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 14148.97530000025,
+          "work": 3633223904,
+          "shuffledBits": 13.296963345802002,
+          "matchedBits": 2.437272643853478,
+          "matchedEvents": 8192,
+          "matchedWork": 3633223904,
+          "ece": 0.023413658074585945,
+          "biasBits": 4.647200173352533,
+          "compression": {
+            "predictionSavingPerEvent": -0.15242019720107436,
+            "extraModelBits": -4352,
+            "netExtraBits": -4047.159605597851,
+            "breakEvenEvents": null
+          }
+        },
+        "random": {
+          "bits": 2.284852446652404,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6245,
+            "4": 0.659,
+            "6": 0.6925,
+            "8": 0.7175,
+            "10": 0.729,
+            "12": 0.7315
+          },
+          "active": 196,
+          "mature": 56,
+          "bytes": 38288,
+          "trainBytes": 659100,
+          "auditBytes": 5345191,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 444
+          },
+          "ms": 48814.874299999065,
+          "work": 5182188924,
+          "shuffledBits": 13.1427563403379,
+          "matchedBits": 2.6255566856505723,
+          "matchedEvents": 5742,
+          "matchedWork": 3633219648,
+          "ece": 0.06996537233710473,
+          "biasBits": 4.646958670766627
+        },
+        "hebb": {
+          "bits": 2.2810893573100546,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.649,
+            "4": 0.689,
+            "6": 0.719,
+            "8": 0.7425,
+            "10": 0.768,
+            "12": 0.7555
+          },
+          "active": 216,
+          "mature": 64,
+          "bytes": 38448,
+          "trainBytes": 664249,
+          "auditBytes": 5383116,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 424
+          },
+          "ms": 55853.28990000101,
+          "work": 5510638416,
+          "shuffledBits": 12.711104715354384,
+          "matchedBits": 2.6389927550134162,
+          "matchedEvents": 5439,
+          "matchedWork": 3631937548,
+          "ece": 0.0719760844364951,
+          "biasBits": 4.647873080973002,
+          "compression": {
+            "predictionSavingPerEvent": 0.0037630893423492573,
+            "extraModelBits": 1280,
+            "netExtraBits": 1272.4738213153014,
+            "breakEvenEvents": 340147
+          }
+        },
+        "bidirectional": {
+          "bits": 2.455260986967077,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6495,
+            "4": 0.6595,
+            "6": 0.6675,
+            "8": 0.6795,
+            "10": 0.665,
+            "12": 0.6315
+          },
+          "active": 188,
+          "mature": 36,
+          "bytes": 38224,
+          "trainBytes": 657027,
+          "auditBytes": 5343616,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 452
+          },
+          "ms": 47762.56219999977,
+          "work": 5142471896,
+          "shuffledBits": 12.366169552019398,
+          "matchedBits": 2.6008964288076384,
+          "matchedEvents": 5800,
+          "matchedWork": 3632959044,
+          "ece": 0.049972747781377745,
+          "biasBits": 4.64876218273257,
+          "compression": {
+            "predictionSavingPerEvent": -0.17040854031467312,
+            "extraModelBits": -512,
+            "netExtraBits": -171.18291937065374,
+            "breakEvenEvents": null
+          }
+        },
+        "joint": {
+          "bits": 2.3979185034533677,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.571,
+            "4": 0.612,
+            "6": 0.645,
+            "8": 0.6705,
+            "10": 0.69,
+            "12": 0.69
+          },
+          "active": 200,
+          "mature": 52,
+          "bytes": 38320,
+          "trainBytes": 661103,
+          "auditBytes": 5340070,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 440
+          },
+          "ms": 50135.823900000265,
+          "work": 5242802428,
+          "shuffledBits": 12.561240945573582,
+          "matchedBits": 2.6951340978816076,
+          "matchedEvents": 5632,
+          "matchedWork": 3632693840,
+          "ece": 0.066809333027347,
+          "biasBits": 4.648573069744844,
+          "compression": {
+            "predictionSavingPerEvent": -0.11306605680096382,
+            "extraModelBits": 256,
+            "netExtraBits": 482.13211360192764,
+            "breakEvenEvents": null
+          }
+        },
+        "shuffled": {
+          "bits": 2.389904470429355,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6585,
+            "4": 0.676,
+            "6": 0.6945,
+            "8": 0.7115,
+            "10": 0.718,
+            "12": 0.7045
+          },
+          "active": 188,
+          "mature": 36,
+          "bytes": 38224,
+          "trainBytes": 658047,
+          "auditBytes": 5325514,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 452
+          },
+          "ms": 46285.45269999959,
+          "work": 5080027988,
+          "shuffledBits": 12.493833976733836,
+          "matchedBits": 2.645590744100413,
+          "matchedEvents": 5826,
+          "matchedWork": 3633142532,
+          "ece": 0.06701801007606602,
+          "biasBits": 4.647573241753088,
+          "compression": {
+            "predictionSavingPerEvent": -0.10505202377695122,
+            "extraModelBits": -512,
+            "netExtraBits": -301.89595244609757,
+            "breakEvenEvents": null
+          }
+        },
+        "capacity": {
+          "bits": 2.3544645996040705,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.647,
+            "4": 0.694,
+            "6": 0.7215,
+            "8": 0.7375,
+            "10": 0.7535,
+            "12": 0.757
+          },
+          "active": 196,
+          "mature": 0,
+          "bytes": 38288,
+          "trainBytes": 654467,
+          "auditBytes": 30178,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 14586.553300000836,
+          "work": 3672872596,
+          "shuffledBits": 13.327294853323492,
+          "matchedBits": 2.3751425132814954,
+          "matchedEvents": 8101,
+          "matchedWork": 3633173888,
+          "ece": 0.016948237432446583,
+          "biasBits": 4.644364665689064,
+          "compression": {
+            "predictionSavingPerEvent": -0.06961215295166667,
+            "extraModelBits": 0,
+            "netExtraBits": 139.22430590333335,
+            "breakEvenEvents": null
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 8,
+              "edges": [
+                156,
+                157,
+                158,
+                159
+              ],
+              "target": [
+                0.012454281800563294
+              ],
+              "control": [
+                0.0032100125304018734
+              ],
+              "difference": [
+                0.00924426927016142
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 1873206391,
+      "prior": 4.649380263136063,
+      "uniform": 4.643856189774706,
+      "budget": 3617019392,
+      "networks": {
+        "fixed": {
+          "bits": 2.758490599251407,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.4885,
+            "4": 0.5215,
+            "6": 0.547,
+            "8": 0.5795,
+            "10": 0.623,
+            "12": 0.654
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 641332,
+          "auditBytes": 19655,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 8,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 9220.815199991339,
+          "work": 3617019392,
+          "shuffledBits": 12.528400352192486,
+          "matchedBits": 2.758490599251407,
+          "matchedEvents": 8192,
+          "matchedWork": 3617019392,
+          "ece": 0.035124261660271695,
+          "biasBits": 4.649135405826782,
+          "compression": {
+            "predictionSavingPerEvent": -0.3573822276195906,
+            "extraModelBits": -6400,
+            "netExtraBits": -5685.235544760819,
+            "breakEvenEvents": null
+          }
+        },
+        "random": {
+          "bits": 2.4011083716318162,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6685,
+            "4": 0.7,
+            "6": 0.7165,
+            "8": 0.7285,
+            "10": 0.733,
+            "12": 0.7305
+          },
+          "active": 228,
+          "mature": 76,
+          "bytes": 38544,
+          "trainBytes": 668565,
+          "auditBytes": 5328960,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 412
+          },
+          "ms": 30209.465599995456,
+          "work": 5093135220,
+          "shuffledBits": 12.345870414370662,
+          "matchedBits": 2.609863212946782,
+          "matchedEvents": 5925,
+          "matchedWork": 3616844800,
+          "ece": 0.025586581250426475,
+          "biasBits": 4.650729362390776
+        },
+        "hebb": {
+          "bits": 2.4283966164538553,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.671,
+            "4": 0.691,
+            "6": 0.703,
+            "8": 0.717,
+            "10": 0.7275,
+            "12": 0.7215
+          },
+          "active": 176,
+          "mature": 32,
+          "bytes": 38128,
+          "trainBytes": 654124,
+          "auditBytes": 5292464,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 464
+          },
+          "ms": 28511.085199994617,
+          "work": 4960476136,
+          "shuffledBits": 11.704285062146946,
+          "matchedBits": 2.683879242341529,
+          "matchedEvents": 5786,
+          "matchedWork": 3616830212,
+          "ece": 0.05535646059184525,
+          "biasBits": 4.650272220892673,
+          "compression": {
+            "predictionSavingPerEvent": -0.027288244822039065,
+            "extraModelBits": -3328,
+            "netExtraBits": -3273.4235103559217,
+            "breakEvenEvents": null
+          }
+        },
+        "bidirectional": {
+          "bits": 2.4192238186675015,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6885,
+            "4": 0.7205,
+            "6": 0.752,
+            "8": 0.7745,
+            "10": 0.77,
+            "12": 0.774
+          },
+          "active": 184,
+          "mature": 40,
+          "bytes": 38192,
+          "trainBytes": 655612,
+          "auditBytes": 5289019,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 456
+          },
+          "ms": 25745.66399999673,
+          "work": 4797087476,
+          "shuffledBits": 11.723572622119882,
+          "matchedBits": 2.707135420681232,
+          "matchedEvents": 6147,
+          "matchedWork": 3616734216,
+          "ece": 0.02904725340600106,
+          "biasBits": 4.649924898945473,
+          "compression": {
+            "predictionSavingPerEvent": -0.01811544703568524,
+            "extraModelBits": -2816,
+            "netExtraBits": -2779.7691059286294,
+            "breakEvenEvents": null
+          }
+        },
+        "joint": {
+          "bits": 2.51106500343238,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6295,
+            "4": 0.65,
+            "6": 0.6815,
+            "8": 0.7015,
+            "10": 0.71,
+            "12": 0.698
+          },
+          "active": 200,
+          "mature": 48,
+          "bytes": 38320,
+          "trainBytes": 659790,
+          "auditBytes": 5309438,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 440
+          },
+          "ms": 28602.480999996653,
+          "work": 4988670028,
+          "shuffledBits": 11.700318525927901,
+          "matchedBits": 2.831748707767865,
+          "matchedEvents": 5912,
+          "matchedWork": 3616776736,
+          "ece": 0.03383299631585807,
+          "biasBits": 4.65189611166062,
+          "compression": {
+            "predictionSavingPerEvent": -0.10995663180056381,
+            "extraModelBits": -1792,
+            "netExtraBits": -1572.0867363988723,
+            "breakEvenEvents": null
+          }
+        },
+        "shuffled": {
+          "bits": 2.410719075654153,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6495,
+            "4": 0.6815,
+            "6": 0.7165,
+            "8": 0.738,
+            "10": 0.744,
+            "12": 0.736
+          },
+          "active": 172,
+          "mature": 28,
+          "bytes": 38096,
+          "trainBytes": 652957,
+          "auditBytes": 5301377,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 468
+          },
+          "ms": 28865.751600000076,
+          "work": 4984965956,
+          "shuffledBits": 11.773672117636163,
+          "matchedBits": 2.624577749519794,
+          "matchedEvents": 5736,
+          "matchedWork": 3616733988,
+          "ece": 0.019416483504570602,
+          "biasBits": 4.650889247805268,
+          "compression": {
+            "predictionSavingPerEvent": -0.009610704022336769,
+            "extraModelBits": -3584,
+            "netExtraBits": -3564.7785919553266,
+            "breakEvenEvents": null
+          }
+        },
+        "capacity": {
+          "bits": 2.429455088405001,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.633,
+            "4": 0.651,
+            "6": 0.664,
+            "8": 0.6675,
+            "10": 0.6595,
+            "12": 0.653
+          },
+          "active": 196,
+          "mature": 0,
+          "bytes": 38288,
+          "trainBytes": 654834,
+          "auditBytes": 30183,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 13,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 9265.994400003226,
+          "work": 3656475712,
+          "shuffledBits": 12.054213837320605,
+          "matchedBits": 2.3173721114500228,
+          "matchedEvents": 8099,
+          "matchedWork": 3616995172,
+          "ece": 0.05418543960680447,
+          "biasBits": 4.6497257886892855,
+          "compression": {
+            "predictionSavingPerEvent": -0.028346716773184788,
+            "extraModelBits": -2048,
+            "netExtraBits": -1991.3065664536305,
+            "breakEvenEvents": null
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 2,
+              "edges": [
+                132,
+                133,
+                134,
+                135
+              ],
+              "target": [
+                0.07305345474337832
+              ],
+              "control": [
+                0.002622557217310706
+              ],
+              "difference": [
+                0.07043089752606761
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 3371818701,
+      "prior": 4.647041507253697,
+      "uniform": 4.643856189774706,
+      "budget": 3620301536,
+      "networks": {
+        "fixed": {
+          "bits": 2.414170447769878,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.713,
+            "4": 0.7215,
+            "6": 0.7275,
+            "8": 0.7385,
+            "10": 0.7415,
+            "12": 0.731
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 642425,
+          "auditBytes": 19654,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 8,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 8847.593999997946,
+          "work": 3620301536,
+          "shuffledBits": 12.548558022123144,
+          "matchedBits": 2.414170447769878,
+          "matchedEvents": 8192,
+          "matchedWork": 3620301536,
+          "ece": 0.019472005788872485,
+          "biasBits": 4.655166835658141,
+          "compression": {
+            "predictionSavingPerEvent": 0.08417211379603051,
+            "extraModelBits": -3328,
+            "netExtraBits": -3496.344227592061,
+            "breakEvenEvents": 0
+          }
+        },
+        "random": {
+          "bits": 2.4983425615659085,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.627,
+            "4": 0.6635,
+            "6": 0.685,
+            "8": 0.7155,
+            "10": 0.7225,
+            "12": 0.696
+          },
+          "active": 180,
+          "mature": 32,
+          "bytes": 38160,
+          "trainBytes": 655462,
+          "auditBytes": 5294535,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 9,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 460
+          },
+          "ms": 26566.97530000878,
+          "work": 4850092856,
+          "shuffledBits": 12.202859986678579,
+          "matchedBits": 2.6754540458476614,
+          "matchedEvents": 6087,
+          "matchedWork": 3619845156,
+          "ece": 0.042460929361215295,
+          "biasBits": 4.657235445652446
+        },
+        "hebb": {
+          "bits": 2.3946806669972136,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.683,
+            "4": 0.715,
+            "6": 0.7455,
+            "8": 0.768,
+            "10": 0.7775,
+            "12": 0.755
+          },
+          "active": 196,
+          "mature": 52,
+          "bytes": 38288,
+          "trainBytes": 660536,
+          "auditBytes": 5331739,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 444
+          },
+          "ms": 30036.83569999924,
+          "work": 5055442276,
+          "shuffledBits": 12.14678845641051,
+          "matchedBits": 2.638404186953001,
+          "matchedEvents": 5856,
+          "matchedWork": 3620076200,
+          "ece": 0.024005906279769312,
+          "biasBits": 4.655204074814101,
+          "compression": {
+            "predictionSavingPerEvent": 0.1036618945686949,
+            "extraModelBits": 1024,
+            "netExtraBits": 816.6762108626102,
+            "breakEvenEvents": 9879
+          }
+        },
+        "bidirectional": {
+          "bits": 2.3770487067814643,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.655,
+            "4": 0.704,
+            "6": 0.7355,
+            "8": 0.762,
+            "10": 0.773,
+            "12": 0.7505
+          },
+          "active": 176,
+          "mature": 32,
+          "bytes": 38128,
+          "trainBytes": 651346,
+          "auditBytes": 5278562,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 464
+          },
+          "ms": 24451.135099999607,
+          "work": 4707420868,
+          "shuffledBits": 12.205562125592808,
+          "matchedBits": 2.5900685877289944,
+          "matchedEvents": 6298,
+          "matchedWork": 3619604232,
+          "ece": 0.02936429775478134,
+          "biasBits": 4.655346796237578,
+          "compression": {
+            "predictionSavingPerEvent": 0.12129385478444421,
+            "extraModelBits": -256,
+            "netExtraBits": -498.5877095688884,
+            "breakEvenEvents": 0
+          }
+        },
+        "joint": {
+          "bits": 2.4231665454778195,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.678,
+            "4": 0.717,
+            "6": 0.741,
+            "8": 0.77,
+            "10": 0.7685,
+            "12": 0.735
+          },
+          "active": 184,
+          "mature": 44,
+          "bytes": 38192,
+          "trainBytes": 652361,
+          "auditBytes": 5284896,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 456
+          },
+          "ms": 25704.638600004604,
+          "work": 4787881508,
+          "shuffledBits": 12.269003556520621,
+          "matchedBits": 2.6154094392447167,
+          "matchedEvents": 6220,
+          "matchedWork": 3620277132,
+          "ece": 0.03485516954890055,
+          "biasBits": 4.659096446241765,
+          "compression": {
+            "predictionSavingPerEvent": 0.07517601608808899,
+            "extraModelBits": 256,
+            "netExtraBits": 105.647967823822,
+            "breakEvenEvents": 3406
+          }
+        },
+        "shuffled": {
+          "bits": 2.431565591624566,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.709,
+            "4": 0.7275,
+            "6": 0.7405,
+            "8": 0.754,
+            "10": 0.7535,
+            "12": 0.741
+          },
+          "active": 192,
+          "mature": 36,
+          "bytes": 38256,
+          "trainBytes": 659535,
+          "auditBytes": 5331840,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 12,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 448
+          },
+          "ms": 30564.808700002148,
+          "work": 5083995592,
+          "shuffledBits": 11.979024193522113,
+          "matchedBits": 2.527851363334589,
+          "matchedEvents": 5650,
+          "matchedWork": 3620133188,
+          "ece": 0.023394047459002393,
+          "biasBits": 4.6530013774362144,
+          "compression": {
+            "predictionSavingPerEvent": 0.0667769699413423,
+            "extraModelBits": 768,
+            "netExtraBits": 634.4460601173154,
+            "breakEvenEvents": 11501
+          }
+        },
+        "capacity": {
+          "bits": 2.4195151629680516,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.633,
+            "4": 0.6735,
+            "6": 0.7025,
+            "8": 0.721,
+            "10": 0.7305,
+            "12": 0.7145
+          },
+          "active": 196,
+          "mature": 0,
+          "bytes": 38288,
+          "trainBytes": 655653,
+          "auditBytes": 30179,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 9134.405800002976,
+          "work": 3659796820,
+          "shuffledBits": 11.834776895209396,
+          "matchedBits": 2.563922485652258,
+          "matchedEvents": 8102,
+          "matchedWork": 3620058580,
+          "ece": 0.043668185836296,
+          "biasBits": 4.655696658369324,
+          "compression": {
+            "predictionSavingPerEvent": 0.07882739859785692,
+            "extraModelBits": 1024,
+            "netExtraBits": 866.3452028042861,
+            "breakEvenEvents": 12991
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 8,
+              "edges": [
+                156,
+                157,
+                158,
+                159
+              ],
+              "target": [
+                0.0105984136541446
+              ],
+              "control": [
+                0.008411302139945408
+              ],
+              "difference": [
+                0.002187111514199192
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "seed": 3282515575,
+      "prior": 4.646368452523218,
+      "uniform": 4.643856189774706,
+      "budget": 3595694048,
+      "networks": {
+        "fixed": {
+          "bits": 2.45432155095121,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.702,
+            "4": 0.7215,
+            "6": 0.7385,
+            "8": 0.755,
+            "10": 0.7505,
+            "12": 0.7285
+          },
+          "active": 128,
+          "mature": 0,
+          "bytes": 37744,
+          "trainBytes": 645424,
+          "auditBytes": 19639,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 8,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 8967.647699997411,
+          "work": 3595694048,
+          "shuffledBits": 12.263580353849601,
+          "matchedBits": 2.45432155095121,
+          "matchedEvents": 8192,
+          "matchedWork": 3595694048,
+          "ece": 0.08229288811934271,
+          "biasBits": 4.651205081412775,
+          "compression": {
+            "predictionSavingPerEvent": 0.1675801527084153,
+            "extraModelBits": -4608,
+            "netExtraBits": -4943.160305416831,
+            "breakEvenEvents": 0
+          }
+        },
+        "random": {
+          "bits": 2.6219017036596255,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.617,
+            "4": 0.6175,
+            "6": 0.6255,
+            "8": 0.6415,
+            "10": 0.6315,
+            "12": 0.6105
+          },
+          "active": 200,
+          "mature": 40,
+          "bytes": 38320,
+          "trainBytes": 659820,
+          "auditBytes": 5292212,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 440
+          },
+          "ms": 26006.460300002713,
+          "work": 4785560608,
+          "shuffledBits": 12.498755660167514,
+          "matchedBits": 2.6017782913704552,
+          "matchedEvents": 6165,
+          "matchedWork": 3595359044,
+          "ece": 0.09143896227119523,
+          "biasBits": 4.651036547668484
+        },
+        "hebb": {
+          "bits": 2.3967113605642885,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6575,
+            "4": 0.6785,
+            "6": 0.694,
+            "8": 0.7145,
+            "10": 0.737,
+            "12": 0.7405
+          },
+          "active": 208,
+          "mature": 56,
+          "bytes": 38384,
+          "trainBytes": 660800,
+          "auditBytes": 5335308,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 432
+          },
+          "ms": 31474.716900006053,
+          "work": 5126237288,
+          "shuffledBits": 12.377390568192201,
+          "matchedBits": 2.5590813349429915,
+          "matchedEvents": 5744,
+          "matchedWork": 3595692452,
+          "ece": 0.03272613895977416,
+          "biasBits": 4.650631162012318,
+          "compression": {
+            "predictionSavingPerEvent": 0.22519034309533703,
+            "extraModelBits": 512,
+            "netExtraBits": 61.619313809325945,
+            "breakEvenEvents": 2274
+          }
+        },
+        "bidirectional": {
+          "bits": 2.5847025071790304,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.648,
+            "4": 0.6565,
+            "6": 0.668,
+            "8": 0.669,
+            "10": 0.673,
+            "12": 0.664
+          },
+          "active": 204,
+          "mature": 60,
+          "bytes": 38352,
+          "trainBytes": 655966,
+          "auditBytes": 5304828,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 14,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 436
+          },
+          "ms": 27081.25390000292,
+          "work": 4859194648,
+          "shuffledBits": 12.40238845597154,
+          "matchedBits": 2.7031055007840536,
+          "matchedEvents": 6166,
+          "matchedWork": 3595572276,
+          "ece": 0.1030154929680802,
+          "biasBits": 4.651294723127905,
+          "compression": {
+            "predictionSavingPerEvent": 0.03719919648059511,
+            "extraModelBits": 256,
+            "netExtraBits": 181.6016070388098,
+            "breakEvenEvents": 6882
+          }
+        },
+        "joint": {
+          "bits": 2.5255574719842513,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6825,
+            "4": 0.6835,
+            "6": 0.699,
+            "8": 0.7085,
+            "10": 0.696,
+            "12": 0.691
+          },
+          "active": 176,
+          "mature": 32,
+          "bytes": 38128,
+          "trainBytes": 655952,
+          "auditBytes": 5301322,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 2
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 464
+          },
+          "ms": 27545.56570000446,
+          "work": 4871545520,
+          "shuffledBits": 12.025166778513132,
+          "matchedBits": 2.6083450419976435,
+          "matchedEvents": 5965,
+          "matchedWork": 3595415428,
+          "ece": 0.0852452199781697,
+          "biasBits": 4.650937519355077,
+          "compression": {
+            "predictionSavingPerEvent": 0.0963442316753742,
+            "extraModelBits": -1536,
+            "netExtraBits": -1728.6884633507484,
+            "breakEvenEvents": 0
+          }
+        },
+        "shuffled": {
+          "bits": 2.5303634365447656,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.6445,
+            "4": 0.665,
+            "6": 0.684,
+            "8": 0.697,
+            "10": 0.698,
+            "12": 0.686
+          },
+          "active": 192,
+          "mature": 36,
+          "bytes": 38256,
+          "trainBytes": 654611,
+          "auditBytes": 5307621,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 11,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 512,
+            "deleted": 448
+          },
+          "ms": 28499.42869999574,
+          "work": 4948775508,
+          "shuffledBits": 12.503187423705,
+          "matchedBits": 2.555532131697483,
+          "matchedEvents": 5856,
+          "matchedWork": 3595279876,
+          "ece": 0.06078723790365469,
+          "biasBits": 4.651026109663889,
+          "compression": {
+            "predictionSavingPerEvent": 0.0915382671148599,
+            "extraModelBits": -512,
+            "netExtraBits": -695.0765342297198,
+            "breakEvenEvents": 0
+          }
+        },
+        "capacity": {
+          "bits": 2.4494712800475047,
+          "absoluteError": 1,
+          "anticipation": {
+            "2": 0.688,
+            "4": 0.7055,
+            "6": 0.717,
+            "8": 0.7205,
+            "10": 0.7165,
+            "12": 0.7145
+          },
+          "active": 196,
+          "mature": 0,
+          "bytes": 38288,
+          "trainBytes": 655011,
+          "auditBytes": 30181,
+          "topology": {
+            "stronglyConnected": true,
+            "maxIn": 10,
+            "minIn": 3
+          },
+          "newEdges": {
+            "born": 0,
+            "deleted": 0
+          },
+          "ms": 9265.127000002074,
+          "work": 3634897204,
+          "shuffledBits": 12.861118219470155,
+          "matchedBits": 2.274765164281164,
+          "matchedEvents": 8104,
+          "matchedWork": 3595305944,
+          "ece": 0.07712286281339155,
+          "biasBits": 4.651215939550266,
+          "compression": {
+            "predictionSavingPerEvent": 0.1724304236121208,
+            "extraModelBits": -256,
+            "netExtraBits": -600.8608472242415,
+            "breakEvenEvents": 0
+          }
+        }
+      },
+      "blocking": [
+        {
+          "regime": 0,
+          "status": "matched",
+          "results": [
+            {
+              "batch": 7,
+              "edges": [
+                152,
+                153,
+                154,
+                155
+              ],
+              "target": [
+                -0.04480286104457942
+              ],
+              "control": [
+                -0.021096803969450593
+              ],
+              "difference": [
+                -0.02370605707512883
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
