@@ -112,6 +112,21 @@ test('identical starting networks score missing edges and trial edges respect th
   assert.throws(() => unpack(snapshot.encoded.subarray(0, -1)), /size/);
 });
 
+test('reusing the input projection preserves blocked predictions and counts shared work once', () => {
+  const model = new SynapticNetwork(config);
+  const data = [makeEvent(7, 20, 0, config.encoder), makeEvent(7, 20, 1, config.encoder)];
+  const { features, prefixes } = data[0];
+  const stop = prefixes.at(-1);
+  const base = model.forward(features, stop, null, true);
+  const blocked = new Set([model.edges[0].id]);
+  const workBefore = model.work;
+  const cached = model.forward(features, stop, blocked, true, base.inputDrive);
+  assert.equal(model.work - workBefore, (stop + 1) * (cached.edges.length + NODES));
+  assert.deepEqual(cached, model.forward(features, stop, blocked));
+  const projections = data.map(event => model.project(event.features, event.target + FIRST - 2));
+  assert.deepEqual(evaluate(model, data, { blocked, projections }), evaluate(model, data, { blocked }));
+});
+
 test('trial confirmation can mature, retire and reuse a connection', () => {
   const model = new SynapticNetwork({ ...config, interval: 2, confirmEvents: 1, confirmWindows: 2 });
   model.events = 10;

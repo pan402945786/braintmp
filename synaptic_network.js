@@ -115,25 +115,36 @@ class SynapticNetwork {
     return edge;
   }
 
-  forward(features, stop, blocked, countWork = false) {
-    const edges = this.edges.filter(edge => edge.deleted === null && !blocked?.has(edge.id));
-    const a = [new Float64Array(NODES)];
-    const activation = [];
+  project(features, stop) {
+    const projected = [];
     for (let t = 0; t <= stop; t++) {
       const sums = new Float64Array(NODES);
+      const frame = features[t];
       for (let j = 0; j < NODES; j++) {
         const offset = j * this.inputs;
         let sum = 0;
-        for (let k = 0; k < this.inputs; k++) sum += this.input[offset + k] * features[t][k];
+        for (let k = 0; k < this.inputs; k++) sum += this.input[offset + k] * frame[k];
         sums[j] = sum;
       }
+      projected.push(sums);
+    }
+    return projected;
+  }
+
+  forward(features, stop, blocked, countWork = false, inputDrive) {
+    const edges = this.edges.filter(edge => edge.deleted === null && !blocked?.has(edge.id));
+    const a = [new Float64Array(NODES)];
+    const activation = [];
+    const projection = inputDrive ?? this.project(features, stop);
+    for (let t = 0; t <= stop; t++) {
+      const sums = projection[t].slice();
       for (const edge of edges) sums[edge.j] += edge.w * a[t][edge.i];
       const nonlinearity = sums.map((sum, j) => Math.tanh(this.gain[j] * sum));
       activation.push(nonlinearity);
       a.push(nonlinearity.map((value, j) => LEAK * a[t][j] + (1 - LEAK) * value));
     }
-    if (countWork) this.work += (stop + 1) * (NODES * this.inputs + edges.length + NODES);
-    return { a, activation, edges };
+    if (countWork) this.work += (stop + 1) * ((inputDrive ? 0 : NODES * this.inputs) + edges.length + NODES);
+    return { a, activation, edges, inputDrive: projection };
   }
 
   read(a) {
@@ -216,11 +227,11 @@ class SynapticNetwork {
     this.work += 8 * gradient.edges.length;
   }
 
-  observeBatches(event, baseLoss) {
+  observeBatches(event, baseLoss, inputDrive) {
     for (const batch of this.batches) {
       if (batch.state === 'deleted' || this.events - batch.born < this.config.interval) continue;
       const blocked = new Set(batch.edges.map(edge => edge.id));
-      const alternate = this.forward(event.features, event.prefixes.at(-1), blocked, true);
+      const alternate = this.forward(event.features, event.prefixes.at(-1), blocked, true, inputDrive);
       const lossBlocked = event.prefixes.reduce((sum, t) => sum + loss(this.read(alternate.a[t + 1]), event.feedback), 0) / event.prefixes.length;
       this.work += event.prefixes.length * CLASSES * NODES;
       batch.sum += (lossBlocked - baseLoss) / LN2;
@@ -312,7 +323,8 @@ class SynapticNetwork {
     const gradient = this.gradient(event.features, event.prefixes, event.feedback, saved, true);
     const maintenance = performance.now();
     if (GROWTH.has(this.mode)) {
-      this.observeBatches(event, gradient.eventLoss);
+      // Baseline and blocked passes share the input weights until apply().
+      this.observeBatches(event, gradient.eventLoss, saved.inputDrive);
       this.window.push({ a: gradient.a, b: gradient.b });
     }
     const update = performance.now();

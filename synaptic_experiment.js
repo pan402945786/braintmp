@@ -5,6 +5,7 @@ const path = require('node:path');
 const os = require('node:os');
 const { createHash } = require('node:crypto');
 const { parseArgs } = require('node:util');
+const { Worker, isMainThread, workerData } = require('node:worker_threads');
 const { FIRST, CLASSES, stream, shuffle, makeEvent, sceneAt, physicalOracle } = require('./synaptic_scene');
 const { LN2, GROWTH, SynapticNetwork, unpack, loss } = require('./synaptic_network');
 
@@ -41,11 +42,11 @@ function summarize(rows) {
     anticipation, maxAhead, events: rows.length };
 }
 
-function evaluate(model, data, { prior, blocked, pairing, details = false } = {}) {
+function evaluate(model, data, { prior, blocked, pairing, details = false, projections } = {}) {
   const rows = data.map((event, index) => {
     const source = pairing ? data[pairing[index]] : event;
     const stop = pairing ? event.cutoff : event.target + FIRST - HORIZONS[0];
-    const states = model?.forward(source.features, stop, blocked).a;
+    const states = model?.forward(source.features, stop, blocked, false, projections?.[index]).a;
     const p = prior ?? model.read(states[event.cutoff + 1]);
     return { bits: loss(p, event.target) / LN2, error: Math.abs(modelMedian(p) - event.target),
       ahead: pairing ? HORIZONS.map(() => 0) : HORIZONS.map(t => {
@@ -96,6 +97,7 @@ function compression(reference, referenceBytes, measured, measuredBytes, n) {
 function blockStudy(model, edges, data, seed, memory, baseScores) {
   const mature = edges.filter(edge => edge.state === 'mature');
   const groups = memory ? [0, 1] : [0];
+  let projections;
   const baseline = baseScores.map(score => score.bits);
   return groups.map(regime => {
     // Select by training metadata alone. Retain complete batches and require a
@@ -132,7 +134,10 @@ function blockStudy(model, edges, data, seed, memory, baseScores) {
         controls.push(used);
       }
       if (controls.length !== 20) continue;
-      const delta = blocked => data.map((events, k) => evaluate(model, events, { blocked }).bits - baseline[k]);
+      projections ??= data.map(events => events.map(event =>
+        model.project(event.features, event.target + FIRST - HORIZONS[0])));
+      const delta = blocked => data.map((events, k) =>
+        evaluate(model, events, { blocked, projections: projections[k] }).bits - baseline[k]);
       attempts.push({ batch: selected[0].batch, edges: [...target], deltaBits: delta(target),
         controls: controls.map(blocked => ({ edges: [...blocked], deltaBits: delta(blocked) })),
         restoredDeltaBits: delta(new Set()) });
@@ -320,23 +325,31 @@ function codeHash() {
   return hash.digest('hex');
 }
 
-function runStudy(config, output, log = console.log) {
+function prepareStudy(config, output, workers) {
   validate(config);
   fs.mkdirSync(output, { recursive: true });
   // Reject accidental overwrites before any files are created.
   if (fs.readdirSync(output).length) throw new Error('Output directory must be empty');
-  const locked = { config, codeHash: codeHash(), machine: { node: process.version, platform: process.platform,
+  const locked = { config, codeHash: codeHash(), workers, machine: { node: process.version, platform: process.platform,
     cpu: os.cpus()[0]?.model, memoryBytes: os.totalmem() } };
   fs.writeFileSync(path.join(output, 'protocol.json'), JSON.stringify(locked, null, 2), { flag: 'wx' });
-  const reports = [];
-  for (let i = 0; i < config.seeds; i++) {
-    const seed = i === 0 ? config.seed : stream(config.seed, 198, i).state;
-    const dir = path.join(output, `seed-${seed}`);
-    fs.mkdirSync(dir);
-    const report = runSeed(config, seed, dir, log);
-    fs.writeFileSync(path.join(dir, 'report.json'), JSON.stringify(report, null, config.profile === 'formal' ? 0 : 2), { flag: 'wx' });
-    reports.push(report);
-  }
+  return locked;
+}
+
+function studySeeds(config) {
+  return Array.from({ length: config.seeds }, (_, i) => i === 0 ? config.seed : stream(config.seed, 198, i).state);
+}
+
+function runStudySeed(config, output, seed, log) {
+  const dir = path.join(output, `seed-${seed}`);
+  fs.mkdirSync(dir);
+  const report = runSeed(config, seed, dir, log);
+  fs.writeFileSync(path.join(dir, 'report.json'), JSON.stringify(report, null, config.profile === 'formal' ? 0 : 2), { flag: 'wx' });
+  return report;
+}
+
+function finishStudy(locked, output, reports) {
+  const { config } = locked;
   const summary = { ...locked, ...aggregate(reports, config), seeds: reports.map(report => {
     const last = report.checkpoints[report.latest];
     return { seed: report.seed, uniform: report.uniform.bits, prior: last.prior[0].bits,
@@ -346,6 +359,28 @@ function runStudy(config, output, log = console.log) {
   }) };
   fs.writeFileSync(path.join(output, 'summary.json'), JSON.stringify(summary, null, 2), { flag: 'wx' });
   return summary;
+}
+
+function runStudy(config, output, log = console.log) {
+  const locked = prepareStudy(config, output, 1);
+  const reports = studySeeds(config).map(seed => runStudySeed(config, output, seed, log));
+  return finishStudy(locked, output, reports);
+}
+
+async function runParallelStudy(config, output, workers) {
+  workers = Math.min(workers, config.seeds);
+  const locked = prepareStudy(config, output, workers);
+  const seeds = studySeeds(config);
+  // The parent is the sole writer of protocol.json and summary.json.
+  // Each worker owns a disjoint subset of seed directories.
+  await Promise.all(Array.from({ length: workers }, (_, index) => new Promise((resolve, reject) => {
+    const assigned = seeds.filter((_, i) => i % workers === index);
+    const worker = new Worker(__filename, { workerData: { config, output, seeds: assigned } });
+    worker.once('error', reject);
+    worker.once('exit', code => code === 0 ? resolve() : reject(new Error(`Worker exited with code ${code}`)));
+  })));
+  const reports = seeds.map(seed => JSON.parse(fs.readFileSync(path.join(output, `seed-${seed}`, 'report.json'), 'utf8')));
+  return finishStudy(locked, output, reports);
 }
 
 function validate(config) {
@@ -372,18 +407,18 @@ function validate(config) {
   if (config.memory && config.train % config.interval !== 0) throw new Error('Align phase boundaries with the growth interval');
 }
 
-function main() {
+async function main() {
   const { values } = parseArgs({ options: {
     profile: { type: 'string' }, seed: { type: 'string' }, seeds: { type: 'string' }, train: { type: 'string' },
     samples: { type: 'string' }, checkpoints: { type: 'string' }, rate: { type: 'string' }, encoder: { type: 'string' },
     learner: { type: 'string' }, 'trace-decay': { type: 'string' }, methods: { type: 'string' },
     'fixed-capacity': { type: 'string' }, 'compute-match': { type: 'boolean' }, memory: { type: 'boolean' },
-    output: { type: 'string' }, help: { type: 'boolean' },
+    output: { type: 'string' }, help: { type: 'boolean' }, workers: { type: 'string' },
   } });
   if (values.help) {
     console.log('node synaptic_experiment.js --profile pilot|development|formal --train 1024 --seeds 3 --samples 256 --output synaptic-pilot\n'
       + '--encoder motion|pooled --learner bptt|local --trace-decay 1 --methods fixed,random,hebb,bidirectional,joint,shuffled,capacity\n'
-      + '--compute-match --memory are optional. --train is events per phase in memory mode.');
+      + '--compute-match --memory --workers 1 are optional. --train is events per phase in memory mode.');
     return;
   }
   const profile = values.profile ?? 'pilot';
@@ -401,13 +436,19 @@ function main() {
   if ('fixed-capacity' in values) config.fixedCapacity = Number(values['fixed-capacity']);
   if ('compute-match' in values) config.computeMatch = values['compute-match'];
   const output = path.resolve(values.output ?? `synaptic-${profile}`);
-  const summary = runStudy(config, output);
+  const workers = Number(values.workers ?? 1);
+  if (!Number.isSafeInteger(workers) || workers < 1) throw new Error('Expected positive integer: workers');
+  const summary = workers > 1 ? await runParallelStudy(config, output, workers) : runStudy(config, output);
   console.log(JSON.stringify({ output, developmentGate: summary.developmentGate?.passed, primary: summary.primary }, null, 2));
 }
 
 if (require.main === module) {
-  try { main(); }
-  catch (error) { console.error(error.message); process.exitCode = 1; }
+  if (isMainThread) {
+    main().catch(error => { console.error(error.message); process.exitCode = 1; });
+  } else {
+    const { config, output, seeds } = workerData;
+    for (const seed of seeds) runStudySeed(config, output, seed, console.log);
+  }
 }
 
 module.exports = { defaults, evaluate, paired, runStudy };
