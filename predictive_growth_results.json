@@ -1,0 +1,737 @@
+{
+  "config": {
+    "seed": 7,
+    "trainEvents": 512,
+    "devEvents": 128,
+    "testEvents": 256,
+    "checkpoints": [
+      0,
+      128,
+      512
+    ],
+    "tMin": 16,
+    "tMax": 40,
+    "hiddenCapacity": 24,
+    "initialHidden": 4
+  },
+  "results": {
+    "0": {
+      "time_prior": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.64385618977472,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "modelBits": 408,
+          "activeEdges": 0,
+          "stableEdges": 0,
+          "activeHidden": 0
+        },
+        "compression": {
+          "modelBits": 408,
+          "netBitsVsPrior": 0,
+          "estimatedBreakEvenEvents": null
+        }
+      },
+      "fixed_initial": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.644318691886537,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 4,
+          "activeEdges": 40,
+          "stableEdges": 0,
+          "deletedEdges": 0,
+          "modelBits": 58880,
+          "events": 0
+        },
+        "blocking": {
+          "matureDeltaBits": 0,
+          "randomDeltaBits": 0.00000457652177399126,
+          "matureEdgesBlocked": 0
+        },
+        "compression": {
+          "modelBits": 58880,
+          "netBitsVsPrior": 58472.118400540625,
+          "estimatedBreakEvenEvents": null
+        }
+      },
+      "random_growth": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.642435057862509,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 4,
+          "activeEdges": 40,
+          "stableEdges": 0,
+          "deletedEdges": 0,
+          "modelBits": 58984,
+          "events": 0
+        },
+        "blocking": {
+          "matureDeltaBits": 0,
+          "randomDeltaBits": 0.00014052613941117897,
+          "matureEdgesBlocked": 0
+        },
+        "compression": {
+          "modelBits": 58984,
+          "netBitsVsPrior": 58575.63619023047,
+          "estimatedBreakEvenEvents": 41217848.60131923
+        }
+      },
+      "experience_growth": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.642187525991138,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 4,
+          "activeEdges": 40,
+          "stableEdges": 0,
+          "deletedEdges": 0,
+          "modelBits": 58976,
+          "events": 0
+        },
+        "blocking": {
+          "matureDeltaBits": 0,
+          "randomDeltaBits": -0.000015411907205553632,
+          "matureEdgesBlocked": 0
+        },
+        "compression": {
+          "modelBits": 58976,
+          "netBitsVsPrior": 58567.5728220714,
+          "estimatedBreakEvenEvents": 35098742.22491059
+        }
+      },
+      "fixed_capacity": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.642116772248519,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 24,
+          "activeEdges": 720,
+          "stableEdges": 0,
+          "deletedEdges": 0,
+          "modelBits": 796000,
+          "events": 0
+        },
+        "blocking": {
+          "matureDeltaBits": 0,
+          "randomDeltaBits": 0.00002787132530635006,
+          "matureEdgesBlocked": 0
+        },
+        "compression": {
+          "modelBits": 796000,
+          "netBitsVsPrior": 795591.5547091133,
+          "estimatedBreakEvenEvents": 457389895.18961465
+        }
+      }
+    },
+    "128": {
+      "time_prior": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.729049892486339,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "modelBits": 424,
+          "activeEdges": 0,
+          "stableEdges": 0,
+          "activeHidden": 0
+        },
+        "compression": {
+          "modelBits": 424,
+          "netBitsVsPrior": 16,
+          "estimatedBreakEvenEvents": null
+        }
+      },
+      "fixed_initial": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.678725876776342,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 4,
+          "activeEdges": 40,
+          "stableEdges": 40,
+          "deletedEdges": 0,
+          "modelBits": 62944,
+          "events": 128
+        },
+        "blocking": {
+          "matureDeltaBits": -0.005719363181127868,
+          "randomDeltaBits": 0,
+          "matureEdgesBlocked": 40
+        },
+        "compression": {
+          "modelBits": 62944,
+          "netBitsVsPrior": 62523.11705197824,
+          "estimatedBreakEvenEvents": 1242667.1265738728
+        }
+      },
+      "random_growth": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.6799364175548535,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 6,
+          "activeEdges": 46,
+          "stableEdges": 43,
+          "deletedEdges": 0,
+          "modelBits": 72248,
+          "events": 128
+        },
+        "blocking": {
+          "matureDeltaBits": -0.009589173775010451,
+          "randomDeltaBits": 0.000025813689473075385,
+          "matureEdgesBlocked": 43
+        },
+        "compression": {
+          "modelBits": 72248,
+          "netBitsVsPrior": 71827.42695041755,
+          "estimatedBreakEvenEvents": 1462735.0253717266
+        }
+      },
+      "experience_growth": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.676891058706973,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 6,
+          "activeEdges": 46,
+          "stableEdges": 43,
+          "deletedEdges": 0,
+          "modelBits": 72312,
+          "events": 128
+        },
+        "blocking": {
+          "matureDeltaBits": -0.0022622786371924164,
+          "randomDeltaBits": -0.00013933411294253517,
+          "matureEdgesBlocked": 43
+        },
+        "compression": {
+          "modelBits": 72312,
+          "netBitsVsPrior": 71890.64733855249,
+          "estimatedBreakEvenEvents": 1378558.429894291
+        }
+      },
+      "fixed_capacity": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.697922695216597,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 24,
+          "activeEdges": 720,
+          "stableEdges": 720,
+          "deletedEdges": 0,
+          "modelBits": 842904,
+          "events": 128
+        },
+        "blocking": {
+          "matureDeltaBits": -0.028563221558035146,
+          "randomDeltaBits": 0,
+          "matureEdgesBlocked": 720
+        },
+        "compression": {
+          "modelBits": 842904,
+          "netBitsVsPrior": 842488.031437499,
+          "estimatedBreakEvenEvents": 27066233.837216757
+        }
+      }
+    },
+    "512": {
+      "time_prior": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.700374791543333,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "modelBits": 608,
+          "activeEdges": 0,
+          "stableEdges": 0,
+          "activeHidden": 0
+        },
+        "compression": {
+          "modelBits": 608,
+          "netBitsVsPrior": 200,
+          "estimatedBreakEvenEvents": null
+        }
+      },
+      "fixed_initial": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.710441700000982,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.10546875,
+            "4": 0.10546875,
+            "6": 0.10546875,
+            "8": 0.10546875,
+            "10": 0.10546875,
+            "12": 0.10546875
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 4,
+          "activeEdges": 40,
+          "stableEdges": 40,
+          "deletedEdges": 0,
+          "modelBits": 63160,
+          "events": 512
+        },
+        "blocking": {
+          "matureDeltaBits": -0.019905333718220675,
+          "randomDeltaBits": 0,
+          "matureEdgesBlocked": 40
+        },
+        "compression": {
+          "modelBits": 63160,
+          "netBitsVsPrior": 62754.57712856516,
+          "estimatedBreakEvenEvents": null
+        }
+      },
+      "random_growth": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.716681988920008,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.10546875,
+            "4": 0.10546875,
+            "6": 0.10546875,
+            "8": 0.10546875,
+            "10": 0.10546875,
+            "12": 0.10546875
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 12,
+          "activeEdges": 64,
+          "stableEdges": 61,
+          "deletedEdges": 0,
+          "modelBits": 101240,
+          "events": 512
+        },
+        "blocking": {
+          "matureDeltaBits": -0.02688237721074671,
+          "randomDeltaBits": -3.0718642296534426e-7,
+          "matureEdgesBlocked": 61
+        },
+        "compression": {
+          "modelBits": 101240,
+          "netBitsVsPrior": 100836.17464252842,
+          "estimatedBreakEvenEvents": null
+        }
+      },
+      "experience_growth": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.725247306033384,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.10546875,
+            "4": 0.10546875,
+            "6": 0.10546875,
+            "8": 0.10546875,
+            "10": 0.10546875,
+            "12": 0.10546875
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 12,
+          "activeEdges": 64,
+          "stableEdges": 61,
+          "deletedEdges": 0,
+          "modelBits": 101672,
+          "events": 512
+        },
+        "blocking": {
+          "matureDeltaBits": -0.030790542623297057,
+          "randomDeltaBits": 0,
+          "matureEdgesBlocked": 61
+        },
+        "compression": {
+          "modelBits": 101672,
+          "netBitsVsPrior": 101270.36736370945,
+          "estimatedBreakEvenEvents": null
+        }
+      },
+      "fixed_capacity": {
+        "metrics": {
+          "n": 256,
+          "nllBits": 4.734073865890193,
+          "medianAbsFrameError": 6,
+          "anticipationAccuracy": {
+            "2": 0.10546875,
+            "4": 0.10546875,
+            "6": 0.10546875,
+            "8": 0.10546875,
+            "10": 0.10546875,
+            "12": 0.10546875
+          },
+          "maxContinuousAheadFrames": 0
+        },
+        "stats": {
+          "activeHidden": 24,
+          "activeEdges": 720,
+          "stableEdges": 720,
+          "deletedEdges": 0,
+          "modelBits": 848728,
+          "events": 512
+        },
+        "blocking": {
+          "matureDeltaBits": -0.04900493212106927,
+          "randomDeltaBits": 0,
+          "matureEdgesBlocked": 720
+        },
+        "compression": {
+          "modelBits": 848728,
+          "netBitsVsPrior": 848328.6269630328,
+          "estimatedBreakEvenEvents": null
+        }
+      }
+    }
+  },
+  "development": {
+    "0": {
+      "time_prior": {
+        "n": 128,
+        "nllBits": 4.643856189774734,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "fixed_initial": {
+        "n": 128,
+        "nllBits": 4.642423891392501,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "random_growth": {
+        "n": 128,
+        "nllBits": 4.64353037577033,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "experience_growth": {
+        "n": 128,
+        "nllBits": 4.642733228162056,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "fixed_capacity": {
+        "n": 128,
+        "nllBits": 4.646278057538603,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      }
+    },
+    "128": {
+      "time_prior": {
+        "n": 128,
+        "nllBits": 4.716280054536676,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "fixed_initial": {
+        "n": 128,
+        "nllBits": 4.668448632463864,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "random_growth": {
+        "n": 128,
+        "nllBits": 4.670580222687791,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "experience_growth": {
+        "n": 128,
+        "nllBits": 4.666960643710445,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "fixed_capacity": {
+        "n": 128,
+        "nllBits": 4.692516567882274,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      }
+    },
+    "512": {
+      "time_prior": {
+        "n": 128,
+        "nllBits": 4.711793880001509,
+        "medianAbsFrameError": 7,
+        "anticipationAccuracy": {
+          "2": 0.140625,
+          "4": 0.140625,
+          "6": 0.140625,
+          "8": 0.140625,
+          "10": 0.140625,
+          "12": 0.140625
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "fixed_initial": {
+        "n": 128,
+        "nllBits": 4.7116722380002045,
+        "medianAbsFrameError": 6,
+        "anticipationAccuracy": {
+          "2": 0.125,
+          "4": 0.125,
+          "6": 0.125,
+          "8": 0.125,
+          "10": 0.125,
+          "12": 0.125
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "random_growth": {
+        "n": 128,
+        "nllBits": 4.719273138423594,
+        "medianAbsFrameError": 6,
+        "anticipationAccuracy": {
+          "2": 0.125,
+          "4": 0.125,
+          "6": 0.125,
+          "8": 0.125,
+          "10": 0.125,
+          "12": 0.125
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "experience_growth": {
+        "n": 128,
+        "nllBits": 4.723408751482869,
+        "medianAbsFrameError": 6,
+        "anticipationAccuracy": {
+          "2": 0.125,
+          "4": 0.125,
+          "6": 0.125,
+          "8": 0.125,
+          "10": 0.125,
+          "12": 0.125
+        },
+        "maxContinuousAheadFrames": 0
+      },
+      "fixed_capacity": {
+        "n": 128,
+        "nllBits": 4.722882789105854,
+        "medianAbsFrameError": 6,
+        "anticipationAccuracy": {
+          "2": 0.125,
+          "4": 0.125,
+          "6": 0.125,
+          "8": 0.125,
+          "10": 0.125,
+          "12": 0.125
+        },
+        "maxContinuousAheadFrames": 0
+      }
+    }
+  },
+  "notes": [
+    "All methods use identical train/dev/test seeds and per-event cutoffs.",
+    "The visual encoder reads only pixels/audio up to the requested cutoff.",
+    "Use larger train/test counts for the formal run; defaults are a smoke-test scale."
+  ]
+}
