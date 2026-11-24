@@ -1,0 +1,15 @@
+{
+  "seed": 20261123,
+  "method": "joint",
+  "initial_edges": 128,
+  "final_live_edges": 192,
+  "new_live_edges": 64,
+  "mature_final_edges": 48,
+  "contact_frame": 31,
+  "outputs": [
+    "network_initial.svg",
+    "network_final.svg",
+    "network_structures.html",
+    "ball_collision.gif"
+  ]
+}
