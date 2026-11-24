@@ -76,7 +76,7 @@ function render(scene, through = FRAMES - 1) {
   return frames;
 }
 
-const HIERARCHICAL = ['hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback'];
+const HIERARCHICAL = ['hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback', 'hierarchical-attention'];
 
 // Shared fixed local filters, with edge replication and 2x2 aggregation.
 function hierarchicalEncode(frames, temporal) {

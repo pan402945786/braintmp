@@ -78,7 +78,7 @@ class SynapticNetwork {
   constructor(config) {
     this.config = config;
     this.mode = config.mode;
-    this.advanced = ['hierarchical-motion', 'hierarchical-feedback'].includes(config.encoder);
+    this.advanced = ['hierarchical-motion', 'hierarchical-feedback', 'hierarchical-attention'].includes(config.encoder);
     this.inputs = this.advanced ? 449 : featureCount(config.encoder);
     const rng = stream(config.seed, 100);
     this.input = Float64Array.from({ length: NODES * this.inputs }, (_, k) => {
@@ -392,7 +392,7 @@ class SynapticNetwork {
       mature: live.filter(edge => edge.state === 'mature').length, activeEdges: live.length,
       rssBytes: Math.max(this.peakRss, process.memoryUsage.rss()), trainMs: this.trainMs,
       maintenanceMs: this.maintenanceMs, parameterCounts: { bottom: 0, middle: this.motionKernel?.length ?? 0,
-        feedback: this.config.encoder === 'hierarchical-feedback' ? this.visualFeedback.length : 0,
+        feedback: ['hierarchical-feedback', 'hierarchical-attention'].includes(this.config.encoder) ? this.visualFeedback.length : 0,
         reservedFeedback: this.config.encoder === 'hierarchical-motion' ? this.visualFeedback.length : 0, input: this.input.length,
         recurrent: live.length, readout: this.output.length + this.bias.length, homeostasis: this.gain.length } };
   }
@@ -403,7 +403,7 @@ function pack(encoder, input, output, bias, gain, edges, motionKernel, visualFee
   const extra = motionKernel ? motionKernel.length + visualFeedback.length : 0;
   const buffer = Buffer.alloc(12 + 4 * (input.length + output.length + bias.length + gain.length + extra) + 8 * edges.length);
   buffer.write('SYN1');
-  buffer.writeUInt16LE(['pooled', 'motion', 'hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback'].indexOf(encoder), 4);
+  buffer.writeUInt16LE(['pooled', 'motion', 'hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback', 'hierarchical-attention'].indexOf(encoder), 4);
   buffer.writeUInt16LE(NODES, 6);
   buffer.writeUInt16LE(CLASSES, 8);
   buffer.writeUInt16LE(edges.length, 10);
@@ -422,10 +422,10 @@ function pack(encoder, input, output, bias, gain, edges, motionKernel, visualFee
 
 function unpack(buffer, metadata) {
   if (buffer.length < 12 || buffer.toString('ascii', 0, 4) !== 'SYN1'
-    || buffer.readUInt16LE(4) > 5 || buffer.readUInt16LE(6) !== NODES || buffer.readUInt16LE(8) !== CLASSES) {
+    || buffer.readUInt16LE(4) > 6 || buffer.readUInt16LE(6) !== NODES || buffer.readUInt16LE(8) !== CLASSES) {
     throw new Error('Invalid synaptic model header');
   }
-  const encoder = ['pooled', 'motion', 'hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback'][buffer.readUInt16LE(4)];
+  const encoder = ['pooled', 'motion', 'hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback', 'hierarchical-attention'][buffer.readUInt16LE(4)];
   const m = Object.create(SynapticNetwork.prototype);
   m.advanced = buffer.readUInt16LE(4) >= 4;
   m.inputs = m.advanced ? 449 : featureCount(encoder);

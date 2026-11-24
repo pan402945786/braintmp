@@ -1,0 +1,396 @@
+{
+  "config": {
+    "profile": "formal",
+    "seed": 20261124,
+    "seeds": 10,
+    "train": 8192,
+    "samples": 2000,
+    "checkpoints": [
+      0,
+      128,
+      512,
+      2048,
+      8192
+    ],
+    "rate": 0.003,
+    "encoder": "pooled",
+    "learner": "bptt",
+    "traceDecay": 1,
+    "interval": 64,
+    "candidates": 128,
+    "edgesPerGrowth": 4,
+    "maxEdges": 512,
+    "maxIn": 20,
+    "fixedCapacity": 176,
+    "confirmEvents": 32,
+    "confirmWindows": 3,
+    "support": 0.0001,
+    "matureRate": 0.3,
+    "homeostasis": true,
+    "prune": true,
+    "methods": [
+      "fixed"
+    ],
+    "computeMatch": false,
+    "memory": false
+  },
+  "codeHash": "08a1816df0fe8f54ba8120d47d2c828530b99d00aee8c9592a10f253ae6d3212",
+  "workers": 1,
+  "machine": {
+    "node": "v22.23.2",
+    "platform": "win32",
+    "cpu": "Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz",
+    "memoryBytes": 16918597632
+  },
+  "developmentGate": {
+    "vsUniform": {
+      "perSeed": [
+        0.6811531950159173,
+        0.6729940136582893,
+        0.6965275155971731,
+        0.5551812486261545,
+        0.6970171573409356,
+        0.7717259587637062,
+        0.6703904848448317,
+        0.7249502739306095,
+        0.5871065924125753,
+        0.6473538261705221
+      ],
+      "mean": 0.6704400266360715,
+      "interval": 0.95,
+      "bounds": [
+        0.6327756950608474,
+        0.7062858824434691
+      ]
+    },
+    "vsFrequency": {
+      "perSeed": [
+        0.6821822247111884,
+        0.6767621656088685,
+        0.699382770943513,
+        0.5610635750993849,
+        0.6997744427850217,
+        0.7717463417318364,
+        0.6731188535315229,
+        0.7240323030408558,
+        0.58756495768987,
+        0.6485923577260779
+      ],
+      "mean": 0.6724219992868139,
+      "interval": 0.95,
+      "bounds": [
+        0.6354134818214219,
+        0.7076398492112388
+      ]
+    },
+    "matchedVsShuffled": {
+      "perSeed": [
+        1.3807246759620329,
+        1.290217155412472,
+        1.4391974452466578,
+        1.4304778273893675,
+        1.4184670182333612,
+        1.532718117327955,
+        1.221146969467418,
+        1.3933475093020302,
+        1.1122752106002025,
+        1.2651463125022966
+      ],
+      "mean": 1.3483718241443792,
+      "interval": 0.95,
+      "bounds": [
+        1.2738203692979333,
+        1.4178650643965898
+      ]
+    },
+    "passed": true
+  },
+  "primary": null,
+  "primaryThresholdMet": null,
+  "jointVsHebb": null,
+  "jointVsBidirectional": null,
+  "jointVsShuffled": null,
+  "localJointVsRandom": null,
+  "seeds": [
+    {
+      "seed": 20261124,
+      "uniform": 4.643856189774706,
+      "prior": 4.644885219469977,
+      "methods": {
+        "fixed": {
+          "bits": 3.9627029947587884,
+          "anticipation": {
+            "2": 0.14,
+            "4": 0.123,
+            "6": 0.111,
+            "8": 0.115,
+            "10": 0.1175,
+            "12": 0.12
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 37360,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.6821822247111884,
+            "extraModelBits": 298080,
+            "netExtraBits": 296715.6355505776,
+            "breakEvenEvents": 436951
+          }
+        }
+      }
+    },
+    {
+      "seed": 4141705506,
+      "uniform": 4.643856189774706,
+      "prior": 4.647624341725285,
+      "methods": {
+        "fixed": {
+          "bits": 3.9708621761164165,
+          "anticipation": {
+            "2": 0.1375,
+            "4": 0.1265,
+            "6": 0.1225,
+            "8": 0.117,
+            "10": 0.127,
+            "12": 0.1065
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 37360,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.6767621656088685,
+            "extraModelBits": 298080,
+            "netExtraBits": 296726.47566878225,
+            "breakEvenEvents": 440451
+          }
+        }
+      }
+    },
+    {
+      "seed": 3549354703,
+      "uniform": 4.643856189774706,
+      "prior": 4.646711445121046,
+      "methods": {
+        "fixed": {
+          "bits": 3.9473286741775326,
+          "anticipation": {
+            "2": 0.118,
+            "4": 0.112,
+            "6": 0.107,
+            "8": 0.1245,
+            "10": 0.116,
+            "12": 0.107
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 37360,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.699382770943513,
+            "extraModelBits": 298080,
+            "netExtraBits": 296681.234458113,
+            "breakEvenEvents": 426205
+          }
+        }
+      }
+    },
+    {
+      "seed": 3890780824,
+      "uniform": 4.643856189774706,
+      "prior": 4.649738516247936,
+      "methods": {
+        "fixed": {
+          "bits": 4.088674941148551,
+          "anticipation": {
+            "2": 0.124,
+            "4": 0.1205,
+            "6": 0.1195,
+            "8": 0.1215,
+            "10": 0.131,
+            "12": 0.112
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 37360,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.5610635750993849,
+            "extraModelBits": 298080,
+            "netExtraBits": 296957.8728498012,
+            "breakEvenEvents": 531277
+          }
+        }
+      }
+    },
+    {
+      "seed": 809479916,
+      "uniform": 4.643856189774706,
+      "prior": 4.646613475218792,
+      "methods": {
+        "fixed": {
+          "bits": 3.94683903243377,
+          "anticipation": {
+            "2": 0.1145,
+            "4": 0.1105,
+            "6": 0.1185,
+            "8": 0.1305,
+            "10": 0.1235,
+            "12": 0.118
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 37360,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.6997744427850217,
+            "extraModelBits": 298080,
+            "netExtraBits": 296680.45111443,
+            "breakEvenEvents": 425966
+          }
+        }
+      }
+    },
+    {
+      "seed": 453824394,
+      "uniform": 4.643856189774706,
+      "prior": 4.643876572742836,
+      "methods": {
+        "fixed": {
+          "bits": 3.8721302310109995,
+          "anticipation": {
+            "2": 0.184,
+            "4": 0.166,
+            "6": 0.1575,
+            "8": 0.154,
+            "10": 0.1645,
+            "12": 0.1595
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 37360,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.7717463417318364,
+            "extraModelBits": 298080,
+            "netExtraBits": 296536.5073165363,
+            "breakEvenEvents": 386241
+          }
+        }
+      }
+    },
+    {
+      "seed": 1759706657,
+      "uniform": 4.643856189774706,
+      "prior": 4.646584558461397,
+      "methods": {
+        "fixed": {
+          "bits": 3.973465704929874,
+          "anticipation": {
+            "2": 0.1255,
+            "4": 0.1245,
+            "6": 0.127,
+            "8": 0.1305,
+            "10": 0.1125,
+            "12": 0.0935
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 37360,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.6731188535315229,
+            "extraModelBits": 298080,
+            "netExtraBits": 296733.76229293697,
+            "breakEvenEvents": 442835
+          }
+        }
+      }
+    },
+    {
+      "seed": 2607145318,
+      "uniform": 4.643856189774706,
+      "prior": 4.642938218884952,
+      "methods": {
+        "fixed": {
+          "bits": 3.918905915844096,
+          "anticipation": {
+            "2": 0.1185,
+            "4": 0.1175,
+            "6": 0.112,
+            "8": 0.114,
+            "10": 0.1135,
+            "12": 0.109
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 37360,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.7240323030408558,
+            "extraModelBits": 298080,
+            "netExtraBits": 296631.9353939183,
+            "breakEvenEvents": 411695
+          }
+        }
+      }
+    },
+    {
+      "seed": 3958300639,
+      "uniform": 4.643856189774706,
+      "prior": 4.644314555052,
+      "methods": {
+        "fixed": {
+          "bits": 4.05674959736213,
+          "anticipation": {
+            "2": 0.136,
+            "4": 0.126,
+            "6": 0.123,
+            "8": 0.125,
+            "10": 0.116,
+            "12": 0.105
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 37360,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.58756495768987,
+            "extraModelBits": 298080,
+            "netExtraBits": 296904.87008462026,
+            "breakEvenEvents": 507315
+          }
+        }
+      }
+    },
+    {
+      "seed": 2238967054,
+      "uniform": 4.643856189774706,
+      "prior": 4.645094721330262,
+      "methods": {
+        "fixed": {
+          "bits": 3.9965023636041836,
+          "anticipation": {
+            "2": 0.132,
+            "4": 0.1265,
+            "6": 0.1105,
+            "8": 0.116,
+            "10": 0.123,
+            "12": 0.1195
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 37360,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.6485923577260779,
+            "extraModelBits": 298080,
+            "netExtraBits": 296782.81528454786,
+            "breakEvenEvents": 459580
+          }
+        }
+      }
+    }
+  ]
+}

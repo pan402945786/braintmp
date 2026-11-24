@@ -29,6 +29,22 @@ node .\synaptic_experiment.js --memory --train 256 --seeds 3 --samples 128 --met
 
 运行 `node --test test_synaptic_experiment.js test_predictive_growth.js` 验证物理接触、前缀因果性、有限差分梯度、候选评分、局部资格迹等价性、连接状态变化和旧版入口。
 
+## 竞争式通道注意力
+
+`--encoder hierarchical-attention` 在可学习运动基础上，用上一帧高层状态产生七个视觉通道的正增益，再除以通道均值。各通道平均增益保持为 1，因此会相对竞争；声音不受门控。相比原反馈模型不增加参数。这是特征通道注意力，不是空间位置注意力。
+
+开发方案、收益门槛和已知边界见 [注意力实验设计](attention_design_2026-11-24.md)，实测结果见 [注意力开发结果](attention_development_2026-11-24.md)。运行新实验时请使用空输出目录：
+
+```powershell
+node .\synaptic_experiment.js --profile development --encoder hierarchical-attention --methods fixed --train 8192 --seeds 3 --samples 256 --output .\runs\my-attention-development
+```
+
+分别运行同配置的 `hierarchical-motion` 和 `hierarchical-feedback` 后，可汇总配对结果：
+
+```powershell
+node .\compare_attention.js MOTION_DIR FEEDBACK_DIR ATTENTION_DIR OUTPUT_JSON
+```
+
 ## 第一轮实验
 
 `predictive_growth_experiment.js` 不依赖第三方包，实现了

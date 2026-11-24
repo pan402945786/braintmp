@@ -186,7 +186,7 @@ test('hierarchical features are causal, local, differentiable and serializable',
 });
 
 test('learned local motion and delayed feedback have correct gradients and round trip', () => {
-  for (const encoder of ['hierarchical-motion', 'hierarchical-feedback']) {
+  for (const encoder of ['hierarchical-motion', 'hierarchical-feedback', 'hierarchical-attention']) {
     const model = new SynapticNetwork({ ...config, encoder, mode: 'fixed' });
     const event = makeEvent(7, 12, 3, encoder), stop = event.prefixes.at(-1);
     const pass = model.forward(event.features, stop);
@@ -196,7 +196,7 @@ test('learned local motion and delayed feedback have correct gradients and round
       return event.prefixes.reduce((sum, t) => sum + loss(model.read(states[t + 1]), event.feedback), 0) / event.prefixes.length;
     };
     const checks = [[model.input, gradients.inGrad], [model.motionKernel, gradients.motionGrad], [model.output, gradients.outGrad], [model.bias, gradients.biasGrad]];
-    if (encoder.endsWith('feedback')) checks.push([model.visualFeedback, gradients.visualFeedbackGrad]);
+    if (encoder !== 'hierarchical-motion') checks.push([model.visualFeedback, gradients.visualFeedbackGrad]);
     for (const [values, grad] of checks) {
       const index = grad.reduce((best, x, i) => Math.abs(x) > Math.abs(grad[best]) ? i : best, 0);
       assert.ok(Math.abs(grad[index]) > 1e-10);
@@ -224,7 +224,7 @@ test('learned local motion and delayed feedback have correct gradients and round
     const changed = event.features.map(x => x.slice());
     changed[stop].fill(50);
     assert.deepEqual(model.forward(event.features, stop - 1).a, model.forward(changed, stop - 1).a);
-    if (encoder.endsWith('feedback')) {
+    if (encoder !== 'hierarchical-motion') {
       model.visualFeedback.fill(0);
       const gated = model.forward(event.features, stop).a;
       model.config = { ...model.config, encoder: 'hierarchical-motion' };
@@ -235,17 +235,57 @@ test('learned local motion and delayed feedback have correct gradients and round
 
 test('training state and audit restore reproduce subsequent updates and growth', () => {
   const { trainingState, auditState } = require('./synaptic_experiment');
-  const settings = { ...config, encoder: 'hierarchical-feedback', mode: 'joint', interval: 4, confirmEvents: 2, candidates: 8 };
-  const model = new SynapticNetwork(settings);
-  for (let i = 0; i < 6; i++) model.train(makeEvent(7, 12, i, settings.encoder));
-  const state = JSON.parse(JSON.stringify(trainingState(model)));
-  const audit = JSON.parse(JSON.stringify(auditState(model)));
-  const restored = SynapticNetwork.restore(state, audit);
-  for (let i = 6; i < 10; i++) {
-    const event = makeEvent(7, 12, i, settings.encoder);
-    model.train(event); restored.train(event);
+  for (const encoder of ['hierarchical-feedback', 'hierarchical-attention']) {
+    const settings = { ...config, encoder, mode: 'joint', interval: 4, confirmEvents: 2, candidates: 8 };
+    const model = new SynapticNetwork(settings);
+    for (let i = 0; i < 6; i++) model.train(makeEvent(7, 12, i, settings.encoder));
+    const state = JSON.parse(JSON.stringify(trainingState(model)));
+    const audit = JSON.parse(JSON.stringify(auditState(model)));
+    const restored = SynapticNetwork.restore(state, audit);
+    for (let i = 6; i < 10; i++) {
+      const event = makeEvent(7, 12, i, settings.encoder);
+      model.train(event); restored.train(event);
+    }
+    assert.deepEqual(restored.snapshot().encoded, model.snapshot().encoded);
+    assert.deepEqual(auditState(restored), auditState(model));
+    assert.deepEqual(restored.workHistory, model.workHistory);
   }
-  assert.deepEqual(restored.snapshot().encoded, model.snapshot().encoded);
-  assert.deepEqual(auditState(restored), auditState(model));
-  assert.deepEqual(restored.workHistory, model.workHistory);
+});
+
+test('competitive attention preserves total gain and differentiates cross-channel competition', () => {
+  const attention = new SynapticNetwork({ ...config, encoder: 'hierarchical-attention', mode: 'fixed' });
+  const feedback = new SynapticNetwork({ ...config, encoder: 'hierarchical-feedback', mode: 'fixed' });
+  assert.deepEqual(attention.input, feedback.input);
+  assert.deepEqual(attention.motionKernel, feedback.motionKernel);
+  assert.deepEqual(attention.visualFeedback, feedback.visualFeedback);
+  assert.equal(attention.snapshot().parameterCounts.feedback, feedback.snapshot().parameterCounts.feedback);
+  assert.equal(attention.snapshot().encoded.length, feedback.snapshot().encoded.length);
+  // Strong asymmetric gains exercise the denominator derivative, not just the
+  // nearly uniform attention at initialization.
+  attention.visualFeedback.forEach((_, i, values) => { values[i] = Math.sin(i * 0.7) * 2; });
+  const event = makeEvent(7, 12, 3, 'hierarchical-attention'), stop = event.prefixes.at(-1);
+  const pass = attention.forward(event.features, stop);
+  assert.ok(pass.gates[0].every(value => value === 1));
+  let deviation = 0;
+  for (const gate of pass.gates) {
+    close(gate.reduce((sum, x) => sum + x, 0), 7, 1e-12);
+    assert.ok(gate.every(value => value >= 0.6 && value <= 5 / 3));
+    deviation = Math.max(deviation, ...gate.map(value => Math.abs(value - 1)));
+  }
+  assert.ok(deviation > 0.01);
+  const grad = attention.gradient(event.features, event.prefixes, event.feedback, pass);
+  const objective = () => attention.gradient(event.features, event.prefixes, event.feedback).eventLoss;
+  for (let c = 0; c < 7; c++) {
+    const start = c * NODES;
+    let index = start;
+    for (let i = start; i < start + NODES; i++) if (Math.abs(grad.visualFeedbackGrad[i]) > Math.abs(grad.visualFeedbackGrad[index])) index = i;
+    const saved = attention.visualFeedback[index], eps = 1e-5;
+    attention.visualFeedback[index] = saved + eps; const plus = objective();
+    attention.visualFeedback[index] = saved - eps; const minus = objective();
+    attention.visualFeedback[index] = saved;
+    close(grad.visualFeedbackGrad[index], (plus - minus) / (2 * eps));
+  }
+  // Identical channel preferences normalize to neutral attention.
+  attention.visualFeedback.fill(0.5);
+  for (const gate of attention.forward(event.features, stop).gates) gate.forEach(value => close(value, 1, 1e-12));
 });

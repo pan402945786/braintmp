@@ -1,0 +1,646 @@
+{
+  "codeHash": "08a1816df0fe8f54ba8120d47d2c828530b99d00aee8c9592a10f253ae6d3212",
+  "config": {
+    "profile": "development",
+    "seed": 7,
+    "seeds": 3,
+    "train": 1024,
+    "samples": 256,
+    "checkpoints": [
+      0,
+      128,
+      512,
+      1024
+    ],
+    "rate": 0.003,
+    "encoder": "hierarchical-attention",
+    "learner": "bptt",
+    "traceDecay": 1,
+    "interval": 64,
+    "candidates": 128,
+    "edgesPerGrowth": 4,
+    "maxEdges": 512,
+    "maxIn": 20,
+    "fixedCapacity": 176,
+    "confirmEvents": 32,
+    "confirmWindows": 3,
+    "support": 0.0001,
+    "matureRate": 0.3,
+    "homeostasis": true,
+    "prune": true,
+    "methods": [
+      "fixed"
+    ],
+    "computeMatch": false,
+    "memory": false
+  },
+  "directories": {
+    "motion": "runs/attention-screen-motion-20261124",
+    "feedback": "runs/attention-screen-feedback-20261124",
+    "attention": "runs/attention-screen-attention-20261124"
+  },
+  "comparisons": {
+    "vsMotion": {
+      "control": "hierarchical-motion",
+      "treatment": "hierarchical-attention",
+      "method": "fixed",
+      "rows": [
+        {
+          "seed": 7,
+          "control": {
+            "events": 1024,
+            "bits": 4.294571308709537,
+            "work": 1005838400,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 0,
+              "reservedFeedback": 224,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "treatment": {
+            "events": 1024,
+            "bits": 4.229559351404821,
+            "work": 1046082530,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 224,
+              "reservedFeedback": 0,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "budget": 1005838400,
+          "matchedControl": {
+            "events": 1024,
+            "bits": 4.294571308709537,
+            "work": 1005838400
+          },
+          "matchedTreatment": {
+            "events": 512,
+            "bits": 4.595052275760018,
+            "work": 518899204
+          }
+        },
+        {
+          "seed": 2913497007,
+          "control": {
+            "events": 1024,
+            "bits": 4.483346470367856,
+            "work": 1000291744,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 0,
+              "reservedFeedback": 224,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "treatment": {
+            "events": 1024,
+            "bits": 4.428126916903936,
+            "work": 1040266909,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 224,
+              "reservedFeedback": 0,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "budget": 1000291744,
+          "matchedControl": {
+            "events": 1024,
+            "bits": 4.483346470367856,
+            "work": 1000291744
+          },
+          "matchedTreatment": {
+            "events": 512,
+            "bits": 4.593363213690604,
+            "work": 523961723
+          }
+        },
+        {
+          "seed": 2809245340,
+          "control": {
+            "events": 1024,
+            "bits": 4.283402201330791,
+            "work": 994186432,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 0,
+              "reservedFeedback": 224,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "treatment": {
+            "events": 1024,
+            "bits": 4.227643118438836,
+            "work": 1033865542,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 224,
+              "reservedFeedback": 0,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "budget": 994186432,
+          "matchedControl": {
+            "events": 1024,
+            "bits": 4.283402201330791,
+            "work": 994186432
+          },
+          "matchedTreatment": {
+            "events": 512,
+            "bits": 4.682189479508077,
+            "work": 519484950
+          }
+        }
+      ],
+      "sameEvents": {
+        "perSeed": [
+          0.06501195730471654,
+          0.05521955346392016,
+          0.05575908289195475
+        ],
+        "mean": 0.05866353122019715,
+        "interval": 0.95,
+        "bounds": [
+          0.05521955346392016,
+          0.06501195730471654
+        ]
+      },
+      "checkpointBudget": {
+        "perSeed": [
+          -0.3004809670504809,
+          -0.11001674332274813,
+          -0.3987872781772861
+        ],
+        "mean": -0.2697616628501717,
+        "interval": 0.95,
+        "bounds": [
+          -0.3987872781772861,
+          -0.11001674332274813
+        ]
+      },
+      "note": "Positive differences favor treatment. Budget comparison uses the last saved checkpoint at or below each seed’s shared budget, so unused budget may differ. Intervals with few seeds are exploratory.",
+      "developmentCriterion": {
+        "meanImprovementThresholdBits": 0.05,
+        "positiveSeeds": 3,
+        "totalSeeds": 3,
+        "passed": true
+      }
+    },
+    "vsFeedback": {
+      "control": "hierarchical-feedback",
+      "treatment": "hierarchical-attention",
+      "method": "fixed",
+      "rows": [
+        {
+          "seed": 7,
+          "control": {
+            "events": 1024,
+            "bits": 4.238294737711711,
+            "work": 1044855448,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 224,
+              "reservedFeedback": 0,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "treatment": {
+            "events": 1024,
+            "bits": 4.229559351404821,
+            "work": 1046082530,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 224,
+              "reservedFeedback": 0,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "budget": 1044855448,
+          "matchedControl": {
+            "events": 1024,
+            "bits": 4.238294737711711,
+            "work": 1044855448
+          },
+          "matchedTreatment": {
+            "events": 512,
+            "bits": 4.595052275760018,
+            "work": 518899204
+          }
+        },
+        {
+          "seed": 2913497007,
+          "control": {
+            "events": 1024,
+            "bits": 4.433337131822255,
+            "work": 1039048028,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 224,
+              "reservedFeedback": 0,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "treatment": {
+            "events": 1024,
+            "bits": 4.428126916903936,
+            "work": 1040266909,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 224,
+              "reservedFeedback": 0,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "budget": 1039048028,
+          "matchedControl": {
+            "events": 1024,
+            "bits": 4.433337131822255,
+            "work": 1039048028
+          },
+          "matchedTreatment": {
+            "events": 512,
+            "bits": 4.593363213690604,
+            "work": 523961723
+          }
+        },
+        {
+          "seed": 2809245340,
+          "control": {
+            "events": 1024,
+            "bits": 4.2290874854348255,
+            "work": 1032655688,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 224,
+              "reservedFeedback": 0,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "treatment": {
+            "events": 1024,
+            "bits": 4.227643118438836,
+            "work": 1033865542,
+            "parameters": {
+              "bottom": 0,
+              "middle": 9,
+              "feedback": 224,
+              "reservedFeedback": 0,
+              "input": 14368,
+              "recurrent": 128,
+              "readout": 825,
+              "homeostasis": 32
+            }
+          },
+          "budget": 1032655688,
+          "matchedControl": {
+            "events": 1024,
+            "bits": 4.2290874854348255,
+            "work": 1032655688
+          },
+          "matchedTreatment": {
+            "events": 512,
+            "bits": 4.682189479508077,
+            "work": 519484950
+          }
+        }
+      ],
+      "sameEvents": {
+        "perSeed": [
+          0.008735386306890192,
+          0.005210214918319522,
+          0.0014443669959893768
+        ],
+        "mean": 0.005129989407066364,
+        "interval": 0.95,
+        "bounds": [
+          0.0014443669959893768,
+          0.008735386306890192
+        ]
+      },
+      "checkpointBudget": {
+        "perSeed": [
+          -0.35675753804830723,
+          -0.16002608186834877,
+          -0.45310199407325147
+        ],
+        "mean": -0.32329520466330247,
+        "interval": 0.95,
+        "bounds": [
+          -0.45310199407325147,
+          -0.16002608186834877
+        ]
+      },
+      "note": "Positive differences favor treatment. Budget comparison uses the last saved checkpoint at or below each seed’s shared budget, so unused budget may differ. Intervals with few seeds are exploratory.",
+      "developmentCriterion": {
+        "meanImprovementThresholdBits": 0.05,
+        "positiveSeeds": 3,
+        "totalSeeds": 3,
+        "passed": false
+      }
+    }
+  },
+  "diagnostics": [
+    {
+      "seed": 7,
+      "attention": {
+        "events": 32,
+        "frames": 262,
+        "minGain": 0.7513042561858583,
+        "maxGain": 1.2270505696890337,
+        "maxMeanDeviation": 5.551115123125783e-16,
+        "channels": {
+          "brightness": {
+            "meanGain": 0.838140727956392,
+            "meanAbsoluteDeviation": 0.1618592720436079
+          },
+          "on": {
+            "meanGain": 1.02748223497087,
+            "meanAbsoluteDeviation": 0.03503226494177311
+          },
+          "off": {
+            "meanGain": 0.9645761003725701,
+            "meanAbsoluteDeviation": 0.06000199705042405
+          },
+          "horizontal": {
+            "meanGain": 1.001266099878144,
+            "meanAbsoluteDeviation": 0.02018884495859638
+          },
+          "vertical": {
+            "meanGain": 0.9771191589796763,
+            "meanAbsoluteDeviation": 0.08684965801290447
+          },
+          "frameDifference": {
+            "meanGain": 1.027861440382404,
+            "meanAbsoluteDeviation": 0.05799148592519467
+          },
+          "learnedMotion": {
+            "meanGain": 1.1635542374599435,
+            "meanAbsoluteDeviation": 0.16395100674899366
+          }
+        },
+        "bits": 4.21975468453736,
+        "disabledBits": 4.27797002480907,
+        "disabledMinusEnabledBits": 0.05821534027171005,
+        "note": "Post-training intervention on at most 32 development events; not a retrained control or independent test."
+      },
+      "feedback": {
+        "events": 32,
+        "frames": 262,
+        "minGain": 0.7723409542892119,
+        "maxGain": 1.2451807646874116,
+        "maxMeanDeviation": 0.14577273499332444,
+        "channels": {
+          "brightness": {
+            "meanGain": 0.8752770978322634,
+            "meanAbsoluteDeviation": 0.12472290216773708
+          },
+          "on": {
+            "meanGain": 1.0136320454333665,
+            "meanAbsoluteDeviation": 0.09729641307491083
+          },
+          "off": {
+            "meanGain": 0.9657341323465435,
+            "meanAbsoluteDeviation": 0.07104835529044226
+          },
+          "horizontal": {
+            "meanGain": 0.9881293546359077,
+            "meanAbsoluteDeviation": 0.05365127653967211
+          },
+          "vertical": {
+            "meanGain": 0.9765677957039225,
+            "meanAbsoluteDeviation": 0.10531620125720809
+          },
+          "frameDifference": {
+            "meanGain": 1.1524304308076052,
+            "meanAbsoluteDeviation": 0.1524304308076052
+          },
+          "learnedMotion": {
+            "meanGain": 1.211508005983657,
+            "meanAbsoluteDeviation": 0.21150800598365696
+          }
+        },
+        "bits": 4.2303871984024175,
+        "disabledBits": 4.291836378894764,
+        "disabledMinusEnabledBits": 0.06144918049234693,
+        "note": "Post-training intervention on at most 32 development events; not a retrained control or independent test."
+      }
+    },
+    {
+      "seed": 2913497007,
+      "attention": {
+        "events": 32,
+        "frames": 267,
+        "minGain": 0.6930136918801536,
+        "maxGain": 1.1151935938753808,
+        "maxMeanDeviation": 4.440892098500626e-16,
+        "channels": {
+          "brightness": {
+            "meanGain": 0.7743740543911238,
+            "meanAbsoluteDeviation": 0.22562594560887644
+          },
+          "on": {
+            "meanGain": 1.049752334364683,
+            "meanAbsoluteDeviation": 0.04975233436468316
+          },
+          "off": {
+            "meanGain": 1.0181212897568837,
+            "meanAbsoluteDeviation": 0.02413684372901186
+          },
+          "horizontal": {
+            "meanGain": 0.9929723423694816,
+            "meanAbsoluteDeviation": 0.012785276747366245
+          },
+          "vertical": {
+            "meanGain": 1.0527860100802957,
+            "meanAbsoluteDeviation": 0.05287880803784227
+          },
+          "frameDifference": {
+            "meanGain": 1.0269823746452418,
+            "meanAbsoluteDeviation": 0.027076689337036167
+          },
+          "learnedMotion": {
+            "meanGain": 1.0850115943922902,
+            "meanAbsoluteDeviation": 0.08501159439229095
+          }
+        },
+        "bits": 4.290548900086906,
+        "disabledBits": 4.3275940372126795,
+        "disabledMinusEnabledBits": 0.03704513712577384,
+        "note": "Post-training intervention on at most 32 development events; not a retrained control or independent test."
+      },
+      "feedback": {
+        "events": 32,
+        "frames": 267,
+        "minGain": 0.8043532284624152,
+        "maxGain": 1.2433794064836445,
+        "maxMeanDeviation": 0.12345051319332101,
+        "channels": {
+          "brightness": {
+            "meanGain": 0.8748077055848773,
+            "meanAbsoluteDeviation": 0.12519229441512317
+          },
+          "on": {
+            "meanGain": 1.0867869635479022,
+            "meanAbsoluteDeviation": 0.08894089804465144
+          },
+          "off": {
+            "meanGain": 1.0234597077632954,
+            "meanAbsoluteDeviation": 0.03009712732705055
+          },
+          "horizontal": {
+            "meanGain": 1.0009088898926135,
+            "meanAbsoluteDeviation": 0.04107194486508712
+          },
+          "vertical": {
+            "meanGain": 1.1007205994387577,
+            "meanAbsoluteDeviation": 0.10072059943875734
+          },
+          "frameDifference": {
+            "meanGain": 1.1368313848712033,
+            "meanAbsoluteDeviation": 0.13683138487120433
+          },
+          "learnedMotion": {
+            "meanGain": 1.1892238634815933,
+            "meanAbsoluteDeviation": 0.18922386348159306
+          }
+        },
+        "bits": 4.3059153560076,
+        "disabledBits": 4.343688277564393,
+        "disabledMinusEnabledBits": 0.037772921556793015,
+        "note": "Post-training intervention on at most 32 development events; not a retrained control or independent test."
+      }
+    },
+    {
+      "seed": 2809245340,
+      "attention": {
+        "events": 32,
+        "frames": 247,
+        "minGain": 0.7280039288297061,
+        "maxGain": 1.2555210924118125,
+        "maxMeanDeviation": 2.220446049250313e-16,
+        "channels": {
+          "brightness": {
+            "meanGain": 0.8451714893607586,
+            "meanAbsoluteDeviation": 0.15482851063924125
+          },
+          "on": {
+            "meanGain": 1.0243963024950078,
+            "meanAbsoluteDeviation": 0.028731393824975218
+          },
+          "off": {
+            "meanGain": 0.9710337840256601,
+            "meanAbsoluteDeviation": 0.04130132484604493
+          },
+          "horizontal": {
+            "meanGain": 0.9411675156567559,
+            "meanAbsoluteDeviation": 0.08120283556402944
+          },
+          "vertical": {
+            "meanGain": 1.0867729867048297,
+            "meanAbsoluteDeviation": 0.1266133925823211
+          },
+          "frameDifference": {
+            "meanGain": 0.9887701373149257,
+            "meanAbsoluteDeviation": 0.04976551248403169
+          },
+          "learnedMotion": {
+            "meanGain": 1.1426877844420613,
+            "meanAbsoluteDeviation": 0.1431366798917965
+          }
+        },
+        "bits": 4.0776054953702685,
+        "disabledBits": 4.11075017340707,
+        "disabledMinusEnabledBits": 0.03314467803680188,
+        "note": "Post-training intervention on at most 32 development events; not a retrained control or independent test."
+      },
+      "feedback": {
+        "events": 32,
+        "frames": 247,
+        "minGain": 0.7678137723700744,
+        "maxGain": 1.2449758851655093,
+        "maxMeanDeviation": 0.12476027929861688,
+        "channels": {
+          "brightness": {
+            "meanGain": 0.8921089319228958,
+            "meanAbsoluteDeviation": 0.10789106807710427
+          },
+          "on": {
+            "meanGain": 1.0677146086542257,
+            "meanAbsoluteDeviation": 0.1085572412123367
+          },
+          "off": {
+            "meanGain": 1.027071872143127,
+            "meanAbsoluteDeviation": 0.09412435595491453
+          },
+          "horizontal": {
+            "meanGain": 0.9691842149033165,
+            "meanAbsoluteDeviation": 0.03713115010276902
+          },
+          "vertical": {
+            "meanGain": 1.1073961065020022,
+            "meanAbsoluteDeviation": 0.14561481898392076
+          },
+          "frameDifference": {
+            "meanGain": 1.1229046756973022,
+            "meanAbsoluteDeviation": 0.12290467569730273
+          },
+          "learnedMotion": {
+            "meanGain": 1.1896935993528235,
+            "meanAbsoluteDeviation": 0.1901274822298503
+          }
+        },
+        "bits": 4.085796807611366,
+        "disabledBits": 4.127552956817263,
+        "disabledMinusEnabledBits": 0.041756149205896875,
+        "note": "Post-training intervention on at most 32 development events; not a retrained control or independent test."
+      }
+    }
+  ],
+  "note": "Development only. Primary comparison is vsMotion; positive differences favor attention. Three-seed bootstrap intervals are unstable. Gate ablations are post-training interventions on at most 32 reused development scenes. Event-matched comparisons do not establish equal compute."
+}

@@ -1,7 +1,9 @@
 ﻿'use strict';
 
 // One shared 3x3 motion kernel acts on the 8x8 frame-difference map.
-// Feedback uses a previous high-level state and gates each spatial channel.
+// Feedback uses a previous high-level state and gates each feature channel.
+// Attention divides those positive gains by their mean: channels compete for
+// a fixed total gain, with no additional learned parameters or future inputs.
 const N = 32, C = 25, LEAK = 0.45, CHANNELS = 7, SIZE = 64;
 const neighbor = (pos, k) => {
   const y = Math.max(0, Math.min(7, Math.floor(pos / 8) + Math.floor(k / 3) - 1));
@@ -37,15 +39,21 @@ function project(features, stop) {
   });
 }
 function forward(features, stop, blocked, countWork = false, inputDrive) {
+  const feedback = ['hierarchical-feedback', 'hierarchical-attention'].includes(this.config.encoder);
+  const attention = this.config.encoder === 'hierarchical-attention';
   const edges = this.edges.filter(e => e.deleted === null && !blocked?.has(e.id));
   const a = [new Float64Array(N)], activation = [], gates = [], projection = inputDrive ?? this.project(features, stop);
   for (let t = 0; t <= stop; t++) {
     const gate = new Float64Array(CHANNELS).fill(1);
-    if (this.config.encoder === 'hierarchical-feedback' && t > 0) {
+    if (feedback && t > 0) {
       for (let c = 0; c < CHANNELS; c++) {
         let z = 0;
         for (let i = 0; i < N; i++) z += this.visualFeedback[c * N + i] * a[t][i];
         gate[c] += 0.25 * Math.tanh(z);
+      }
+      if (attention) {
+        const mean = gate.reduce((sum, value) => sum + value, 0) / CHANNELS;
+        for (let c = 0; c < CHANNELS; c++) gate[c] /= mean;
       }
     }
     const sums = projection[t].audio.slice();
@@ -56,10 +64,13 @@ function forward(features, stop, blocked, countWork = false, inputDrive) {
     a.push(nonlinearity.map((value, j) => LEAK * a[t][j] + (1 - LEAK) * value));
   }
   if (countWork) this.work += (stop + 1) * ((inputDrive ? 0 : N * this.inputs + SIZE * 9) + CHANNELS * N * 2 + edges.length + N)
-    + (this.config.encoder === 'hierarchical-feedback' ? stop * CHANNELS * N : 0);
+    + (feedback ? stop * CHANNELS * (N * 2 + 3) : 0)
+    + (attention ? stop * (CHANNELS * 2 + 1) : 0);
   return { a, activation, edges, gates, inputDrive: projection };
 }
 function gradient(features, prefixes, target, precomputed, countWork = false) {
+  const feedback = ['hierarchical-feedback', 'hierarchical-attention'].includes(this.config.encoder);
+  const attention = this.config.encoder === 'hierarchical-attention';
   const stop = prefixes.at(-1);
   const { a, activation, edges, gates, inputDrive } = precomputed ?? this.forward(features, stop, null, countWork);
   const inGrad = new Float64Array(this.input.length), outGrad = new Float64Array(this.output.length), biasGrad = new Float64Array(C);
@@ -97,10 +108,19 @@ function gradient(features, prefixes, target, precomputed, countWork = false) {
     for (let p = 0; p < SIZE; p++) for (let k = 0; k < 9; k++) {
       motionGrad[k] += motionSignals[p] * (1 - values[384 + p] ** 2) * features[t][320 + neighbor(p, k)];
     }
-    if (t > 0 && this.config.encoder === 'hierarchical-feedback') {
+    if (t > 0 && feedback) {
+      // Recompute raw gains to differentiate the division by their mean.
+      const raw = new Float64Array(CHANNELS);
       for (let c = 0; c < CHANNELS; c++) {
-        const tanh = (gate[c] - 1) / 0.25;
-        const signal = gateSignals[c] * 0.25 * (1 - tanh * tanh);
+        let z = 0;
+        for (let i = 0; i < N; i++) z += this.visualFeedback[c * N + i] * a[t][i];
+        raw[c] = 1 + 0.25 * Math.tanh(z);
+      }
+      const mean = attention ? raw.reduce((sum, value) => sum + value, 0) / CHANNELS : 1;
+      const competition = attention ? gateSignals.reduce((sum, value, c) => sum + value * gate[c], 0) / CHANNELS : 0;
+      for (let c = 0; c < CHANNELS; c++) {
+        const tanh = (raw[c] - 1) / 0.25;
+        const signal = (gateSignals[c] - competition) / mean * 0.25 * (1 - tanh * tanh);
         for (let i = 0; i < N; i++) {
           visualFeedbackGrad[c * N + i] += signal * a[t][i];
           delta[t - 1][i] += signal * this.visualFeedback[c * N + i];
@@ -113,7 +133,8 @@ function gradient(features, prefixes, target, precomputed, countWork = false) {
     }
   }
   if (countWork) this.work += (stop + 1) * (N * this.inputs + SIZE * 9 * 2 + CHANNELS * N * 4 + 2 * edges.length + 2 * N)
-    + (this.config.encoder === 'hierarchical-feedback' ? stop * CHANNELS * N * 2 : 0) + prefixes.length * 3 * C * N;
+    + (feedback ? stop * CHANNELS * (N * 6 + 9) : 0)
+    + (attention ? stop * (CHANNELS * 6 + 2) : 0) + prefixes.length * 3 * C * N;
   return { inGrad, outGrad, biasGrad, edgeGrad, motionGrad, visualFeedbackGrad, edges, a: a.slice(1), b, eventLoss };
 }
 module.exports = { project, forward, gradient };

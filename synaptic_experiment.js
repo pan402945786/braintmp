@@ -119,6 +119,33 @@ function compression(reference, referenceBytes, measured, measuredBytes, n) {
     breakEvenEvents: predictionSavingPerEvent > 0 ? Math.ceil(Math.max(0, extraModelBits) / predictionSavingPerEvent) : null };
 }
 
+function attentionDiagnostics(model, events) {
+  if (!['hierarchical-feedback', 'hierarchical-attention'].includes(model.config.encoder)) return undefined;
+  const data = events.slice(0, 32);
+  const names = ['brightness', 'on', 'off', 'horizontal', 'vertical', 'frameDifference', 'learnedMotion'];
+  const sums = new Float64Array(7), deviations = new Float64Array(7);
+  let frames = 0, min = Infinity, max = -Infinity, maxMeanDeviation = 0;
+  for (const event of data) {
+    const pass = model.forward(event.features, event.cutoff);
+    for (const gate of pass.gates.slice(1)) {
+      frames++;
+      maxMeanDeviation = Math.max(maxMeanDeviation, Math.abs(gate.reduce((sum, x) => sum + x, 0) / 7 - 1));
+      gate.forEach((value, c) => { sums[c] += value; deviations[c] += Math.abs(value - 1); min = Math.min(min, value); max = Math.max(max, value); });
+    }
+  }
+  const bits = evaluate(model, data).bits;
+  const originalConfig = model.config;
+  let disabledBits;
+  try {
+    model.config = { ...model.config, encoder: 'hierarchical-motion' };
+    disabledBits = evaluate(model, data).bits;
+  } finally { model.config = originalConfig; }
+  return { events: data.length, frames, minGain: min, maxGain: max, maxMeanDeviation,
+    channels: Object.fromEntries(names.map((name, c) => [name, { meanGain: sums[c] / frames, meanAbsoluteDeviation: deviations[c] / frames }])),
+    bits, disabledBits, disabledMinusEnabledBits: disabledBits - bits,
+    note: 'Post-training intervention on at most 32 development events; not a retrained control or independent test.' };
+}
+
 function blockStudy(model, edges, data, seed, memory, baseScores) {
   const mature = edges.filter(edge => edge.state === 'mature');
   const groups = memory ? [0, 1] : [0];
@@ -252,6 +279,7 @@ function runSeed(config, seed, dir, log) {
     finals[method] = {
       model: path.basename(filename), trainingStateBytes: Buffer.byteLength(JSON.stringify(state)), auditBytes: state.auditBytes,
       visualDiagnostics: visualDiagnostics(model, data[0], config.encoder),
+      attentionDiagnostics: attentionDiagnostics(model, data[0]),
       shuffledBits: evaluate(model, data[0], { pairing: pairPermutation(data[0].length, seed) }).bits,
       compressionVsPrior: compression(latest.prior[0].bits, counts.byteLength, readback[0].bits, snapshot.encoded.length, data[0].length),
       ...(method !== 'random' && latest.methods.random ? { compressionVsRandom: compression(latest.methods.random.scores[0].bits,
@@ -360,7 +388,16 @@ function prepareStudy(config, output, workers) {
   fs.mkdirSync(output, { recursive: true });
   // Reject accidental overwrites before any files are created.
   if (fs.readdirSync(output).length) throw new Error('Output directory must be empty');
-  const visionProtocol = config.encoder.startsWith('hierarchical') ? { input: '32x32 grayscale', initialPooling: '2x2 mean, stride 2', receptiveField: '3x3, edge replication', channels: config.encoder === 'hierarchical' ? ['brightness', 'ON', 'OFF', 'horizontal', 'vertical'] : ['brightness', 'ON', 'OFF', 'horizontal', 'vertical', 'frame-difference'], aggregation: '2x2 mean, stride 2', temporalDelayFrames: 1, motion: ['hierarchical-motion', 'hierarchical-feedback'].includes(config.encoder) ? 'learned shared 3x3 filter on 8x8 difference map' : false, highLevelFeedback: config.encoder === 'hierarchical-feedback' ? 'previous-state channel gain 1 + 0.25*tanh(Wa)' : false, bottomWeights: 'fixed shared filters' } : undefined;
+  const visionProtocol = config.encoder.startsWith('hierarchical') ? {
+    input: '32x32 grayscale', initialPooling: '2x2 mean, stride 2', receptiveField: '3x3, edge replication',
+    channels: config.encoder === 'hierarchical' ? ['brightness', 'ON', 'OFF', 'horizontal', 'vertical'] : ['brightness', 'ON', 'OFF', 'horizontal', 'vertical', 'frame-difference'],
+    aggregation: '2x2 mean, stride 2', temporalDelayFrames: 1,
+    motion: ['hierarchical-motion', 'hierarchical-feedback', 'hierarchical-attention'].includes(config.encoder) ? 'learned shared 3x3 filter on 8x8 difference map' : false,
+    highLevelFeedback: config.encoder === 'hierarchical-feedback' ? 'previous-state channel gain 1 + 0.25*tanh(Wa)' :
+      config.encoder === 'hierarchical-attention' ? 'r = 1 + 0.25*tanh(Wa_previous); gate = r / mean(r); first-frame gate = 1' : false,
+    attentionScope: config.encoder === 'hierarchical-attention' ? 'seven feature channels, not spatial locations; audio is ungated' : undefined,
+    bottomWeights: 'fixed shared filters',
+  } : undefined;
   const locked = { config, visionProtocol, codeHash: codeHash(), workers, machine: { node: process.version, platform: process.platform,
     cpu: os.cpus()[0]?.model, memoryBytes: os.totalmem() } };
   fs.writeFileSync(path.join(output, 'protocol.json'), JSON.stringify(locked, null, 2), { flag: 'wx' });
@@ -422,13 +459,13 @@ function validate(config) {
       config.fixedCapacity < 128 || config.fixedCapacity > config.maxEdges || config.interval < 2 || config.maxIn > 32) {
     throw new Error('Invalid seed, sample count, or network limits');
   }
-  if (!['pilot', 'development', 'formal'].includes(config.profile) || !['motion', 'pooled', 'hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback'].includes(config.encoder) ||
+  if (!['pilot', 'development', 'formal'].includes(config.profile) || !['motion', 'pooled', 'hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback', 'hierarchical-attention'].includes(config.encoder) ||
       !['bptt', 'local'].includes(config.learner) || !Number.isFinite(config.rate) || config.rate <= 0 ||
       !Number.isFinite(config.traceDecay) || config.traceDecay < 0 || config.traceDecay > 1 ||
       !Number.isFinite(config.support) || config.support < 0 || !Number.isFinite(config.matureRate) || config.matureRate < 0 || config.matureRate > 1) {
     throw new Error('Invalid profile, encoder, or training hyperparameters');
   }
-  if (['hierarchical-motion', 'hierarchical-feedback'].includes(config.encoder) && (config.learner !== 'bptt' || config.methods.some(m => m.startsWith('local_')))) throw new Error('Hierarchical motion and feedback require BPTT');
+  if (['hierarchical-motion', 'hierarchical-feedback', 'hierarchical-attention'].includes(config.encoder) && (config.learner !== 'bptt' || config.methods.some(m => m.startsWith('local_')))) throw new Error('Hierarchical motion, feedback and attention require BPTT');
   if (!config.methods.length || new Set(config.methods).size !== config.methods.length ||
       config.methods.some(method => !METHODS.includes(method) && !['local_fixed', 'local_random', 'local_joint',
         'joint_no_prune', 'joint_no_stability', 'joint_no_homeostasis'].includes(method))) throw new Error('Invalid method list');
@@ -449,7 +486,7 @@ async function main() {
   } });
   if (values.help) {
     console.log('node synaptic_experiment.js --profile pilot|development|formal --train 1024 --seeds 3 --samples 256 --output synaptic-pilot\n'
-      + '--encoder motion|pooled|hierarchical|hierarchical-delta|hierarchical-motion|hierarchical-feedback --learner bptt|local --trace-decay 1 --methods fixed,random,hebb,bidirectional,joint,shuffled,capacity\n'
+      + '--encoder motion|pooled|hierarchical|hierarchical-delta|hierarchical-motion|hierarchical-feedback|hierarchical-attention --learner bptt|local --trace-decay 1 --methods fixed,random,hebb,bidirectional,joint,shuffled,capacity\n'
       + '--compute-match --memory --workers 1 are optional. --train is events per phase in memory mode.');
     return;
   }
