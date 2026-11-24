@@ -1,0 +1,131 @@
+{
+  "config": {
+    "profile": "pilot",
+    "seed": 7,
+    "seeds": 1,
+    "train": 128,
+    "samples": 32,
+    "checkpoints": [
+      0,
+      128
+    ],
+    "rate": 0.003,
+    "encoder": "hierarchical-delta",
+    "learner": "bptt",
+    "traceDecay": 1,
+    "interval": 64,
+    "candidates": 128,
+    "edgesPerGrowth": 4,
+    "maxEdges": 512,
+    "maxIn": 20,
+    "fixedCapacity": 176,
+    "confirmEvents": 32,
+    "confirmWindows": 3,
+    "support": 0.0001,
+    "matureRate": 0.3,
+    "homeostasis": true,
+    "prune": true,
+    "methods": [
+      "fixed"
+    ],
+    "computeMatch": false,
+    "memory": false
+  },
+  "visionProtocol": {
+    "input": "32x32 grayscale",
+    "initialPooling": "2x2 mean, stride 2",
+    "receptiveField": "3x3, edge replication",
+    "channels": [
+      "brightness",
+      "ON",
+      "OFF",
+      "horizontal",
+      "vertical",
+      "frame-difference"
+    ],
+    "aggregation": "2x2 mean, stride 2",
+    "temporalDelayFrames": 1,
+    "highLevelFeedback": false,
+    "bottomAndMiddleWeights": "fixed shared filters"
+  },
+  "codeHash": "e08faa4af2df04f1520af33ef53d262712c0b9eec682c6d4f6b511f6c29e6d1d",
+  "workers": 1,
+  "machine": {
+    "node": "v22.23.2",
+    "platform": "win32",
+    "cpu": "Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz",
+    "memoryBytes": 16918597632
+  },
+  "developmentGate": {
+    "vsUniform": {
+      "perSeed": [
+        0.0193657156267788
+      ],
+      "mean": 0.0193657156267788,
+      "interval": 0.95,
+      "bounds": [
+        0.0193657156267788,
+        0.0193657156267788
+      ]
+    },
+    "vsFrequency": {
+      "perSeed": [
+        0.08709810256159312
+      ],
+      "mean": 0.08709810256159312,
+      "interval": 0.95,
+      "bounds": [
+        0.08709810256159312,
+        0.08709810256159312
+      ]
+    },
+    "matchedVsShuffled": {
+      "perSeed": [
+        -0.007719544568266734
+      ],
+      "mean": -0.007719544568266734,
+      "interval": 0.95,
+      "bounds": [
+        -0.007719544568266734,
+        -0.007719544568266734
+      ]
+    },
+    "passed": false
+  },
+  "primary": null,
+  "primaryThresholdMet": null,
+  "jointVsHebb": null,
+  "jointVsBidirectional": null,
+  "jointVsShuffled": null,
+  "localJointVsRandom": null,
+  "seeds": [
+    {
+      "seed": 7,
+      "uniform": 4.643856189774726,
+      "prior": 4.7115885767095405,
+      "methods": {
+        "fixed": {
+          "bits": 4.624490474147947,
+          "anticipation": {
+            "2": 0.1875,
+            "4": 0.1875,
+            "6": 0.1875,
+            "8": 0.1875,
+            "10": 0.1875,
+            "12": 0.1875
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 53744,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.08709810256159312,
+            "extraModelBits": 429152,
+            "netExtraBits": 429149.212860718,
+            "breakEvenEvents": 4927226
+          }
+        }
+      }
+    }
+  ]
+}

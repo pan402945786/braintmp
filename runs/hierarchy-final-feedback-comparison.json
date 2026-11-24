@@ -1,0 +1,166 @@
+﻿{
+  "control": "hierarchical-motion",
+  "treatment": "hierarchical-feedback",
+  "method": "fixed",
+  "rows": [
+    {
+      "seed": 7,
+      "control": {
+        "events": 8192,
+        "bits": 2.902285021219899,
+        "work": 7951336640,
+        "parameters": {
+          "bottom": 0,
+          "middle": 9,
+          "feedback": 0,
+          "reservedFeedback": 224,
+          "input": 14368,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "treatment": {
+        "events": 8192,
+        "bits": 2.920391852387836,
+        "work": 8061540608,
+        "parameters": {
+          "bottom": 0,
+          "middle": 9,
+          "feedback": 224,
+          "reservedFeedback": 0,
+          "input": 14368,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "budget": 7951336640,
+      "matchedControl": {
+        "events": 8192,
+        "bits": 2.902285021219899,
+        "work": 7951336640
+      },
+      "matchedTreatment": {
+        "events": 7168,
+        "bits": 2.801097099030134,
+        "work": 7060715520
+      }
+    },
+    {
+      "seed": 2913497007,
+      "control": {
+        "events": 8192,
+        "bits": 3.0891871366322694,
+        "work": 7993036320,
+        "parameters": {
+          "bottom": 0,
+          "middle": 9,
+          "feedback": 0,
+          "reservedFeedback": 224,
+          "input": 14368,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "treatment": {
+        "events": 8192,
+        "bits": 3.1232911934455543,
+        "work": 8103942528,
+        "parameters": {
+          "bottom": 0,
+          "middle": 9,
+          "feedback": 224,
+          "reservedFeedback": 0,
+          "input": 14368,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "budget": 7993036320,
+      "matchedControl": {
+        "events": 8192,
+        "bits": 3.0891871366322694,
+        "work": 7993036320
+      },
+      "matchedTreatment": {
+        "events": 7168,
+        "bits": 2.9487498802973904,
+        "work": 7092243072
+      }
+    },
+    {
+      "seed": 2809245340,
+      "control": {
+        "events": 8192,
+        "bits": 3.361500342793608,
+        "work": 7932302432,
+        "parameters": {
+          "bottom": 0,
+          "middle": 9,
+          "feedback": 0,
+          "reservedFeedback": 224,
+          "input": 14368,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "treatment": {
+        "events": 8192,
+        "bits": 2.711951467922437,
+        "work": 8042185856,
+        "parameters": {
+          "bottom": 0,
+          "middle": 9,
+          "feedback": 224,
+          "reservedFeedback": 0,
+          "input": 14368,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "budget": 7932302432,
+      "matchedControl": {
+        "events": 8192,
+        "bits": 3.361500342793608,
+        "work": 7932302432
+      },
+      "matchedTreatment": {
+        "events": 7168,
+        "bits": 2.9514061262895237,
+        "work": 7048055808
+      }
+    }
+  ],
+  "sameEvents": {
+    "perSeed": [
+      -0.018106831167936654,
+      -0.03410405681328488,
+      0.6495488748711713
+    ],
+    "mean": 0.19911266229664992,
+    "interval": 0.95,
+    "bounds": [
+      -0.03410405681328488,
+      0.6495488748711713
+    ]
+  },
+  "checkpointBudget": {
+    "perSeed": [
+      0.10118792218976536,
+      0.14043725633487902,
+      0.4100942165040844
+    ],
+    "mean": 0.2172397983429096,
+    "interval": 0.95,
+    "bounds": [
+      0.10118792218976536,
+      0.4100942165040844
+    ]
+  },
+  "note": "Positive differences favor treatment. Budget comparison uses the last saved checkpoint at or below each seed’s shared budget, so unused budget may differ. Intervals with few seeds are exploratory."
+}

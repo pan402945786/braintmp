@@ -152,3 +152,100 @@ test('trial confirmation can mature, retire and reuse a connection', () => {
   const reformed = model.addEdge(pair, 0.02, 2);
   assert.notEqual(reformed.id, edge.id);
 });
+
+test('hierarchical features are causal, local, differentiable and serializable', () => {
+  const empty = () => ({ pixels: new Float32Array(1024), audio: 0 });
+  const a = empty(), b = empty();
+  b.pixels[8 * 32 + 8] = 1;
+  const temporal = encode([a, b], 'hierarchical-delta');
+  assert.equal(temporal[0].length, 385);
+  assert.ok(temporal[0].slice(320, 384).every(v => v === 0));
+  assert.ok(temporal[1].slice(320, 384).some(v => v > 0));
+  assert.equal(temporal[1][63], 0);
+  for (const encoder of ['hierarchical', 'hierarchical-delta']) {
+    const scene = sceneAt(7, 10, 5);
+    assert.deepEqual(encode(render(scene), encoder).slice(0, 9), encode(render(scene, 8), encoder));
+    const model = new SynapticNetwork({ ...config, encoder, mode: 'fixed' });
+    const loaded = unpack(model.snapshot().encoded);
+    const event = makeEvent(7, 12, 3, encoder), stop = event.prefixes.at(-1);
+    const original = model.forward(event.features, stop).a[stop + 1];
+    const restored = loaded.forward(event.features, stop).a[stop + 1];
+    original.forEach((v, k) => close(v, restored[k], 1e-6));
+    const gradients = model.gradient(event.features, event.prefixes, event.feedback);
+    const index = gradients.inGrad.findIndex(x => Math.abs(x) > 1e-7);
+    const saved = model.input[index], eps = 1e-5;
+    const objective = () => {
+      const states = model.forward(event.features, stop).a;
+      return event.prefixes.reduce((sum, t) => sum + loss(model.read(states[t + 1]), event.feedback), 0) / event.prefixes.length;
+    };
+    model.input[index] = saved + eps; const plus = objective();
+    model.input[index] = saved - eps; const minus = objective();
+    model.input[index] = saved;
+    close(gradients.inGrad[index], (plus - minus) / (2 * eps));
+  }
+});
+
+test('learned local motion and delayed feedback have correct gradients and round trip', () => {
+  for (const encoder of ['hierarchical-motion', 'hierarchical-feedback']) {
+    const model = new SynapticNetwork({ ...config, encoder, mode: 'fixed' });
+    const event = makeEvent(7, 12, 3, encoder), stop = event.prefixes.at(-1);
+    const pass = model.forward(event.features, stop);
+    const gradients = model.gradient(event.features, event.prefixes, event.feedback, pass);
+    const objective = () => {
+      const states = model.forward(event.features, stop).a;
+      return event.prefixes.reduce((sum, t) => sum + loss(model.read(states[t + 1]), event.feedback), 0) / event.prefixes.length;
+    };
+    const checks = [[model.input, gradients.inGrad], [model.motionKernel, gradients.motionGrad], [model.output, gradients.outGrad], [model.bias, gradients.biasGrad]];
+    if (encoder.endsWith('feedback')) checks.push([model.visualFeedback, gradients.visualFeedbackGrad]);
+    for (const [values, grad] of checks) {
+      const index = grad.reduce((best, x, i) => Math.abs(x) > Math.abs(grad[best]) ? i : best, 0);
+      assert.ok(Math.abs(grad[index]) > 1e-10);
+      const saved = values[index], eps = 1e-5;
+      values[index] = saved + eps; const plus = objective();
+      values[index] = saved - eps; const minus = objective();
+      values[index] = saved;
+      close(grad[index], (plus - minus) / (2 * eps), 1e-7);
+    }
+    const edge = model.edges[0], old = edge.w, eps = 1e-5;
+    edge.w = old + eps; const plus = objective(); edge.w = old - eps; const minus = objective(); edge.w = old;
+    close(gradients.edgeGrad[0], (plus - minus) / (2 * eps));
+    const missing = model.pairs.find(pair => !model.edges.some(e => e.i === pair.i && e.j === pair.j));
+    const candidate = model.addEdge(missing, 0, 1);
+    candidate.w = eps; const candidatePlus = objective();
+    candidate.w = -eps; const candidateMinus = objective();
+    candidate.w = 0;
+    close(-evidence([gradients], missing, [0]).q, (candidatePlus - candidateMinus) / (2 * eps));
+    model.edges.pop();
+    const loaded = unpack(model.snapshot().encoded);
+    const actual = loaded.forward(event.features, stop).a[stop + 1];
+    pass.a[stop + 1].forEach((x, i) => close(x, actual[i], 1e-6));
+    const blocked = new Set([model.edges[0].id]);
+    assert.deepEqual(model.forward(event.features, stop, blocked).a, model.forward(event.features, stop, blocked, false, pass.inputDrive).a);
+    const changed = event.features.map(x => x.slice());
+    changed[stop].fill(50);
+    assert.deepEqual(model.forward(event.features, stop - 1).a, model.forward(changed, stop - 1).a);
+    if (encoder.endsWith('feedback')) {
+      model.visualFeedback.fill(0);
+      const gated = model.forward(event.features, stop).a;
+      model.config = { ...model.config, encoder: 'hierarchical-motion' };
+      assert.deepEqual(model.forward(event.features, stop).a, gated);
+    }
+  }
+});
+
+test('training state and audit restore reproduce subsequent updates and growth', () => {
+  const { trainingState, auditState } = require('./synaptic_experiment');
+  const settings = { ...config, encoder: 'hierarchical-feedback', mode: 'joint', interval: 4, confirmEvents: 2, candidates: 8 };
+  const model = new SynapticNetwork(settings);
+  for (let i = 0; i < 6; i++) model.train(makeEvent(7, 12, i, settings.encoder));
+  const state = JSON.parse(JSON.stringify(trainingState(model)));
+  const audit = JSON.parse(JSON.stringify(auditState(model)));
+  const restored = SynapticNetwork.restore(state, audit);
+  for (let i = 6; i < 10; i++) {
+    const event = makeEvent(7, 12, i, settings.encoder);
+    model.train(event); restored.train(event);
+  }
+  assert.deepEqual(restored.snapshot().encoded, model.snapshot().encoded);
+  assert.deepEqual(auditState(restored), auditState(model));
+  assert.deepEqual(restored.workHistory, model.workHistory);
+});

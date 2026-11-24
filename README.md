@@ -67,3 +67,20 @@ const report = runExperiment({ trainEvents: 128, testEvents: 64 });
 进行多随机种子比较时，可以调用 `runStudy({ seeds: 10, ... })`。它会返回每个种子的报告，以及各组损失和随机生长与经验生长之间差值的配对 bootstrap 95% 置信区间。
 
 默认配置适合快速试跑，便于在只安装了 Node.js 的环境中验证流程。在得出科学结论之前，应使用登记的实验规模重新运行并分析结果。
+
+## 分层视觉
+
+开发比较和已知限制见 [分层视觉开发记录](hierarchical_development_2026-11-24.md)。
+
+`--encoder hierarchical` 使用固定、共享的局部视觉滤波；`--encoder hierarchical-delta` 另外加入相邻帧差。输入先以 2×2 均值降为 16×16，再以边缘复制的 3×3 邻域计算亮度、中心—周围 ON/OFF、水平和竖直差分，最后以 2×2 均值聚合成每通道 8×8。首帧的时间差为零。同期声音作为独立输入。高层仍是原来的 32 单元循环网络，反馈关闭。滤波器无可训练参数，高层输入投影可训练；各层参数数目写入检查点。协议记录具体边界与时间约定。
+
+```powershell
+node .\synaptic_experiment.js --profile development --encoder hierarchical --methods fixed --output .\runs\hierarchical-development
+node .\synaptic_experiment.js --profile development --encoder hierarchical-delta --methods fixed --output .\runs\hierarchical-delta-development
+```
+
+`hierarchical-motion` 在帧差上增加共享、可学习的 3×3 卷积和 tanh；`hierarchical-feedback` 再用上一帧高层状态计算各通道增益 `1 + 0.25*tanh(Wa)`，首帧恒为 1。两者共享相同初始化和参数尺寸；前者不启用反馈矩阵，因此反馈矩阵在控制组中不参与训练。它们目前只支持 BPTT。固定低层滤波无可训练参数；中层卷积、反馈、高层投影、循环边和读出分别计数。最终报告还在最多 32 个开发场景上记录各输入通道的非零率、空间覆盖、跨帧变化和整通道遮蔽效果。
+
+每个种子的部署模型、训练状态数据和审计历史分别保存。可在程序中读取 `<method>-training-state.json` 与 `<method>-edges.json`，调用 `SynapticNetwork.restore(state, audit)` 恢复并继续调用 `train(event)`；调用方负责提供正确的后续事件。此恢复接口适用于包含 `workHistory` 的新版状态文件。估算计算量包括分层滤波与网络运算，但仍只是近似计数；场景生成不计入。跨架构按相同种子和开发数据分别运行，再用 `node .\compare_hierarchies.js CONTROL_DIR TREATMENT_DIR` 比较同事件数及共同预算内最近保存检查点。后者受检查点间距限制；不同编码器间仍需谨慎解释计算量估算。
+
+设计要求先验证固定结构的开发门槛，再开展后续结构比较。可学习运动和反馈的梯度、因果性、模型读回和训练恢复已通过自动测试；反馈是否改善预测需要配对开发实验检验。尚未实现与非分层基线具有相同有效可训练参数数目的对照，也未完成独立正式测试。

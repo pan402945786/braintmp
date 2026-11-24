@@ -87,6 +87,31 @@ function scoreSnapshot(snapshot, data, details = false) {
   return { ...stats, deployBytes: encoded.length, scores: data.map(events => evaluate(model, events, { details })) };
 }
 
+function visualDiagnostics(model, events, encoder) {
+  if (!encoder.startsWith('hierarchical')) return undefined;
+  const names = ['brightness', 'on', 'off', 'horizontal', 'vertical', ...(encoder === 'hierarchical' ? [] : ['frameDifference'])];
+  const sample = events.slice(0, Math.min(events.length, 32));
+  const base = evaluate(model, sample).bits;
+  return Object.fromEntries(names.map((name, channel) => {
+    let total = 0, nonzero = 0, absolute = 0, change = 0, transitions = 0;
+    const covered = new Set();
+    const ablated = sample.map(event => {
+      for (let t = 0; t <= event.cutoff; t++) for (let p = 0; p < 64; p++) {
+        const value = event.features[t][channel * 64 + p];
+        total++; absolute += Math.abs(value);
+        if (Math.abs(value) > 1e-8) { nonzero++; covered.add(p); }
+        if (t) { change += Math.abs(value - event.features[t - 1][channel * 64 + p]); transitions++; }
+      }
+      return { ...event, features: event.features.map(frame => {
+        const copy = frame.slice(); copy.fill(0, channel * 64, channel * 64 + 64); return copy;
+      }) };
+    });
+    return [name, { nonzeroFraction: nonzero / total, spatialCoverage: covered.size / 64,
+      meanAbsoluteActivity: absolute / total, meanFrameChange: change / (transitions || 1),
+      ablationDeltaBits: evaluate(model, ablated).bits - base, events: sample.length }];
+  }));
+}
+
 function compression(reference, referenceBytes, measured, measuredBytes, n) {
   const predictionSavingPerEvent = reference - measured;
   const extraModelBits = (measuredBytes - referenceBytes) * 8;
@@ -158,8 +183,11 @@ function trainingState(network) {
   const { edges, batches, proposals } = auditState(network);
   return {
     config: network.config, events: network.events, work: network.work, nextId: network.nextId,
+    workHistory: network.workHistory, trainMs: network.trainMs, maintenanceMs: network.maintenanceMs,
     input: array(network.input), output: array(network.output), bias: array(network.bias), gain: array(network.gain),
     activity: array(network.activity), feedback: array(network.feedback),
+    motionKernel: network.motionKernel ? array(network.motionKernel) : undefined,
+    visualFeedback: network.visualFeedback ? array(network.visualFeedback) : undefined,
     optimizer: network.optimizer.map(({ m, v }) => ({ m: array(m), v: array(v) })),
     liveEdges: network.edges.filter(edge => edge.deleted === null),
     window: network.window.map(({ a, b }) => ({ a: a.map(array), b: b.map(array) })),
@@ -219,9 +247,11 @@ function runSeed(config, seed, dir, log) {
     }
     const audit = auditState(network);
     const state = trainingState(network);
-    if (GROWTH.has(network.mode)) fs.writeFileSync(path.join(dir, `${method}-edges.json`), JSON.stringify(audit), { flag: 'wx' });
+    fs.writeFileSync(path.join(dir, `${method}-edges.json`), JSON.stringify(audit), { flag: 'wx' });
+    fs.writeFileSync(path.join(dir, `${method}-training-state.json`), JSON.stringify(state), { flag: 'wx' });
     finals[method] = {
       model: path.basename(filename), trainingStateBytes: Buffer.byteLength(JSON.stringify(state)), auditBytes: state.auditBytes,
+      visualDiagnostics: visualDiagnostics(model, data[0], config.encoder),
       shuffledBits: evaluate(model, data[0], { pairing: pairPermutation(data[0].length, seed) }).bits,
       compressionVsPrior: compression(latest.prior[0].bits, counts.byteLength, readback[0].bits, snapshot.encoded.length, data[0].length),
       ...(method !== 'random' && latest.methods.random ? { compressionVsRandom: compression(latest.methods.random.scores[0].bits,
@@ -319,7 +349,7 @@ function aggregate(reports, config) {
 
 function codeHash() {
   const hash = createHash('sha256');
-  for (const file of ['synaptic_scene.js', 'synaptic_network.js', 'synaptic_experiment.js', 'predictive_growth_experiment.js']) {
+  for (const file of ['synaptic_scene.js', 'synaptic_network.js', 'hierarchical_network.js', 'synaptic_experiment.js', 'predictive_growth_experiment.js']) {
     hash.update(fs.readFileSync(path.join(__dirname, file)));
   }
   return hash.digest('hex');
@@ -330,7 +360,8 @@ function prepareStudy(config, output, workers) {
   fs.mkdirSync(output, { recursive: true });
   // Reject accidental overwrites before any files are created.
   if (fs.readdirSync(output).length) throw new Error('Output directory must be empty');
-  const locked = { config, codeHash: codeHash(), workers, machine: { node: process.version, platform: process.platform,
+  const visionProtocol = config.encoder.startsWith('hierarchical') ? { input: '32x32 grayscale', initialPooling: '2x2 mean, stride 2', receptiveField: '3x3, edge replication', channels: config.encoder === 'hierarchical' ? ['brightness', 'ON', 'OFF', 'horizontal', 'vertical'] : ['brightness', 'ON', 'OFF', 'horizontal', 'vertical', 'frame-difference'], aggregation: '2x2 mean, stride 2', temporalDelayFrames: 1, motion: ['hierarchical-motion', 'hierarchical-feedback'].includes(config.encoder) ? 'learned shared 3x3 filter on 8x8 difference map' : false, highLevelFeedback: config.encoder === 'hierarchical-feedback' ? 'previous-state channel gain 1 + 0.25*tanh(Wa)' : false, bottomWeights: 'fixed shared filters' } : undefined;
+  const locked = { config, visionProtocol, codeHash: codeHash(), workers, machine: { node: process.version, platform: process.platform,
     cpu: os.cpus()[0]?.model, memoryBytes: os.totalmem() } };
   fs.writeFileSync(path.join(output, 'protocol.json'), JSON.stringify(locked, null, 2), { flag: 'wx' });
   return locked;
@@ -391,12 +422,13 @@ function validate(config) {
       config.fixedCapacity < 128 || config.fixedCapacity > config.maxEdges || config.interval < 2 || config.maxIn > 32) {
     throw new Error('Invalid seed, sample count, or network limits');
   }
-  if (!['pilot', 'development', 'formal'].includes(config.profile) || !['motion', 'pooled'].includes(config.encoder) ||
+  if (!['pilot', 'development', 'formal'].includes(config.profile) || !['motion', 'pooled', 'hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback'].includes(config.encoder) ||
       !['bptt', 'local'].includes(config.learner) || !Number.isFinite(config.rate) || config.rate <= 0 ||
       !Number.isFinite(config.traceDecay) || config.traceDecay < 0 || config.traceDecay > 1 ||
       !Number.isFinite(config.support) || config.support < 0 || !Number.isFinite(config.matureRate) || config.matureRate < 0 || config.matureRate > 1) {
     throw new Error('Invalid profile, encoder, or training hyperparameters');
   }
+  if (['hierarchical-motion', 'hierarchical-feedback'].includes(config.encoder) && (config.learner !== 'bptt' || config.methods.some(m => m.startsWith('local_')))) throw new Error('Hierarchical motion and feedback require BPTT');
   if (!config.methods.length || new Set(config.methods).size !== config.methods.length ||
       config.methods.some(method => !METHODS.includes(method) && !['local_fixed', 'local_random', 'local_joint',
         'joint_no_prune', 'joint_no_stability', 'joint_no_homeostasis'].includes(method))) throw new Error('Invalid method list');
@@ -417,7 +449,7 @@ async function main() {
   } });
   if (values.help) {
     console.log('node synaptic_experiment.js --profile pilot|development|formal --train 1024 --seeds 3 --samples 256 --output synaptic-pilot\n'
-      + '--encoder motion|pooled --learner bptt|local --trace-decay 1 --methods fixed,random,hebb,bidirectional,joint,shuffled,capacity\n'
+      + '--encoder motion|pooled|hierarchical|hierarchical-delta|hierarchical-motion|hierarchical-feedback --learner bptt|local --trace-decay 1 --methods fixed,random,hebb,bidirectional,joint,shuffled,capacity\n'
       + '--compute-match --memory --workers 1 are optional. --train is events per phase in memory mode.');
     return;
   }
@@ -451,4 +483,4 @@ if (require.main === module) {
   }
 }
 
-module.exports = { defaults, evaluate, paired, runStudy };
+module.exports = { defaults, evaluate, paired, runStudy, trainingState, auditState };

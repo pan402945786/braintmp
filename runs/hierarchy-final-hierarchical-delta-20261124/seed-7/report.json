@@ -1,0 +1,591 @@
+{
+  "seed": 7,
+  "uniform": {
+    "bits": 4.64385618977472,
+    "medianAbsoluteError": 6,
+    "anticipation": {
+      "2": 0.09765625,
+      "4": 0.09765625,
+      "6": 0.09765625,
+      "8": 0.09765625,
+      "10": 0.09765625,
+      "12": 0.09765625
+    },
+    "maxAhead": 0,
+    "events": 256
+  },
+  "physics": [
+    1
+  ],
+  "checkpoints": {
+    "0": {
+      "prior": [
+        {
+          "bits": 4.64385618977472,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.09765625,
+            "4": 0.09765625,
+            "6": 0.09765625,
+            "8": 0.09765625,
+            "10": 0.09765625,
+            "12": 0.09765625
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 0,
+          "work": 0,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 167997440,
+          "trainMs": 0,
+          "maintenanceMs": 0,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 0,
+            "feedback": 0,
+            "reservedFeedback": 0,
+            "input": 12320,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 53744,
+          "scores": [
+            {
+              "bits": 4.6445517366213975,
+              "medianAbsoluteError": 6,
+              "anticipation": {
+                "2": 0.09765625,
+                "4": 0.09765625,
+                "6": 0.09765625,
+                "8": 0.09765625,
+                "10": 0.09765625,
+                "12": 0.09765625
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "128": {
+      "prior": [
+        {
+          "bits": 4.701381428638692,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.125,
+            "4": 0.125,
+            "6": 0.125,
+            "8": 0.125,
+            "10": 0.125,
+            "12": 0.125
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 128,
+          "work": 105813888,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 213688320,
+          "trainMs": 1958.2196999999996,
+          "maintenanceMs": 1.3767000000016196,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 0,
+            "feedback": 0,
+            "reservedFeedback": 0,
+            "input": 12320,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 53744,
+          "scores": [
+            {
+              "bits": 4.674590120116244,
+              "medianAbsoluteError": 6,
+              "anticipation": {
+                "2": 0.09765625,
+                "4": 0.09765625,
+                "6": 0.09765625,
+                "8": 0.09765625,
+                "10": 0.08984375,
+                "12": 0.08984375
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "512": {
+      "prior": [
+        {
+          "bits": 4.681388186747654,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.09765625,
+            "4": 0.09765625,
+            "6": 0.09765625,
+            "8": 0.09765625,
+            "10": 0.09765625,
+            "12": 0.09765625
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 512,
+          "work": 412125312,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 216952832,
+          "trainMs": 6400.97599999997,
+          "maintenanceMs": 2.9091000000544227,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 0,
+            "feedback": 0,
+            "reservedFeedback": 0,
+            "input": 12320,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 53744,
+          "scores": [
+            {
+              "bits": 4.595451248890816,
+              "medianAbsoluteError": 5,
+              "anticipation": {
+                "2": 0.109375,
+                "4": 0.1171875,
+                "6": 0.1171875,
+                "8": 0.08984375,
+                "10": 0.09765625,
+                "12": 0.09375
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "1024": {
+      "prior": [
+        {
+          "bits": 4.667886680618768,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.09765625,
+            "4": 0.09765625,
+            "6": 0.09765625,
+            "8": 0.09765625,
+            "10": 0.09765625,
+            "12": 0.09765625
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 1024,
+          "work": 830732352,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 234856448,
+          "trainMs": 12794.106899999995,
+          "maintenanceMs": 4.783300000089184,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 0,
+            "feedback": 0,
+            "reservedFeedback": 0,
+            "input": 12320,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 53744,
+          "scores": [
+            {
+              "bits": 4.480679651073756,
+              "medianAbsoluteError": 5,
+              "anticipation": {
+                "2": 0.1171875,
+                "4": 0.11328125,
+                "6": 0.11328125,
+                "8": 0.109375,
+                "10": 0.11328125,
+                "12": 0.10546875
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "2048": {
+      "prior": [
+        {
+          "bits": 4.656117094027319,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.09765625,
+            "4": 0.09765625,
+            "6": 0.09765625,
+            "8": 0.09765625,
+            "10": 0.09765625,
+            "12": 0.09765625
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 2048,
+          "work": 1652233152,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 275292160,
+          "trainMs": 26577.481999999985,
+          "maintenanceMs": 8.405000000274413,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 0,
+            "feedback": 0,
+            "reservedFeedback": 0,
+            "input": 12320,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 53744,
+          "scores": [
+            {
+              "bits": 4.33916623435105,
+              "medianAbsoluteError": 4,
+              "anticipation": {
+                "2": 0.12109375,
+                "4": 0.11328125,
+                "6": 0.11328125,
+                "8": 0.1015625,
+                "10": 0.11328125,
+                "12": 0.1171875
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "4096": {
+      "prior": [
+        {
+          "bits": 4.64453433893255,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.09765625,
+            "4": 0.09765625,
+            "6": 0.09765625,
+            "8": 0.09765625,
+            "10": 0.09765625,
+            "12": 0.09765625
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 4096,
+          "work": 3291633792,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 275292160,
+          "trainMs": 49405.75749999998,
+          "maintenanceMs": 34.40260000061153,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 0,
+            "feedback": 0,
+            "reservedFeedback": 0,
+            "input": 12320,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 53744,
+          "scores": [
+            {
+              "bits": 4.109262899846309,
+              "medianAbsoluteError": 3,
+              "anticipation": {
+                "2": 0.125,
+                "4": 0.11328125,
+                "6": 0.109375,
+                "8": 0.11328125,
+                "10": 0.109375,
+                "12": 0.11328125
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "6144": {
+      "prior": [
+        {
+          "bits": 4.644079087185702,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.09765625,
+            "4": 0.09765625,
+            "6": 0.09765625,
+            "8": 0.09765625,
+            "10": 0.09765625,
+            "12": 0.09765625
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 6144,
+          "work": 4927760832,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 275935232,
+          "trainMs": 69526.74050000033,
+          "maintenanceMs": 42.84200000112378,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 0,
+            "feedback": 0,
+            "reservedFeedback": 0,
+            "input": 12320,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 53744,
+          "scores": [
+            {
+              "bits": 3.965772068467039,
+              "medianAbsoluteError": 3,
+              "anticipation": {
+                "2": 0.1171875,
+                "4": 0.1015625,
+                "6": 0.09765625,
+                "8": 0.09375,
+                "10": 0.1015625,
+                "12": 0.09765625
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "7168": {
+      "prior": [
+        {
+          "bits": 4.644314197285052,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.09765625,
+            "4": 0.09765625,
+            "6": 0.09765625,
+            "8": 0.09765625,
+            "10": 0.09765625,
+            "12": 0.09765625
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 7168,
+          "work": 5752207872,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 277594112,
+          "trainMs": 79252.8597000002,
+          "maintenanceMs": 46.895200001147714,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 0,
+            "feedback": 0,
+            "reservedFeedback": 0,
+            "input": 12320,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 53744,
+          "scores": [
+            {
+              "bits": 4.123945831624167,
+              "medianAbsoluteError": 3,
+              "anticipation": {
+                "2": 0.1015625,
+                "4": 0.1015625,
+                "6": 0.1328125,
+                "8": 0.1015625,
+                "10": 0.125,
+                "12": 0.11328125
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    },
+    "8192": {
+      "prior": [
+        {
+          "bits": 4.646603700674487,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.09765625,
+            "4": 0.09765625,
+            "6": 0.09765625,
+            "8": 0.09765625,
+            "10": 0.09765625,
+            "12": 0.09765625
+          },
+          "maxAhead": 0,
+          "events": 256
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 8192,
+          "work": 6567619776,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 282841088,
+          "trainMs": 87287.75039999973,
+          "maintenanceMs": 50.84890000130599,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 0,
+            "feedback": 0,
+            "reservedFeedback": 0,
+            "input": 12320,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 53744,
+          "scores": [
+            {
+              "bits": 3.888343916740525,
+              "medianAbsoluteError": 2,
+              "anticipation": {
+                "2": 0.125,
+                "4": 0.12109375,
+                "6": 0.10546875,
+                "8": 0.12890625,
+                "10": 0.125,
+                "12": 0.12890625
+              },
+              "maxAhead": 0,
+              "events": 256
+            }
+          ]
+        }
+      }
+    }
+  },
+  "latest": 8192,
+  "final": {
+    "fixed": {
+      "model": "fixed.syn",
+      "trainingStateBytes": 995006,
+      "auditBytes": 19713,
+      "visualDiagnostics": {
+        "brightness": {
+          "nonzeroFraction": 1,
+          "spatialCoverage": 1,
+          "meanAbsoluteActivity": 0.1548672590203571,
+          "meanFrameChange": 0.0009170546832658619,
+          "ablationDeltaBits": 0.11631792338855451,
+          "events": 32
+        },
+        "on": {
+          "nonzeroFraction": 0.8636267006802721,
+          "spatialCoverage": 1,
+          "meanAbsoluteActivity": 0.007457001439497944,
+          "meanFrameChange": 0.00042898616286394636,
+          "ablationDeltaBits": 0.0707504749312946,
+          "events": 32
+        },
+        "off": {
+          "nonzeroFraction": 0.9001913265306123,
+          "spatialCoverage": 1,
+          "meanAbsoluteActivity": 0.007457001439498003,
+          "meanFrameChange": 0.0002699535670386245,
+          "ablationDeltaBits": 0.03459228031011374,
+          "events": 32
+        },
+        "horizontal": {
+          "nonzeroFraction": 1,
+          "spatialCoverage": 1,
+          "meanAbsoluteActivity": 0.0122872220896405,
+          "meanFrameChange": 0.0007340660268217121,
+          "ablationDeltaBits": 0.04573503044275684,
+          "events": 32
+        },
+        "vertical": {
+          "nonzeroFraction": 1,
+          "spatialCoverage": 1,
+          "meanAbsoluteActivity": 0.01886055080352407,
+          "meanFrameChange": 0.0008712923021212608,
+          "ablationDeltaBits": 0.24549924232492515,
+          "events": 32
+        },
+        "frameDifference": {
+          "nonzeroFraction": 0.13143069727891157,
+          "spatialCoverage": 0.625,
+          "meanAbsoluteActivity": 0.0008172392075362443,
+          "meanFrameChange": 0.0004513033574545011,
+          "ablationDeltaBits": 0.14094843874029328,
+          "events": 32
+        }
+      },
+      "shuffledBits": 5.422407778156323,
+      "compressionVsPrior": {
+        "predictionSavingPerEvent": 0.758259783933962,
+        "extraModelBits": 429152,
+        "netExtraBits": 428957.8854953129,
+        "breakEvenEvents": 565970
+      }
+    }
+  }
+}

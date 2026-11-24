@@ -1,6 +1,7 @@
 ﻿'use strict';
 
 const { CLASSES, featureCount, stream, shuffle } = require('./synaptic_scene');
+const hierarchy = require('./hierarchical_network');
 
 const NODES = 32;
 const INITIAL_EDGES = 128;
@@ -77,7 +78,8 @@ class SynapticNetwork {
   constructor(config) {
     this.config = config;
     this.mode = config.mode;
-    this.inputs = featureCount(config.encoder);
+    this.advanced = ['hierarchical-motion', 'hierarchical-feedback'].includes(config.encoder);
+    this.inputs = this.advanced ? 449 : featureCount(config.encoder);
     const rng = stream(config.seed, 100);
     this.input = Float64Array.from({ length: NODES * this.inputs }, (_, k) => {
       return rng.normal() * (k % this.inputs > 256 ? 0.22 : 0.075);
@@ -88,6 +90,11 @@ class SynapticNetwork {
     this.activity = new Float64Array(NODES).fill(0.045);
     const feedback = stream(config.seed, 101);
     this.feedback = Float64Array.from({ length: CLASSES * NODES }, () => feedback.normal() * 0.14);
+    if (this.advanced) {
+      const visualRng = stream(config.seed, 105);
+      this.motionKernel = Float64Array.from({ length: 9 }, () => visualRng.normal() * 0.1);
+      this.visualFeedback = Float64Array.from({ length: 7 * NODES }, () => visualRng.normal() * 0.01);
+    }
     this.pairs = initialPairs(config.seed);
     this.edges = [];
     this.batches = [];
@@ -100,12 +107,31 @@ class SynapticNetwork {
     const start = this.mode === 'capacity' ? config.fixedCapacity : INITIAL_EDGES;
     const weight = stream(config.seed, 103);
     for (const pair of this.pairs.slice(0, start)) this.addEdge(pair, weight.normal() * 0.1, null);
-    this.optimizer = [this.input, this.output, this.bias].map(weights => ({
+    this.optimizer = [this.input, this.output, this.bias, ...(this.advanced ? [this.motionKernel, this.visualFeedback] : [])].map(weights => ({
       m: new Float64Array(weights.length), v: new Float64Array(weights.length),
     }));
     this.peakRss = process.memoryUsage.rss();
     this.trainMs = 0;
     this.maintenanceMs = 0;
+  }
+
+  static restore(state, audit) {
+    const network = new SynapticNetwork(state.config);
+    for (const key of ['input', 'output', 'bias', 'gain', 'activity', 'feedback', 'motionKernel', 'visualFeedback']) {
+      if (state[key] !== undefined) network[key] = Float64Array.from(state[key]);
+    }
+    network.optimizer = state.optimizer.map(({ m, v }) => ({ m: Float64Array.from(m), v: Float64Array.from(v) }));
+    const live = new Map(state.liveEdges.map(edge => [edge.id, edge]));
+    network.edges = audit.edges.map(edge => ({ ...edge, ...(live.get(edge.id) ?? {}) }));
+    const edgeById = new Map(network.edges.map(edge => [edge.id, edge]));
+    const liveBatches = new Map(state.liveBatches.map(batch => [batch.id, batch]));
+    network.batches = audit.batches.map(batch => ({ ...batch, ...(liveBatches.get(batch.id) ?? {}),
+      edges: batch.edges.map(id => { const edge = edgeById.get(id); if (!edge) throw new Error('Invalid audit edge'); return edge; }) }));
+    network.proposals = audit.proposals;
+    network.window = state.window.map(({ a, b }) => ({ a: a.map(x => Float64Array.from(x)), b: b.map(x => Float64Array.from(x)) }));
+    network.events = state.events; network.work = state.work; network.nextId = state.nextId;
+    network.workHistory = state.workHistory.slice(); network.trainMs = state.trainMs; network.maintenanceMs = state.maintenanceMs;
+    return network;
   }
 
   addEdge({ i, j, backbone }, w, batch) {
@@ -116,6 +142,7 @@ class SynapticNetwork {
   }
 
   project(features, stop) {
+    if (this.advanced) return hierarchy.project.call(this, features, stop);
     const projected = [];
     for (let t = 0; t <= stop; t++) {
       const sums = new Float64Array(NODES);
@@ -132,6 +159,7 @@ class SynapticNetwork {
   }
 
   forward(features, stop, blocked, countWork = false, inputDrive) {
+    if (this.advanced) return hierarchy.forward.call(this, features, stop, blocked, countWork, inputDrive);
     const edges = this.edges.filter(edge => edge.deleted === null && !blocked?.has(edge.id));
     const a = [new Float64Array(NODES)];
     const activation = [];
@@ -156,6 +184,7 @@ class SynapticNetwork {
   }
 
   gradient(features, prefixes, target, precomputed, countWork = false) {
+    if (this.advanced) return hierarchy.gradient.call(this, features, prefixes, target, precomputed, countWork);
     const stop = prefixes.at(-1);
     const { a, activation, edges } = precomputed ?? this.forward(features, stop, null, countWork);
     const inGrad = new Float64Array(this.input.length), outGrad = new Float64Array(this.output.length);
@@ -204,8 +233,8 @@ class SynapticNetwork {
 
   apply(gradient) {
     const step = this.events, rate = this.config.rate;
-    const arrays = [this.input, this.output, this.bias];
-    const grads = [gradient.inGrad, gradient.outGrad, gradient.biasGrad];
+    const arrays = [this.input, this.output, this.bias, ...(this.advanced ? [this.motionKernel, this.visualFeedback] : [])];
+    const grads = [gradient.inGrad, gradient.outGrad, gradient.biasGrad, ...(this.advanced ? [gradient.motionGrad, gradient.visualFeedbackGrad] : [])];
     const c1 = 1 - 0.9 ** step, c2 = 1 - 0.999 ** step;
     for (let k = 0; k < arrays.length; k++) {
       const values = arrays[k], g = grads[k], { m, v } = this.optimizer[k];
@@ -317,6 +346,10 @@ class SynapticNetwork {
 
   train(event) {
     const start = performance.now();
+    // Charge the fixed spatial encoder to every method even though scenes are shared.
+    const frames = event.prefixes.at(-1) + 1;
+    if (this.config.encoder.startsWith('hierarchical')) this.work += frames * (256 * 28 + 64 * 6);
+    else this.work += frames * (256 * 4 + 56 * 2 + (this.config.encoder === 'motion' ? 24 * 28 * 4 : 0));
     // The forward pass uses only selected, pre-impact frames. Sound onset is
     // revealed afterwards and supplies the sole training target.
     const saved = this.forward(event.features, event.prefixes.at(-1), null, true);
@@ -354,24 +387,28 @@ class SynapticNetwork {
 
   snapshot() {
     const live = this.edges.filter(edge => edge.deleted === null);
-    const encoded = pack(this.config.encoder, this.input, this.output, this.bias, this.gain, live);
+    const encoded = pack(this.config.encoder, this.input, this.output, this.bias, this.gain, live, this.motionKernel, this.visualFeedback);
     return { encoded, edges: live.map(edge => ({ ...edge })), events: this.events, work: this.work,
       mature: live.filter(edge => edge.state === 'mature').length, activeEdges: live.length,
       rssBytes: Math.max(this.peakRss, process.memoryUsage.rss()), trainMs: this.trainMs,
-      maintenanceMs: this.maintenanceMs };
+      maintenanceMs: this.maintenanceMs, parameterCounts: { bottom: 0, middle: this.motionKernel?.length ?? 0,
+        feedback: this.config.encoder === 'hierarchical-feedback' ? this.visualFeedback.length : 0,
+        reservedFeedback: this.config.encoder === 'hierarchical-motion' ? this.visualFeedback.length : 0, input: this.input.length,
+        recurrent: live.length, readout: this.output.length + this.bias.length, homeostasis: this.gain.length } };
   }
 }
 
 // Header (magic, encoder, shape), float32 arrays, and compact uint16 edge endpoints.
-function pack(encoder, input, output, bias, gain, edges) {
-  const buffer = Buffer.alloc(12 + 4 * (input.length + output.length + bias.length + gain.length) + 8 * edges.length);
+function pack(encoder, input, output, bias, gain, edges, motionKernel, visualFeedback) {
+  const extra = motionKernel ? motionKernel.length + visualFeedback.length : 0;
+  const buffer = Buffer.alloc(12 + 4 * (input.length + output.length + bias.length + gain.length + extra) + 8 * edges.length);
   buffer.write('SYN1');
-  buffer.writeUInt16LE(encoder === 'motion' ? 1 : 0, 4);
+  buffer.writeUInt16LE(['pooled', 'motion', 'hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback'].indexOf(encoder), 4);
   buffer.writeUInt16LE(NODES, 6);
   buffer.writeUInt16LE(CLASSES, 8);
   buffer.writeUInt16LE(edges.length, 10);
   let offset = 12;
-  for (const values of [input, output, bias, gain]) {
+  for (const values of [input, output, bias, gain, ...(motionKernel ? [motionKernel, visualFeedback] : [])]) {
     for (const value of values) { buffer.writeFloatLE(value, offset); offset += 4; }
   }
   for (const edge of edges) {
@@ -385,15 +422,16 @@ function pack(encoder, input, output, bias, gain, edges) {
 
 function unpack(buffer, metadata) {
   if (buffer.length < 12 || buffer.toString('ascii', 0, 4) !== 'SYN1'
-    || buffer.readUInt16LE(4) > 1 || buffer.readUInt16LE(6) !== NODES || buffer.readUInt16LE(8) !== CLASSES) {
+    || buffer.readUInt16LE(4) > 5 || buffer.readUInt16LE(6) !== NODES || buffer.readUInt16LE(8) !== CLASSES) {
     throw new Error('Invalid synaptic model header');
   }
-  const encoder = buffer.readUInt16LE(4) ? 'motion' : 'pooled';
+  const encoder = ['pooled', 'motion', 'hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback'][buffer.readUInt16LE(4)];
   const m = Object.create(SynapticNetwork.prototype);
-  m.inputs = featureCount(encoder);
+  m.advanced = buffer.readUInt16LE(4) >= 4;
+  m.inputs = m.advanced ? 449 : featureCount(encoder);
   m.config = { encoder };
   const edgeCount = buffer.readUInt16LE(10);
-  const expected = 12 + 4 * (m.inputs * NODES + NODES * CLASSES + CLASSES + NODES) + 8 * edgeCount;
+  const expected = 12 + 4 * (m.inputs * NODES + NODES * CLASSES + CLASSES + NODES + (m.advanced ? 9 + 7 * NODES : 0)) + 8 * edgeCount;
   if (buffer.length !== expected || (metadata && metadata.length !== edgeCount)) throw new Error('Invalid synaptic model size');
   let offset = 12;
   const floats = n => Float64Array.from({ length: n }, () => {
@@ -406,6 +444,7 @@ function unpack(buffer, metadata) {
   m.output = floats(NODES * CLASSES);
   m.bias = floats(CLASSES);
   m.gain = floats(NODES);
+  if (m.advanced) { m.motionKernel = floats(9); m.visualFeedback = floats(7 * NODES); }
   m.edges = Array.from({ length: edgeCount }, (_, k) => {
     const edge = { ...metadata?.[k], deleted: null, id: metadata?.[k]?.id ?? k,
       i: buffer.readUInt16LE(offset), j: buffer.readUInt16LE(offset + 2), w: buffer.readFloatLE(offset + 4) };

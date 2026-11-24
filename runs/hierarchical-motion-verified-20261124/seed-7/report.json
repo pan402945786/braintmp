@@ -1,0 +1,199 @@
+{
+  "seed": 7,
+  "uniform": {
+    "bits": 4.643856189774724,
+    "medianAbsoluteError": 6.5,
+    "anticipation": {
+      "2": 0.125,
+      "4": 0.125,
+      "6": 0.125,
+      "8": 0.125,
+      "10": 0.125,
+      "12": 0.125
+    },
+    "maxAhead": 0,
+    "events": 8
+  },
+  "physics": [
+    1
+  ],
+  "checkpoints": {
+    "0": {
+      "prior": [
+        {
+          "bits": 4.643856189774724,
+          "medianAbsoluteError": 6.5,
+          "anticipation": {
+            "2": 0.125,
+            "4": 0.125,
+            "6": 0.125,
+            "8": 0.125,
+            "10": 0.125,
+            "12": 0.125
+          },
+          "maxAhead": 0,
+          "events": 8
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 0,
+          "work": 0,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 44183552,
+          "trainMs": 0,
+          "maintenanceMs": 0,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 9,
+            "feedback": 0,
+            "reservedFeedback": 224,
+            "input": 14368,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 62868,
+          "scores": [
+            {
+              "bits": 4.7023486422333765,
+              "medianAbsoluteError": 6.5,
+              "anticipation": {
+                "2": 0.125,
+                "4": 0.125,
+                "6": 0.125,
+                "8": 0.125,
+                "10": 0.125,
+                "12": 0.125
+              },
+              "maxAhead": 0,
+              "events": 8
+            }
+          ]
+        }
+      }
+    },
+    "64": {
+      "prior": [
+        {
+          "bits": 4.987372106515333,
+          "medianAbsoluteError": 6,
+          "anticipation": {
+            "2": 0.125,
+            "4": 0.125,
+            "6": 0.125,
+            "8": 0.125,
+            "10": 0.125,
+            "12": 0.125
+          },
+          "maxAhead": 0,
+          "events": 8
+        }
+      ],
+      "methods": {
+        "fixed": {
+          "events": 64,
+          "work": 64545856,
+          "mature": 0,
+          "activeEdges": 128,
+          "rssBytes": 52850688,
+          "trainMs": 371.3777000000002,
+          "maintenanceMs": 0.48329999999936035,
+          "parameterCounts": {
+            "bottom": 0,
+            "middle": 9,
+            "feedback": 0,
+            "reservedFeedback": 224,
+            "input": 14368,
+            "recurrent": 128,
+            "readout": 825,
+            "homeostasis": 32
+          },
+          "deployBytes": 62868,
+          "scores": [
+            {
+              "bits": 4.783423871763873,
+              "medianAbsoluteError": 6,
+              "anticipation": {
+                "2": 0,
+                "4": 0.125,
+                "6": 0.125,
+                "8": 0.125,
+                "10": 0.125,
+                "12": 0.125
+              },
+              "maxAhead": 0,
+              "events": 8
+            }
+          ]
+        }
+      }
+    }
+  },
+  "latest": 64,
+  "final": {
+    "fixed": {
+      "model": "fixed.syn",
+      "trainingStateBytes": 1031587,
+      "auditBytes": 19776,
+      "visualDiagnostics": {
+        "brightness": {
+          "nonzeroFraction": 1,
+          "spatialCoverage": 1,
+          "meanAbsoluteActivity": 0.1495164978685487,
+          "meanFrameChange": 0.0007705678504546244,
+          "ablationDeltaBits": -0.10054771140102048,
+          "events": 8
+        },
+        "on": {
+          "nonzeroFraction": 0.8605324074074074,
+          "spatialCoverage": 1,
+          "meanAbsoluteActivity": 0.007514914503818855,
+          "meanFrameChange": 0.0003824500050840013,
+          "ablationDeltaBits": 0.0004969172887943074,
+          "events": 8
+        },
+        "off": {
+          "nonzeroFraction": 0.8940972222222222,
+          "spatialCoverage": 1,
+          "meanAbsoluteActivity": 0.00751491450381888,
+          "meanFrameChange": 0.0002013093303745062,
+          "ablationDeltaBits": -0.002777041333114738,
+          "events": 8
+        },
+        "horizontal": {
+          "nonzeroFraction": 1,
+          "spatialCoverage": 1,
+          "meanAbsoluteActivity": 0.01238392639350894,
+          "meanFrameChange": 0.0005954953170578887,
+          "ablationDeltaBits": 0.0030332975886322444,
+          "events": 8
+        },
+        "vertical": {
+          "nonzeroFraction": 1,
+          "spatialCoverage": 1,
+          "meanAbsoluteActivity": 0.019519764037559745,
+          "meanFrameChange": 0.0005491880090077124,
+          "ablationDeltaBits": -0.03037128726801086,
+          "events": 8
+        },
+        "frameDifference": {
+          "nonzeroFraction": 0.1293402777777778,
+          "spatialCoverage": 0.40625,
+          "meanAbsoluteActivity": 0.0006564096503872726,
+          "meanFrameChange": 0.00031373431319598637,
+          "ablationDeltaBits": 0.0037448258366765685,
+          "events": 8
+        }
+      },
+      "shuffledBits": 4.815095427650219,
+      "compressionVsPrior": {
+        "predictionSavingPerEvent": 0.2039482347514605,
+        "extraModelBits": 502144,
+        "netExtraBits": 502142.368414122,
+        "breakEvenEvents": 2462115
+      }
+    }
+  }
+}

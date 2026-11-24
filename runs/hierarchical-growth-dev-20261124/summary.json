@@ -1,0 +1,564 @@
+{
+  "config": {
+    "profile": "development",
+    "seed": 7,
+    "seeds": 3,
+    "train": 1024,
+    "samples": 128,
+    "checkpoints": [
+      0,
+      128,
+      512,
+      1024
+    ],
+    "rate": 0.003,
+    "encoder": "hierarchical-delta",
+    "learner": "bptt",
+    "traceDecay": 1,
+    "interval": 64,
+    "candidates": 128,
+    "edgesPerGrowth": 4,
+    "maxEdges": 512,
+    "maxIn": 20,
+    "fixedCapacity": 176,
+    "confirmEvents": 32,
+    "confirmWindows": 3,
+    "support": 0.0001,
+    "matureRate": 0.3,
+    "homeostasis": true,
+    "prune": true,
+    "methods": [
+      "fixed",
+      "random",
+      "hebb",
+      "bidirectional",
+      "joint",
+      "shuffled"
+    ],
+    "computeMatch": true,
+    "memory": false
+  },
+  "visionProtocol": {
+    "input": "32x32 grayscale",
+    "initialPooling": "2x2 mean, stride 2",
+    "receptiveField": "3x3, edge replication",
+    "channels": [
+      "brightness",
+      "ON",
+      "OFF",
+      "horizontal",
+      "vertical",
+      "frame-difference"
+    ],
+    "aggregation": "2x2 mean, stride 2",
+    "temporalDelayFrames": 1,
+    "motion": false,
+    "highLevelFeedback": false,
+    "bottomWeights": "fixed shared filters"
+  },
+  "codeHash": "2d7788f7c1de00424be4389af3e074fbebe240d1c2c1c2a1279815401441d124",
+  "workers": 3,
+  "machine": {
+    "node": "v22.23.2",
+    "platform": "win32",
+    "cpu": "Intel(R) Core(TM) i7-10510U CPU @ 1.80GHz",
+    "memoryBytes": 16918597632
+  },
+  "developmentGate": {
+    "vsUniform": {
+      "perSeed": [
+        0.20121974884802718,
+        0.07913420828406359,
+        0.1857280907369363
+      ],
+      "mean": 0.15536068262300903,
+      "interval": 0.95,
+      "bounds": [
+        0.07913420828406359,
+        0.20121974884802718
+      ]
+    },
+    "vsFrequency": {
+      "perSeed": [
+        0.19627656207684208,
+        0.09085762489923788,
+        0.21474234587818497
+      ],
+      "mean": 0.16729217761808832,
+      "interval": 0.95,
+      "bounds": [
+        0.09085762489923788,
+        0.21474234587818497
+      ]
+    },
+    "matchedVsShuffled": {
+      "perSeed": [
+        0.28320570110375787,
+        0.21279437429524428,
+        0.24593771093876526
+      ],
+      "mean": 0.24731259544592246,
+      "interval": 0.95,
+      "bounds": [
+        0.21279437429524428,
+        0.28320570110375787
+      ]
+    },
+    "passed": true
+  },
+  "primary": {
+    "perSeed": [
+      -0.005232531440244159,
+      -0.015578962701433774,
+      -0.0037514834021896704
+    ],
+    "mean": -0.0081876591812892,
+    "interval": 0.95,
+    "bounds": [
+      -0.015578962701433774,
+      -0.0037514834021896704
+    ]
+  },
+  "primaryThresholdMet": false,
+  "jointVsHebb": {
+    "perSeed": [
+      -0.004243992265186236,
+      0.0022599240781202568,
+      0.003040271482221968
+    ],
+    "mean": 0.00035206776505199616,
+    "interval": 0.975,
+    "bounds": [
+      -0.004243992265186236,
+      0.003040271482221968
+    ]
+  },
+  "jointVsBidirectional": {
+    "perSeed": [
+      -0.0030328616402677255,
+      -0.0023145188909232672,
+      0.0002733214459524902
+    ],
+    "mean": -0.0016913530284128342,
+    "interval": 0.975,
+    "bounds": [
+      -0.0030328616402677255,
+      0.0002733214459524902
+    ]
+  },
+  "jointVsShuffled": {
+    "perSeed": [
+      -0.0002468340670800373,
+      -0.0028730167567916354,
+      0.003580733932250446
+    ],
+    "mean": 0.00015362770279292448,
+    "interval": 0.95,
+    "bounds": [
+      -0.0028730167567916354,
+      0.003580733932250446
+    ]
+  },
+  "localJointVsRandom": null,
+  "seeds": [
+    {
+      "seed": 7,
+      "uniform": 4.643856189774734,
+      "prior": 4.638913003003549,
+      "methods": {
+        "fixed": {
+          "bits": 4.442636440926707,
+          "anticipation": {
+            "2": 0.09375,
+            "4": 0.1015625,
+            "6": 0.1015625,
+            "8": 0.1015625,
+            "10": 0.109375,
+            "12": 0.1015625
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 53744,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.19627656207684208,
+            "extraModelBits": 429152,
+            "netExtraBits": 429126.87660005415,
+            "breakEvenEvents": 2186466
+          }
+        },
+        "random": {
+          "bits": 4.437551848764182,
+          "anticipation": {
+            "2": 0.09375,
+            "4": 0.1015625,
+            "6": 0.1015625,
+            "8": 0.1015625,
+            "10": 0.109375,
+            "12": 0.1015625
+          },
+          "maxAhead": 0,
+          "activeEdges": 156,
+          "mature": 12,
+          "deployBytes": 53968,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.2013611542393674,
+            "extraModelBits": 430944,
+            "netExtraBits": 430918.22577225737,
+            "breakEvenEvents": 2140155
+          }
+        },
+        "hebb": {
+          "bits": 4.4385403879392396,
+          "anticipation": {
+            "2": 0.09375,
+            "4": 0.1015625,
+            "6": 0.1015625,
+            "8": 0.1015625,
+            "10": 0.109375,
+            "12": 0.1015625
+          },
+          "maxAhead": 0,
+          "activeEdges": 156,
+          "mature": 8,
+          "deployBytes": 53968,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.20037261506430948,
+            "extraModelBits": 430944,
+            "netExtraBits": 430918.3523052718,
+            "breakEvenEvents": 2150714
+          }
+        },
+        "bidirectional": {
+          "bits": 4.439751518564158,
+          "anticipation": {
+            "2": 0.09375,
+            "4": 0.1015625,
+            "6": 0.1015625,
+            "8": 0.1015625,
+            "10": 0.109375,
+            "12": 0.1015625
+          },
+          "maxAhead": 0,
+          "activeEdges": 156,
+          "mature": 4,
+          "deployBytes": 53968,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.19916148443939097,
+            "extraModelBits": 430944,
+            "netExtraBits": 430918.5073299918,
+            "breakEvenEvents": 2163792
+          }
+        },
+        "joint": {
+          "bits": 4.442784380204426,
+          "anticipation": {
+            "2": 0.09375,
+            "4": 0.1015625,
+            "6": 0.1015625,
+            "8": 0.1015625,
+            "10": 0.1015625,
+            "12": 0.1015625
+          },
+          "maxAhead": 0,
+          "activeEdges": 152,
+          "mature": 0,
+          "deployBytes": 53936,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.19612862279912324,
+            "extraModelBits": 430688,
+            "netExtraBits": 430662.8955362817,
+            "breakEvenEvents": 2195947
+          }
+        },
+        "shuffled": {
+          "bits": 4.442537546137346,
+          "anticipation": {
+            "2": 0.09375,
+            "4": 0.1015625,
+            "6": 0.1015625,
+            "8": 0.1015625,
+            "10": 0.109375,
+            "12": 0.1015625
+          },
+          "maxAhead": 0,
+          "activeEdges": 152,
+          "mature": 4,
+          "deployBytes": 53936,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.19637545686620328,
+            "extraModelBits": 430688,
+            "netExtraBits": 430662.86394152115,
+            "breakEvenEvents": 2193187
+          }
+        }
+      }
+    },
+    {
+      "seed": 2913497007,
+      "uniform": 4.643856189774734,
+      "prior": 4.655579606389908,
+      "methods": {
+        "fixed": {
+          "bits": 4.5647219814906705,
+          "anticipation": {
+            "2": 0.1015625,
+            "4": 0.1015625,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.09375,
+            "12": 0.0859375
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 53744,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.09085762489923788,
+            "extraModelBits": 429152,
+            "netExtraBits": 429140.3702240129,
+            "breakEvenEvents": 4723347
+          }
+        },
+        "random": {
+          "bits": 4.54798122411883,
+          "anticipation": {
+            "2": 0.1015625,
+            "4": 0.1015625,
+            "6": 0.109375,
+            "8": 0.09375,
+            "10": 0.09375,
+            "12": 0.0859375
+          },
+          "maxAhead": 0,
+          "activeEdges": 168,
+          "mature": 4,
+          "deployBytes": 54064,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.10759838227107821,
+            "extraModelBits": 431712,
+            "netExtraBits": 431698.2274070693,
+            "breakEvenEvents": 4012254
+          }
+        },
+        "hebb": {
+          "bits": 4.565820110898384,
+          "anticipation": {
+            "2": 0.1015625,
+            "4": 0.1015625,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.0859375,
+            "12": 0.0859375
+          },
+          "maxAhead": 0,
+          "activeEdges": 160,
+          "mature": 12,
+          "deployBytes": 54000,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.08975949549152418,
+            "extraModelBits": 431200,
+            "netExtraBits": 431188.5107845771,
+            "breakEvenEvents": 4803949
+          }
+        },
+        "bidirectional": {
+          "bits": 4.561245667929341,
+          "anticipation": {
+            "2": 0.1015625,
+            "4": 0.1015625,
+            "6": 0.109375,
+            "8": 0.1015625,
+            "10": 0.09375,
+            "12": 0.0859375
+          },
+          "maxAhead": 0,
+          "activeEdges": 144,
+          "mature": 0,
+          "deployBytes": 53872,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.0943339384605677,
+            "extraModelBits": 430176,
+            "netExtraBits": 430163.925255877,
+            "breakEvenEvents": 4560141
+          }
+        },
+        "joint": {
+          "bits": 4.563560186820264,
+          "anticipation": {
+            "2": 0.1015625,
+            "4": 0.1015625,
+            "6": 0.109375,
+            "8": 0.109375,
+            "10": 0.0859375,
+            "12": 0.0859375
+          },
+          "maxAhead": 0,
+          "activeEdges": 156,
+          "mature": 8,
+          "deployBytes": 53968,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.09201941956964443,
+            "extraModelBits": 430944,
+            "netExtraBits": 430932.2215142951,
+            "breakEvenEvents": 4683186
+          }
+        },
+        "shuffled": {
+          "bits": 4.560687170063472,
+          "anticipation": {
+            "2": 0.109375,
+            "4": 0.109375,
+            "6": 0.1015625,
+            "8": 0.09375,
+            "10": 0.09375,
+            "12": 0.0859375
+          },
+          "maxAhead": 0,
+          "activeEdges": 152,
+          "mature": 4,
+          "deployBytes": 53936,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.09489243632643607,
+            "extraModelBits": 430688,
+            "netExtraBits": 430675.8537681502,
+            "breakEvenEvents": 4538697
+          }
+        }
+      }
+    },
+    {
+      "seed": 2809245340,
+      "uniform": 4.643856189774734,
+      "prior": 4.672870444915983,
+      "methods": {
+        "fixed": {
+          "bits": 4.458128099037798,
+          "anticipation": {
+            "2": 0.125,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.09375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxAhead": 0,
+          "activeEdges": 128,
+          "mature": 0,
+          "deployBytes": 53744,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.21474234587818497,
+            "extraModelBits": 429152,
+            "netExtraBits": 429124.5129797276,
+            "breakEvenEvents": 1998451
+          }
+        },
+        "random": {
+          "bits": 4.450459603239422,
+          "anticipation": {
+            "2": 0.1171875,
+            "4": 0.09375,
+            "6": 0.09375,
+            "8": 0.1015625,
+            "10": 0.109375,
+            "12": 0.1015625
+          },
+          "maxAhead": 0,
+          "activeEdges": 160,
+          "mature": 8,
+          "deployBytes": 54000,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.22241084167656044,
+            "extraModelBits": 431200,
+            "netExtraBits": 431171.5314122654,
+            "breakEvenEvents": 1938755
+          }
+        },
+        "hebb": {
+          "bits": 4.457251358123834,
+          "anticipation": {
+            "2": 0.125,
+            "4": 0.1171875,
+            "6": 0.109375,
+            "8": 0.1015625,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxAhead": 0,
+          "activeEdges": 160,
+          "mature": 8,
+          "deployBytes": 54000,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.2156190867921488,
+            "extraModelBits": 431200,
+            "netExtraBits": 431172.4007568906,
+            "breakEvenEvents": 1999823
+          }
+        },
+        "bidirectional": {
+          "bits": 4.4544844080875645,
+          "anticipation": {
+            "2": 0.125,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.09375,
+            "10": 0.109375,
+            "12": 0.1015625
+          },
+          "maxAhead": 0,
+          "activeEdges": 148,
+          "mature": 8,
+          "deployBytes": 53904,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.21838603682841828,
+            "extraModelBits": 430432,
+            "netExtraBits": 430404.04658728593,
+            "breakEvenEvents": 1970969
+          }
+        },
+        "joint": {
+          "bits": 4.454211086641612,
+          "anticipation": {
+            "2": 0.125,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.09375,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxAhead": 0,
+          "activeEdges": 156,
+          "mature": 0,
+          "deployBytes": 53968,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.21865935827437077,
+            "extraModelBits": 430944,
+            "netExtraBits": 430916.0116021409,
+            "breakEvenEvents": 1970847
+          }
+        },
+        "shuffled": {
+          "bits": 4.4577918205738625,
+          "anticipation": {
+            "2": 0.125,
+            "4": 0.109375,
+            "6": 0.109375,
+            "8": 0.1015625,
+            "10": 0.109375,
+            "12": 0.109375
+          },
+          "maxAhead": 0,
+          "activeEdges": 148,
+          "mature": 4,
+          "deployBytes": 53904,
+          "compressionVsPrior": {
+            "predictionSavingPerEvent": 0.21507862434212033,
+            "extraModelBits": 430432,
+            "netExtraBits": 430404.46993608424,
+            "breakEvenEvents": 2001278
+          }
+        }
+      }
+    }
+  ]
+}

@@ -76,11 +76,44 @@ function render(scene, through = FRAMES - 1) {
   return frames;
 }
 
+const HIERARCHICAL = ['hierarchical', 'hierarchical-delta', 'hierarchical-motion', 'hierarchical-feedback'];
+
+// Shared fixed local filters, with edge replication and 2x2 aggregation.
+function hierarchicalEncode(frames, temporal) {
+  let previous = null;
+  return frames.map(({ pixels, audio }) => {
+    const small = new Float64Array(256);
+    for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) {
+      const k = y * 64 + x * 2;
+      small[y * 16 + x] = (pixels[k] + pixels[k + 1] + pixels[k + 32] + pixels[k + 33]) / 4;
+    }
+    const count = temporal ? 6 : 5;
+    const result = new Float64Array(count * 64 + 1);
+    const at = (y, x) => small[Math.max(0, Math.min(15, y)) * 16 + Math.max(0, Math.min(15, x))];
+    for (let y = 0; y < 16; y++) for (let x = 0; x < 16; x++) {
+      const center = at(y, x);
+      let surround = 0;
+      for (let dy = -1; dy <= 1; dy++) for (let dx = -1; dx <= 1; dx++) surround += at(y + dy, x + dx);
+      const contrast = center - surround / 9;
+      const values = [center, Math.max(0, contrast), Math.max(0, -contrast),
+        (at(y, x + 1) - at(y, x - 1)) / 2, (at(y + 1, x) - at(y - 1, x)) / 2];
+      if (temporal) values.push(previous ? center - previous[y * 16 + x] : 0);
+      const dest = Math.floor(y / 2) * 8 + Math.floor(x / 2);
+      values.forEach((v, channel) => { result[channel * 64 + dest] += v / 4; });
+    }
+    result[count * 64] = audio;
+    previous = small;
+    return result;
+  });
+}
+
 function featureCount(encoder) {
+  if (HIERARCHICAL.includes(encoder)) return (encoder === 'hierarchical' ? 5 : 6) * 64 + 1;
   return PIXELS + (encoder === 'motion' ? 4 : 1);
 }
 
 function encode(frames, encoder) {
+  if (HIERARCHICAL.includes(encoder)) return hierarchicalEncode(frames, encoder !== 'hierarchical');
   let firstY;
   let lastY;
   return frames.map(({ pixels, audio }, t) => {

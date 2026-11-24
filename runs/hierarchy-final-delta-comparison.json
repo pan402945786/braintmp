@@ -1,0 +1,166 @@
+﻿{
+  "control": "hierarchical",
+  "treatment": "hierarchical-delta",
+  "method": "fixed",
+  "rows": [
+    {
+      "seed": 7,
+      "control": {
+        "events": 8192,
+        "bits": 4.126169655079017,
+        "work": 5728128192,
+        "parameters": {
+          "bottom": 0,
+          "middle": 0,
+          "feedback": 0,
+          "reservedFeedback": 0,
+          "input": 10272,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "treatment": {
+        "events": 8192,
+        "bits": 3.888343916740525,
+        "work": 6567619776,
+        "parameters": {
+          "bottom": 0,
+          "middle": 0,
+          "feedback": 0,
+          "reservedFeedback": 0,
+          "input": 12320,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "budget": 5728128192,
+      "matchedControl": {
+        "events": 8192,
+        "bits": 4.126169655079017,
+        "work": 5728128192
+      },
+      "matchedTreatment": {
+        "events": 6144,
+        "bits": 3.965772068467039,
+        "work": 4927760832
+      }
+    },
+    {
+      "seed": 2913497007,
+      "control": {
+        "events": 8192,
+        "bits": 4.209196869689328,
+        "work": 5758056992,
+        "parameters": {
+          "bottom": 0,
+          "middle": 0,
+          "feedback": 0,
+          "reservedFeedback": 0,
+          "input": 10272,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "treatment": {
+        "events": 8192,
+        "bits": 4.109066587535556,
+        "work": 6601828896,
+        "parameters": {
+          "bottom": 0,
+          "middle": 0,
+          "feedback": 0,
+          "reservedFeedback": 0,
+          "input": 12320,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "budget": 5758056992,
+      "matchedControl": {
+        "events": 8192,
+        "bits": 4.209196869689328,
+        "work": 5758056992
+      },
+      "matchedTreatment": {
+        "events": 6144,
+        "bits": 4.109132568178698,
+        "work": 4948842816
+      }
+    },
+    {
+      "seed": 2809245340,
+      "control": {
+        "events": 8192,
+        "bits": 4.059390899889313,
+        "work": 5714466912,
+        "parameters": {
+          "bottom": 0,
+          "middle": 0,
+          "feedback": 0,
+          "reservedFeedback": 0,
+          "input": 10272,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "treatment": {
+        "events": 8192,
+        "bits": 3.900383726900889,
+        "work": 6552004704,
+        "parameters": {
+          "bottom": 0,
+          "middle": 0,
+          "feedback": 0,
+          "reservedFeedback": 0,
+          "input": 12320,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "budget": 5714466912,
+      "matchedControl": {
+        "events": 8192,
+        "bits": 4.059390899889313,
+        "work": 5714466912
+      },
+      "matchedTreatment": {
+        "events": 6144,
+        "bits": 3.9921429919838944,
+        "work": 4920460704
+      }
+    }
+  ],
+  "sameEvents": {
+    "perSeed": [
+      0.23782573833849163,
+      0.1001302821537724,
+      0.15900717298842393
+    ],
+    "mean": 0.16565439782689598,
+    "interval": 0.95,
+    "bounds": [
+      0.1001302821537724,
+      0.23782573833849163
+    ]
+  },
+  "checkpointBudget": {
+    "perSeed": [
+      0.16039758661197778,
+      0.1000643015106304,
+      0.06724790790541846
+    ],
+    "mean": 0.10923659867600888,
+    "interval": 0.95,
+    "bounds": [
+      0.06724790790541846,
+      0.16039758661197778
+    ]
+  },
+  "note": "Positive differences favor treatment. Budget comparison uses the last saved checkpoint at or below each seed’s shared budget, so unused budget may differ. Intervals with few seeds are exploratory."
+}

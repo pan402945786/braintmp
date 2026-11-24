@@ -1,0 +1,160 @@
+﻿{
+  "control": "hierarchical-delta",
+  "treatment": "hierarchical-motion",
+  "method": "fixed",
+  "rows": [
+    {
+      "seed": 7,
+      "control": {
+        "events": 8192,
+        "bits": 3.888343916740525,
+        "work": 6567619776,
+        "parameters": {
+          "bottom": 0,
+          "middle": 0,
+          "feedback": 0,
+          "input": 12320,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "treatment": {
+        "events": 8192,
+        "bits": 2.902285021219899,
+        "work": 7951336640,
+        "parameters": {
+          "bottom": 0,
+          "middle": 9,
+          "feedback": 224,
+          "input": 14368,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "budget": 6567619776,
+      "matchedControl": {
+        "events": 8192,
+        "bits": 3.888343916740525,
+        "work": 6567619776
+      },
+      "matchedTreatment": {
+        "events": 2048,
+        "bits": 3.692456198337549,
+        "work": 2000423872
+      }
+    },
+    {
+      "seed": 2913497007,
+      "control": {
+        "events": 8192,
+        "bits": 4.109066587535556,
+        "work": 6601828896,
+        "parameters": {
+          "bottom": 0,
+          "middle": 0,
+          "feedback": 0,
+          "input": 12320,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "treatment": {
+        "events": 8192,
+        "bits": 3.0891871366322694,
+        "work": 7993036320,
+        "parameters": {
+          "bottom": 0,
+          "middle": 9,
+          "feedback": 224,
+          "input": 14368,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "budget": 6601828896,
+      "matchedControl": {
+        "events": 8192,
+        "bits": 4.109066587535556,
+        "work": 6601828896
+      },
+      "matchedTreatment": {
+        "events": 2048,
+        "bits": 3.9977287519148614,
+        "work": 1995435872
+      }
+    },
+    {
+      "seed": 2809245340,
+      "control": {
+        "events": 8192,
+        "bits": 3.900383726900889,
+        "work": 6552004704,
+        "parameters": {
+          "bottom": 0,
+          "middle": 0,
+          "feedback": 0,
+          "input": 12320,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "treatment": {
+        "events": 8192,
+        "bits": 3.361500342793608,
+        "work": 7932302432,
+        "parameters": {
+          "bottom": 0,
+          "middle": 9,
+          "feedback": 224,
+          "input": 14368,
+          "recurrent": 128,
+          "readout": 825,
+          "homeostasis": 32
+        }
+      },
+      "budget": 6552004704,
+      "matchedControl": {
+        "events": 8192,
+        "bits": 3.900383726900889,
+        "work": 6552004704
+      },
+      "matchedTreatment": {
+        "events": 2048,
+        "bits": 4.040982761762731,
+        "work": 1991884416
+      }
+    }
+  ],
+  "sameEvents": {
+    "perSeed": [
+      0.986058895520626,
+      1.0198794509032862,
+      0.5388833841072809
+    ],
+    "mean": 0.8482739101770643,
+    "interval": 0.95,
+    "bounds": [
+      0.5388833841072809,
+      1.0198794509032862
+    ]
+  },
+  "checkpointBudget": {
+    "perSeed": [
+      0.19588771840297614,
+      0.11133783562069421,
+      -0.14059903486184178
+    ],
+    "mean": 0.05554217305394286,
+    "interval": 0.95,
+    "bounds": [
+      -0.14059903486184178,
+      0.19588771840297614
+    ]
+  },
+  "note": "Positive differences favor treatment. Budget comparison uses the last saved checkpoint at or below each seed’s shared budget, so unused budget may differ. Intervals with few seeds are exploratory."
+}
